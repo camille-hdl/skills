@@ -1,0 +1,18 @@
+---
+name: mon-skill
+description: Décris ici ce que fait le skill et dans quels cas l'utiliser.
+---
+
+# Mon skill
+
+Décris ici les instructions que l'agent doit suivre.
+
+## Quand l'utiliser
+
+Explique les situations dans lesquelles ce skill doit être activé.
+
+## Procédure
+
+1. Première étape.
+2. Deuxième étape.
+
