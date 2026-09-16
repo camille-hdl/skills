@@ -1,0 +1,3 @@
+interface:
+  display_name: "Delegate"
+  short_description: "Déléguer une tâche à un agent avec le contexte nécessaire"
