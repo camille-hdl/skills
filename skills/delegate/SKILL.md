@@ -1,118 +1,118 @@
 ---
 name: delegate
-description: Déléguer une tâche à un autre agent en ligne de commande (Codex, Claude Code, Cursor…) par un mandat qui ne porte que le contexte nécessaire. À utiliser pour confier une tâche ou une revue à un agent, ou pour choisir le modèle et le harnais d'une délégation.
+description: Delegate a task to another command-line agent (Codex, Claude Code, Cursor…) through a brief that carries only the necessary context. Use when handing a task or a review to an agent, or when choosing the model and harness for a delegation.
 ---
 
-# Déléguer
+# Delegate
 
-Le **mandat** est le seul document que reçoit l'agent délégué : il ne voit ni la conversation, ni ton raisonnement. Tout ce qu'il doit savoir et ne peut pas trouver en regardant y est ; le reste n'y est pas.
+The **brief** is the only document the delegated agent receives: it sees neither the conversation nor your reasoning. Everything it must know and cannot find by looking is in it; everything else is not.
 
-L'outil, la combinaison d'agents et le repli se choisissent sur une **échelle** : on descend les barreaux dans l'ordre et on s'arrête au premier qui s'applique. Ce sont des règles, pas des suggestions : garde l'ordre des barreaux.
+The tool, the agent combination, and the fallback are chosen on a **scale**: walk down the rungs in order and stop at the first that applies. These are rules, not suggestions: keep the rung order.
 
-Deux fichiers de référence, lus quand une étape les appelle :
+Two reference files, read when a step calls for them:
 
-- [`references/tableau.md`](references/tableau.md) : modèles recommandés par nature de tâche, complexité et impact ; grilles de performance ; coût selon le forfait ; sources, niveaux de preuve et trous. Daté.
-- [`references/harnais.md`](references/harnais.md) : inventaire, forme de lancement de chaque CLI, pièges vérifiés, confidentialité.
+- [`references/table.md`](references/table.md): recommended models by kind of task, complexity, and impact; performance grids; cost by subscription; sources, evidence levels, and gaps. Dated.
+- [`references/harness.md`](references/harness.md): inventory, launch form of each CLI, verified pitfalls, confidentiality.
 
-Pour demander quelque chose à l'utilisateur, écris la question dans ta réponse et attends.
+To ask the user something, write the question in your reply and wait.
 
-## 1. Relever la demande
+## 1. Collect the request
 
-Pour chaque point, note « donné » (avec la valeur) ou « absent » :
+For each item, note “given” (with the value) or “missing”:
 
-- la tâche, et ce qui la termine ;
-- l'outil de délégation (Herdr, un CLI précis…) ;
-- la combinaison d'agents — modèle, effort, harnais — pour la tâche et pour la revue ;
-- la difficulté annoncée, et la préférence pour un modèle cher ou économique ;
-- l'impact : ce que coûte une erreur ;
-- la confidentialité des données que l'agent verra ;
-- les forfaits de l'utilisateur (ChatGPT, Claude, Cursor, clé d'API…).
+- the task, and what completes it;
+- the delegation tool (Herdr, a specific CLI…);
+- the agent combination — model, effort, harness — for the task and for the review;
+- the stated difficulty, and the preference for an expensive or economical model;
+- the impact: what an error costs;
+- the confidentiality of the data the agent will see;
+- the user’s subscriptions (ChatGPT, Claude, Cursor, API key…).
 
-Cherche aussi dans `AGENTS.md`, `CLAUDE.md` et la documentation accessible du projet : outil de délégation, modèles, forfaits.
+Also look in `AGENTS.md`, `CLAUDE.md`, and accessible project documentation: delegation tool, models, subscriptions.
 
-Terminé quand chaque point porte « donné » ou « absent ».
+Done when each item is marked “given” or “missing”.
 
-## 2. Inventaire et âge du tableau
+## 2. Inventory and age of the table
 
-Lance, quel que soit ton shell :
+Run, regardless of your shell:
 
 ```sh
 sh -c 'date +%F; for c in herdr codex claude cursor-agent gemini opencode; do command -v "$c"; done; echo "HERDR_ENV=${HERDR_ENV:-}"'
 ```
 
-- **Harnais installés** : les CLI trouvés. Pour les modèles réellement accessibles, voir « Inventaire » dans `references/harnais.md`.
-- **Herdr disponible** : `herdr` est trouvé **et** `HERDR_ENV=1`, c'est-à-dire que tu tournes dans un pane Herdr.
-- **Âge du tableau** : compare la date du jour à la `date` du frontmatter de `references/tableau.md`. Si l'écart dépasse un mois, dis-le à l'utilisateur, avec la date du tableau, et recommande de le mettre à jour à partir de benchmarks récents (section « Mettre à jour » du tableau). Poursuis ensuite avec le tableau tel qu'il est.
+- **Installed harnesses**: the CLIs found. For models that are actually accessible, see “Model inventory” in `references/harness.md`.
+- **Herdr available**: `herdr` is found **and** `HERDR_ENV=1`, meaning you are running in a Herdr pane.
+- **Age of the table**: compare today’s date with the `date` in the frontmatter of `references/table.md`. If the gap exceeds one month, tell the user, with the table’s date, and recommend updating it from recent benchmarks (the table’s “Updating” section). Then continue with the table as it stands.
 
-Terminé quand tu as la liste des harnais, la réponse sur Herdr, et l'âge du tableau en jours.
+Done when you have the list of harnesses, the answer on Herdr, and the age of the table in days.
 
-## 3. Outil de délégation — échelle
+## 3. Delegation tool — scale
 
-1. Celui que l'utilisateur précise.
-2. Sinon, celui qu'indiquent `AGENTS.md` ou une autre documentation accessible du projet.
-3. Sinon, **Herdr**, s'il est disponible.
-4. Sinon, **demande à l'utilisateur**, en lui proposant les harnais trouvés à l'étape 2.
+1. The one the user specifies.
+2. Otherwise, the one indicated by `AGENTS.md` or other accessible project documentation.
+3. Otherwise, **Herdr**, if it is available.
+4. Otherwise, **ask the user**, offering the harnesses found in step 2.
 
-Terminé quand l'outil est fixé et que tu sais sur quel barreau.
+Done when the tool is fixed and you know which rung.
 
-## 4. Combinaison d'agents — échelle
+## 4. Agent combination — scale
 
-Pour la tâche, puis pour la revue si l'étape 5 l'exige :
+For the task, then for the review if step 5 requires it:
 
-1. Celle que l'utilisateur précise.
-2. Sinon, **choisie dans le tableau**, à partir de la difficulté annoncée par l'utilisateur, et de sa préférence cher / économique s'il l'a dite.
-3. Sinon, **déterminée automatiquement** : estime la complexité et l'impact de la tâche avec les définitions du tableau, puis prends la ligne correspondante.
+1. The one the user specifies.
+2. Otherwise, **chosen from the table**, based on the difficulty the user stated, and on their expensive / economical preference if they stated one.
+3. Otherwise, **determined automatically**: estimate the complexity and impact of the task with the table’s definitions, then take the matching row.
 
-**Forfait.** Quand la ligne retenue dépend du forfait (le tableau le signale) et que le forfait est absent de la demande et de la documentation du projet, demande-le à l'utilisateur avant de lancer. Applique ensuite la section « Coût : le forfait décide de l'ordre » du tableau.
+**Subscription.** When the chosen row depends on the subscription (the table flags this) and the subscription is missing from the request and from the project documentation, ask the user for it before launching. Then apply the table section “Cost: the subscription decides the order”.
 
-**Confidentialité.** Si l'agent verra des données confidentielles, retiens seulement des modèles et des harnais qui conservent zéro donnée : `references/harnais.md` dit lesquels ne le font pas.
+**Confidentiality.** If the agent will see confidential data, keep only models and harnesses that retain zero data: `references/harness.md` says which ones do not.
 
-**Repli.** Quand le modèle ou le harnais retenu n'est pas installé :
+**Fallback.** When the chosen model or harness is not installed:
 
-1. le même modèle par un autre harnais installé (le catalogue du tableau dit lesquels) ;
-2. sinon, dans la grille de la même nature de tâche, le modèle installé du même niveau de performance au coût le plus proche ;
-3. sinon, le niveau voisin, et tu le dis à l'utilisateur.
+1. the same model through another installed harness (the table’s catalog says which ones);
+2. otherwise, in the grid for the same kind of task, the installed model at the same performance level with the closest cost;
+3. otherwise, the neighboring level, and you tell the user.
 
-Un modèle absent du tableau n'a pas de rang : situe-le à partir d'un benchmark public daté, avec son niveau de preuve, ou demande à l'utilisateur.
+A model absent from the table has no rank: place it from a dated public benchmark, with its evidence level, or ask the user.
 
-Terminé quand chaque agent à lancer a un modèle, un effort et un harnais installés, et que chaque substitution est notée avec sa raison.
+Done when each agent to launch has an installed model, effort, and harness, and each substitution is noted with its reason.
 
-## 5. Revue
+## 5. Review
 
-Une revue est nécessaire pour du code, et pour tout livrable dont l'impact est fort. Elle est confiée à un agent **de performance égale ou supérieure** à celui qui a fait la tâche, dans la grille de la même nature de tâche, et **de préférence d'un autre éditeur**. Choisis-le avec l'échelle de l'étape 4. Si la combinaison donnée par l'utilisateur place la revue sous l'agent qui a fait la tâche, signale-le avant de lancer.
+A review is required for code, and for any deliverable whose impact is high. It is given to an agent of **equal or higher performance** than the one that did the task, in the grid for the same kind of task, and **preferably from a different vendor**. Choose it with the scale in step 4. If the combination given by the user places the review under the agent that did the task, flag it before launching.
 
-Terminé quand la revue est écartée avec sa raison, ou que son agent est fixé.
+Done when the review is set aside with its reason, or its agent is fixed.
 
-## 6. Rédiger le mandat
+## 6. Write the brief
 
-Le mandat contient, et rien d'autre :
+The brief contains, and nothing else:
 
-- **l'objectif** : ce qu'il faut produire, en une ou deux phrases ;
-- **le critère de fin** : une condition que l'agent peut vérifier seul ;
-- **les points d'entrée** : chemins, commandes, URL. Un pointeur suffit pour ce que l'agent peut lire ; copie seulement ce qu'il ne peut pas atteindre ;
-- **les décisions déjà prises** et les contraintes, avec leur raison quand elle évite une erreur ;
-- **le périmètre** : ce qu'il peut lire, modifier, exécuter ; s'il committe ; où il s'arrête ;
-- **le rendu** : quoi, sous quelle forme, où l'écrire.
+- **the objective**: what to produce, in one or two sentences;
+- **the done criterion**: a condition the agent can verify on its own;
+- **the entry points**: paths, commands, URLs. A pointer is enough for what the agent can read; copy only what it cannot reach;
+- **decisions already made** and constraints, with their reason when it prevents an error;
+- **the scope**: what it may read, modify, execute; whether it commits; where it stops;
+- **the deliverable**: what, in what form, where to write it.
 
-Relis chaque ligne : si elle ne sert aucun de ces six points, retire-la. L'historique de la conversation, tes hypothèses écartées et les préférences sans rapport avec la tâche échouent à ce test.
+Reread each line: if it serves none of these six points, remove it. Conversation history, discarded hypotheses, and preferences unrelated to the task fail this test.
 
-Pour une revue, le mandat pointe vers le mandat de la tâche, le diff ou les fichiers produits, et demande des constats vérifiés.
+For a review, the brief points to the task brief, the diff or the files produced, and asks for verified findings.
 
-Écris le mandat dans un fichier : un fichier temporaire (`mktemp`), ou l'emplacement que prévoit la documentation du projet.
+Write the brief to a file: a temporary file (`mktemp`), or the location provided by the project documentation.
 
-Terminé quand chaque ligne sert l'un des six points et que l'agent pourrait commencer sans poser de question.
+Done when each line serves one of the six points and the agent could start without asking a question.
 
-## 7. Lancer
+## 7. Launch
 
-Suis `references/harnais.md` pour l'outil et le harnais retenus : forme de la commande, passage du mandat par l'entrée standard, droits accordés selon le périmètre. Lance la revue de la même façon, une fois la tâche rendue.
+Follow `references/harness.md` for the chosen tool and harness: command form, passing the brief on standard input, permissions granted according to the scope. Launch the review the same way, once the task has been delivered.
 
-Terminé quand chaque agent a rendu, ou a échoué avec une erreur que tu as lue.
+Done when each agent has delivered, or has failed with an error you have read.
 
-## 8. Rendre compte
+## 8. Report back
 
-Dis à l'utilisateur :
+Tell the user:
 
-- l'outil et chaque combinaison, avec le barreau d'échelle qui les a fixés ;
-- les substitutions et leur raison ;
-- l'avertissement sur l'âge du tableau, s'il y a lieu ;
-- le résultat de la tâche et celui de la revue, avec le chemin des livrables.
+- the tool and each combination, with the scale rung that fixed them;
+- the substitutions and their reason;
+- the warning on the age of the table, if any;
+- the result of the task and of the review, with the path of the deliverables.

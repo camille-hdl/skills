@@ -1,18 +1,17 @@
 ---
-name: mon-skill
-description: Décris ici ce que fait le skill et dans quels cas l'utiliser.
+name: my-skill
+description: Describe here what the skill does and when to use it.
 ---
 
-# Mon skill
+# My skill
 
-Décris ici les instructions que l'agent doit suivre.
+Describe here the instructions the agent must follow.
 
-## Quand l'utiliser
+## When to use it
 
-Explique les situations dans lesquelles ce skill doit être activé.
+Explain the situations in which this skill should be activated.
 
-## Procédure
+## Procedure
 
-1. Première étape.
-2. Deuxième étape.
-
+1. First step.
+2. Second step.
