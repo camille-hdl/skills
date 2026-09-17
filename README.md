@@ -1,42 +1,41 @@
 # Camille's skills
 
-Collection de skills installables avec la CLI [`skills`](https://skills.sh/).
+Collection of skills installable with the [`skills`](https://skills.sh/) CLI.
 
-## Installer les skills
+## Install the skills
 
-Depuis le projet dans lequel les skills doivent être disponibles :
+From the project where the skills should be available:
 
 ```bash
 npx skills add camille-hdl/skills
 ```
 
-Pour voir la liste sans installer :
+To see the list without installing:
 
 ```bash
 npx skills add camille-hdl/skills --list
 ```
 
-Pour installer un skill précis :
+To install a specific skill:
 
 ```bash
-npx skills add camille-hdl/skills --skill nom-du-skill
+npx skills add camille-hdl/skills --skill skill-name
 ```
 
-Ajouter `-g` pour une installation globale, ou `-a codex` (et éventuellement
-d'autres agents) pour cibler un agent précis. Les mises à jour se font avec
+Add `-g` for a global install, or `-a codex` (and optionally
+other agents) to target a specific agent. Updates are done with
 `npx skills update`.
 
-## Ajouter un skill
+## Add a skill
 
-Chaque skill doit vivre dans son propre sous-répertoire de `skills/` et
-contenir un fichier `SKILL.md` avec un frontmatter YAML comprenant au minimum
-`name` et `description` :
+Each skill must live in its own subdirectory of `skills/` and
+contain a `SKILL.md` file with YAML frontmatter that includes at least
+`name` and `description`:
 
 ```text
 skills/
-└── mon-skill/
+└── my-skill/
     └── SKILL.md
 ```
 
-Un modèle est disponible dans [`templates/SKILL.md.example`](templates/SKILL.md.example).
-
+A template is available in [`templates/SKILL.md.example`](templates/SKILL.md.example).
