@@ -53,12 +53,12 @@ Command form: the harness section in `harness.md`, with the catalog identifier a
 | Code | mechanical | Luna `low` or `medium` | Codex ; Cursor | OpenAI points Luna at “extraction, classification, transformation” [V] | no third-party data on low effort in code |
 | Code | ready plan · low | Luna `high` | Codex ; Cursor | SWE-Bench Pro 62.7% vs Sol 64.6% [V] ; ARC-AGI-2: 7.4% at `medium`, 29.3% at `high` [T] | [I] `high` effort is worth its extra cost |
 | Code | long and autonomous · medium | Opus 5 `high` | Claude Code | Terminal-Bench 4.0: 51.8%, vs Sol 37.3% and Luna 17.3% [T] | very verbose; in Claude Code, a Fable 5.1 advisor is possible; its contribution is unmeasured |
-| Code | no plan, or high impact | Astra `high` or Fable 5.1 `high` ‡ subscription | Codex / Claude Code | Terminal-Bench 4.0: 58.2% and 57.9%, each in its own harness [T] | review by the other |
-| Planning | complex · high | Fable 5.1 `high` or Astra `high` ‡ subscription; cross-read of the plan by the other | Claude Code / Codex | Astra 1st on all proxies: Intelligence Index 53, ECI 166, ARC-AGI-2 92.1% at `high`, ARC-AGI-3 62.7% [T] ; Fable 5.1 at the same level: Intelligence Index 53, ECI 164 [T] | Astra is the least verbose of the strong models [T] |
+| Code | no plan, or high impact | Fable 5.1 `high` ‡ subscription | Claude Code | Terminal-Bench 4.0: 57.9% in its own harness [T] | no other listed vendor reaches High for an equal-performance cross-vendor review |
+| Planning | complex · high | Fable 5.1 `high` ‡ subscription | Claude Code | Intelligence Index 53, ECI 164 [T] | no other listed vendor reaches High for an equal-performance cross-read |
 | Planning | medium | Opus 5 `high` | Claude Code | Intelligence Index 51, ECI 162, ARC-AGI-3 30.2% vs Sol 7.8% [T] | |
 | Web search | low stakes, low cost | Luna `high` | Codex, web enabled ; Cursor | BrowseComp 83.3% [V] ; only cheap option with a data point | Grok 4.6 costs even less on Cursor, but with no data: to try, not to recommend |
 | Web search | high stakes, synthesis that decides | Sol `xhigh` | Codex, web enabled | only third-party signal: 1st on Arena Search, at `xhigh`, as of 2026-08-24 [T] ; BrowseComp 90.4% [V] | Astra, Opus 5, and Fable 5.1 were absent from Arena Search. Without Codex: Opus 5 with web tools, BrowseComp 90.8% [V, uncertain reading] |
-| Code review | any implementation | the other vendor among Astra `high`, Fable 5.1 `high`, Opus 5 `high` | Codex / Claude Code | the top three on Terminal-Bench 4.0 [T] | equal or higher than the author, in the Code grid |
+| Code review | any implementation | Fable 5.1 `high`, when available and at least as strong as the author | Claude Code | 57.9% on Terminal-Bench 4.0 [T] | if unavailable, no equal-or-higher cross-vendor reviewer is established for a High-level author |
 | Prose for humans | editing, simplification | Grok 4.6 `high` | Cursor | no reformulation benchmark found | usage choice of the skill author, unmeasured |
 
 Missing rows:
@@ -76,7 +76,7 @@ No benchmark measures planning. Proxies: reasoning on closed problems.
 
 | Level | Models | Cost | Evidence |
 | --- | --- | --- | --- |
-| High | Astra, Fable 5.1 ; Opus 5 one step below | high ‡ | Intelligence Index 53 / 53 / 51 ; ECI 166 / 164 / 162 ; ARC-AGI-3: Astra 62.7%, Opus 5 30.2%, Fable 5.1 unpublished [T] |
+| High | Fable 5.1 | high ‡ | Intelligence Index 53, ECI 164; ARC-AGI-3 unpublished [T] |
 | Good | Sol | medium | Intelligence Index 47, ECI 162, ARC-AGI-2 92.5% at `max`, but ARC-AGI-3 7.8% [T] |
 | Medium | Grok 4.6 ; Terra | low ; medium | Intelligence Index 44 / 42 ; ARC-AGI-2 67.1% at `xhigh` / 83.9% at `max` [T] |
 | Low | Luna | low | Intelligence Index 38 ; ARC-AGI-2 59.5% at `max`, 7.4% at `medium` [T] |
@@ -85,7 +85,7 @@ No benchmark measures planning. Proxies: reasoning on closed problems.
 
 | Level | Models | Cost | Evidence |
 | --- | --- | --- | --- |
-| High | Astra, Fable 5.1 | high ‡ | Terminal-Bench 4.0: 58.2%, 57.9% [T] |
+| High | Fable 5.1 | high ‡ | Terminal-Bench 4.0: 57.9% [T] |
 | Good | Opus 5 | high ‡ | Terminal-Bench 4.0: 51.8% [T] ; CursorBench 70.0% [V] |
 | Medium | Sol | medium | Terminal-Bench 4.0: 37.3% [T] ; SWE-Bench Pro 64.6% [V] |
 | Low on long tasks, close on well-scoped tasks | Terra, Grok 4.6, Luna | medium ; low ; low | Terminal-Bench 4.0: 21.5%, 20.3% (in Grok Build), 17.3% [T] ; SWE-Bench Pro Luna 62.7% [V] ; CursorBench Grok 4.6 69.9% [V, Cursor co-trains Grok] |
@@ -126,11 +126,11 @@ The cost that matters is not the token price, but what the delegation consumes *
 
 | Subscription | Public limits | Effect on order |
 | --- | --- | --- |
-| ChatGPT Plus (Codex) | local messages per 5 h window: Astra 5–45, Sol 10–100, Terra 25–200, Luna 250–2,000 ; “Weekly limits may also apply” [V] | **Astra is scarce**: reserve it for planning or high-impact code, and prefer Fable 5.1 if the Claude subscription includes it. Luna is the workhorse |
-| ChatGPT Pro 5x / Pro 20x | Astra 25–225 / 100–900 ; Luna 1,250–10,000 / 5,000–40,000 [V] | Astra becomes a first resort for no-plan code and heavy planning |
+| ChatGPT Plus (Codex) | local messages per 5 h window: Astra 5–45, Sol 10–100, Terra 25–200, Luna 250–2,000 ; “Weekly limits may also apply” [V] | Prefer Fable 5.1 if the Claude subscription includes it; Luna is the workhorse |
+| ChatGPT Pro 5x / Pro 20x | Astra 25–225 / 100–900 ; Luna 1,250–10,000 / 5,000–40,000 [V] | Opus 5 is the strongest included alternative; Fable 5.1 requires Claude credits |
 | Codex Fast mode | Astra: “2.5x multiplier” ; other models unpublished [V] | avoid when quota matters |
-| Claude Pro | Opus 5 included, “strongest model on Claude Pro” ; Fable 5.1 **only through paid credits** [V] | Fable 5.1 costs money: Astra or Opus 5 first, Fable 5.1 last, advisor included |
-| Claude Max | Fable 5.1 included up to “50% of your weekly usage limits”, consumed faster than other Claude models, with no published multiplier ; absolute limits unpublished [V] | **Fable 5.1 becomes the first resort** for heavy planning and no-plan code ; Astra remains the reserve. A Fable advisor consumes quota, not money |
+| Claude Pro | Opus 5 included, “strongest model on Claude Pro” ; Fable 5.1 **only through paid credits** [V] | Opus 5 first, Fable 5.1 last; a Fable advisor is included |
+| Claude Max | Fable 5.1 included up to “50% of your weekly usage limits”, consumed faster than other Claude models, with no published multiplier ; absolute limits unpublished [V] | **Fable 5.1 becomes the first resort** for heavy planning and no-plan code. A Fable advisor consumes quota, not money |
 | Cursor, paid subscriptions | two monthly pools: “Cursor Models”, with “significantly more included usage” for Grok 4.6 ; “Other Models” (GPT-5.6, Opus 5, Fable 5.1) billed at API price ; Astra absent ; amounts unpublished [V] | Grok 4.6 is the cheapest. Cursor serves as a fallback pool for Luna, Sol, Opus 5, and Fable 5.1 when Codex or Claude are exhausted, except confidential data for Fable 5.1 |
 | API key only | token price | order by run cost [T]: Luna < Terra < Sol < Astra < Grok 4.6 < Opus 5 ≈ Fable 5.1 |
 

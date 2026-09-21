@@ -57,6 +57,8 @@ Done when the tool is fixed and you know which rung.
 
 ## 4. Agent combination — scale
 
+By the user's decision on 2026-09-21, GPT-6 Astra is used only on explicit request because it is rare in ChatGPT Plus quotas.
+
 For the task, then for the review if step 5 requires it:
 
 1. The one the user specifies.
