@@ -76,7 +76,7 @@ No benchmark measures planning. Proxies: reasoning on closed problems.
 
 | Level | Models | Cost | Evidence |
 | --- | --- | --- | --- |
-| High | Fable 5.1 | high ‡ | Intelligence Index 53, ECI 164; ARC-AGI-3 unpublished [T] |
+| High | Astra (`explicit request only`), Fable 5.1 ; Opus 5 one step below | high ‡ | Intelligence Index 53 / 53 / 51 ; ECI 166 / 164 / 162 ; ARC-AGI-3: Astra 62.7%, Opus 5 30.2%, Fable 5.1 unpublished [T] |
 | Good | Sol | medium | Intelligence Index 47, ECI 162, ARC-AGI-2 92.5% at `max`, but ARC-AGI-3 7.8% [T] |
 | Medium | Grok 4.6 ; Terra | low ; medium | Intelligence Index 44 / 42 ; ARC-AGI-2 67.1% at `xhigh` / 83.9% at `max` [T] |
 | Low | Luna | low | Intelligence Index 38 ; ARC-AGI-2 59.5% at `max`, 7.4% at `medium` [T] |
@@ -85,7 +85,7 @@ No benchmark measures planning. Proxies: reasoning on closed problems.
 
 | Level | Models | Cost | Evidence |
 | --- | --- | --- | --- |
-| High | Fable 5.1 | high ‡ | Terminal-Bench 4.0: 57.9% [T] |
+| High | Astra (`explicit request only`), Fable 5.1 | high ‡ | Terminal-Bench 4.0: 58.2%, 57.9% [T] |
 | Good | Opus 5 | high ‡ | Terminal-Bench 4.0: 51.8% [T] ; CursorBench 70.0% [V] |
 | Medium | Sol | medium | Terminal-Bench 4.0: 37.3% [T] ; SWE-Bench Pro 64.6% [V] |
 | Low on long tasks, close on well-scoped tasks | Terra, Grok 4.6, Luna | medium ; low ; low | Terminal-Bench 4.0: 21.5%, 20.3% (in Grok Build), 17.3% [T] ; SWE-Bench Pro Luna 62.7% [V] ; CursorBench Grok 4.6 69.9% [V, Cursor co-trains Grok] |
@@ -136,7 +136,7 @@ The cost that matters is not the token price, but what the delegation consumes *
 
 Contradiction [V]: the ChatGPT help center reserves Astra for Pro subscriptions and above; the Codex table gives it a quota on Plus. Verify with the Codex model list (`harness.md`).
 
-**Unknown subscription.** Quota order [I], cheapest to most expensive: Grok 4.6 (dedicated Cursor pool) · Luna · Terra · Sol · then Opus 5, Astra, and Fable 5.1, **with no order among them**. When the choice falls among those three, the subscription decides: ask for it.
+**Unknown subscription.** Quota order [I], cheapest to most expensive: Grok 4.6 (dedicated Cursor pool) · Luna · Terra · Sol · then Opus 5 and Fable 5.1, **with no order between them**. Astra is available only on explicit request. When the choice falls between Opus 5 and Fable 5.1, the subscription decides: ask for it.
 
 ## Gaps
 
