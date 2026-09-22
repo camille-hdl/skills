@@ -10,6 +10,7 @@ Collection of skills installable with the [`skills`](https://skills.sh/) CLI.
 | [`fat-marker-sketch`](skills/fat-marker-sketch/SKILL.md) | Draws very low-fidelity UI concepts as hand-drawn images, several variants side by side. | Exploring UI or UX directions quickly, before wireframes or prototypes. |
 | [`hill-chart`](skills/hill-chart/SKILL.md) | Draws the progress of a project's scopes as dots on a hill, Shape Up style: uphill while figuring out what to do, downhill while getting it done. | Showing or updating where the scopes of a project stand. |
 | [`pull-request-description`](skills/pull-request-description/SKILL.md) | Writes a short pull request description for human reviewers: what they need to know to run the change in production. | Opening or updating a pull request. |
+| [`tactical-programming`](skills/tactical-programming/SKILL.md) | Gives an agent the few well-known design moves for a targeted change to existing code: Shameless Green, Four Rules of Simple Design, Software Vise, Flocking Rules… | Adding code, fixing a bug, refactoring, or changing poorly tested code, in a small task or one ticket among others. |
 
 ## Install the skills
 
