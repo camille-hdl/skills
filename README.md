@@ -2,6 +2,14 @@
 
 Collection of skills installable with the [`skills`](https://skills.sh/) CLI.
 
+## Skills
+
+| Skill | What it does | When to use it |
+| --- | --- | --- |
+| [`delegate`](skills/delegate/SKILL.md) | Hands a task to another command-line agent (Codex, Claude Code, Cursor…) through a brief, and chooses its model and harness. | Delegating a task or a review to another agent. |
+| [`fat-marker-sketch`](skills/fat-marker-sketch/SKILL.md) | Draws very low-fidelity UI concepts as hand-drawn images, several variants side by side. | Exploring UI or UX directions quickly, before wireframes or prototypes. |
+| [`pull-request-description`](skills/pull-request-description/SKILL.md) | Writes a short pull request description for human reviewers: what they need to know to run the change in production. | Opening or updating a pull request. |
+
 ## Install the skills
 
 From the project where the skills should be available:
