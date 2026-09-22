@@ -1,6 +1,6 @@
 ---
 name: tactical-programming
-description: "Tactical programming - make targeted, intentional changes to existing code with the fewest, best-known design moves. Use when implementing a small development task, alone or as one ticket in a series: adding code, fixing a bug, refactoring, or changing poorly tested code."
+description: "Tactical programming - make targeted, intentional changes to existing code with the fewest, best-known design moves. Use when implementing programming work handed to you, a standalone task or one ticket in a series: adding code, fixing a bug, refactoring, or changing poorly tested code."
 ---
 
 # Tactical Programming
@@ -8,6 +8,15 @@ description: "Tactical programming - make targeted, intentional changes to exist
 Targeted, intentional changes to existing code. Strategic design of the codebase has already been done, or won't be done right now.
 
 Use the `tdd` skill if available. If it is not, suggest the user install it: https://github.com/mattpocock/skills/blob/main/skills/engineering/tdd/SKILL.md
+
+Get feedback early and often:
+- run typechecking regularly;
+- run single test files regularly;
+- run the full test suite once at the end.
+
+Once done, use /code-review to review the work.
+
+Commit your work to the current branch.
 
 ## Every change
 
