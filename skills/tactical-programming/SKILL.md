@@ -1,6 +1,6 @@
 ---
 name: tactical-programming
-description: Tactical programming - make targeted, intentional changes to existing code with the fewest, best-known design moves. Use when implementing a small development task, alone or as one ticket in a series: adding code, fixing a bug, refactoring, or changing poorly tested code.
+description: "Tactical programming - make targeted, intentional changes to existing code with the fewest, best-known design moves. Use when implementing a small development task, alone or as one ticket in a series: adding code, fixing a bug, refactoring, or changing poorly tested code."
 ---
 
 # Tactical Programming
