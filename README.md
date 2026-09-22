@@ -6,6 +6,7 @@ Collection of skills installable with the [`skills`](https://skills.sh/) CLI.
 
 | Skill | What it does | When to use it |
 | --- | --- | --- |
+| [`data-modeling`](skills/data-modeling/SKILL.md) | Helps translate a domain model into a data model, after William Kent's *Data and Reality*, which it borrows from heavily: oneness, sameness, categories, existence, naming scopes, relationships. | Designing classes, entities, attributes, relationships or a database schema from a domain. |
 | [`delegate`](skills/delegate/SKILL.md) | Hands a task to another command-line agent (Codex, Claude Code, Cursor…) through a brief, and chooses its model and harness. | Delegating a task or a review to another agent. |
 | [`fat-marker-sketch`](skills/fat-marker-sketch/SKILL.md) | Draws very low-fidelity UI concepts as hand-drawn images, several variants side by side. | Exploring UI or UX directions quickly, before wireframes or prototypes. |
 | [`hill-chart`](skills/hill-chart/SKILL.md) | Draws the progress of a project's scopes as dots on a hill, Shape Up style: uphill while figuring out what to do, downhill while getting it done. | Showing or updating where the scopes of a project stand. |
