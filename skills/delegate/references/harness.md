@@ -29,7 +29,7 @@ codex exec --ephemeral -s read-only -m gpt-5.6-luna -c model_reasoning_effort="l
 
 - **write**: `-s workspace-write`;
 - **outside a git repository**: `--skip-git-repo-check`;
-- **web**: `--search`, or `web_search = "live"` in the Codex configuration ([doc](https://developers.openai.com/codex/config-basic)) ✔;
+- **web**: `-c web_search='"live"'` ✔ (codex-cli 0.155.1, 2026-09-22). `--search` is accepted by the interactive `codex` only; `codex exec` rejects it (“unexpected argument”). Same setting in the Codex configuration: `web_search = "live"` ([doc](https://developers.openai.com/codex/config-basic));
 - **last message to a file**: `-o <file>`.
 
 ## Claude Code
