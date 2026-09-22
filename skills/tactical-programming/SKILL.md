@@ -14,7 +14,7 @@ Get feedback early and often:
 - run single test files regularly;
 - run the full test suite once at the end.
 
-Once done, use /code-review to review the work.
+Once done, use the `code-review` skill to review the work, if available. If it is not, suggest the user install it: https://github.com/mattpocock/skills/blob/main/skills/engineering/code-review/SKILL.md
 
 Commit your work to the current branch.
 
