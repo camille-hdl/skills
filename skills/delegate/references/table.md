@@ -44,6 +44,16 @@ Impact:
 
 Impact comes from no benchmark. It governs review: the higher it is, the more independent the review — different vendor, strong model.
 
+## Overrides
+
+User decisions that take precedence over the rest of this file: apply them to every row, grid, and cost line before choosing. The two replacements hold **until benchmarks** of the new models are compiled here (see “Updating”); meanwhile, evidence, grids, and costs still describe the replaced models.
+
+- **Astra: explicit request only** (2026-09-21), because it is rare in ChatGPT Plus quotas. For the task, fallback, and reviewer, skip models marked `explicit request only` unless the user explicitly requested them.
+- **Sol → GPT-6 Sol** (2026-09-22): wherever this file says Sol or `gpt-5.6-sol`, use `gpt-6-sol` in Codex. Its Codex default effort is `medium`, not `low`: keep passing effort explicitly. Absent from `cursor-agent --list-models` on 2026-09-22: Codex only.
+- **Opus 5 and Fable 5.1 → Opus 5.5** (2026-09-22): wherever this file says Opus 5 or Fable 5.1, use Opus 5.5: `claude-opus-5-5` in Claude Code, `claude-opus-5-5-<effort>` in Cursor (not marked “(NO ZDR)” on 2026-09-22). It takes the High level of the grids, reviewer included. The ‡ choice between Opus 5 and Fable 5.1, the Fable advisor notes, and the Fable retention caveats no longer apply.
+
+[I] GPT-6 Sol and Opus 5.5 are assumed at least as strong as the models they replace; no benchmark of them was read.
+
 ## Recommendations
 
 Command form: the harness section in `harness.md`, with the catalog identifier and the row’s effort (in Cursor, effort is part of the identifier).
@@ -52,13 +62,13 @@ Command form: the harness section in `harness.md`, with the catalog identifier a
 | --- | --- | --- | --- | --- | --- |
 | Code | mechanical | Luna `low` or `medium` | Codex ; Cursor | OpenAI points Luna at “extraction, classification, transformation” [V] | no third-party data on low effort in code |
 | Code | ready plan · low | Luna `high` | Codex ; Cursor | SWE-Bench Pro 62.7% vs Sol 64.6% [V] ; ARC-AGI-2: 7.4% at `medium`, 29.3% at `high` [T] | [I] `high` effort is worth its extra cost |
-| Code | long and autonomous · medium | Opus 5 `high` | Claude Code | Terminal-Bench 4.0: 51.8%, vs Sol 37.3% and Luna 17.3% [T] | very verbose; in Claude Code, a Fable 5.1 advisor is possible; its contribution is unmeasured |
-| Code | no plan, or high impact | Fable 5.1 `high` ‡ subscription | Claude Code | Terminal-Bench 4.0: 57.9% in its own harness [T] | no other listed vendor reaches High for an equal-performance cross-vendor review |
-| Planning | complex · high | Fable 5.1 `high` ‡ subscription | Claude Code | Intelligence Index 53, ECI 164 [T] | no other listed vendor reaches High for an equal-performance cross-read |
-| Planning | medium | Opus 5 `high` | Claude Code | Intelligence Index 51, ECI 162, ARC-AGI-3 30.2% vs Sol 7.8% [T] | |
+| Code | long and autonomous · medium | Opus 5.5 `high` (override) | Claude Code | Terminal-Bench 4.0: 51.8%, vs Sol 37.3% and Luna 17.3% [T] | very verbose; in Claude Code, a Fable 5.1 advisor is possible; its contribution is unmeasured |
+| Code | no plan, or high impact | Opus 5.5 `high` (override) | Claude Code | Terminal-Bench 4.0: 57.9% in its own harness [T] | no other listed vendor reaches High for an equal-performance cross-vendor review |
+| Planning | complex · high | Opus 5.5 `high` (override) | Claude Code | Intelligence Index 53, ECI 164 [T] | no other listed vendor reaches High for an equal-performance cross-read |
+| Planning | medium | Opus 5.5 `high` (override) | Claude Code | Intelligence Index 51, ECI 162, ARC-AGI-3 30.2% vs Sol 7.8% [T] | |
 | Web search | low stakes, low cost | Luna `high` | Codex, web enabled ; Cursor | BrowseComp 83.3% [V] ; only cheap option with a data point | Grok 4.6 costs even less on Cursor, but with no data: to try, not to recommend |
-| Web search | high stakes, synthesis that decides | Sol `xhigh` | Codex, web enabled | only third-party signal: 1st on Arena Search, at `xhigh`, as of 2026-08-24 [T] ; BrowseComp 90.4% [V] | Astra, Opus 5, and Fable 5.1 were absent from Arena Search. Without Codex: Opus 5 with web tools, BrowseComp 90.8% [V, uncertain reading] |
-| Code review | any implementation | Fable 5.1 `high`, when available and at least as strong as the author | Claude Code | 57.9% on Terminal-Bench 4.0 [T] | if unavailable, no equal-or-higher cross-vendor reviewer is established for a High-level author |
+| Web search | high stakes, synthesis that decides | GPT-6 Sol `xhigh` (override) | Codex, web enabled | only third-party signal: 1st on Arena Search, at `xhigh`, as of 2026-08-24 [T] ; BrowseComp 90.4% [V] | Astra, Opus 5, and Fable 5.1 were absent from Arena Search. Without Codex: Opus 5 with web tools, BrowseComp 90.8% [V, uncertain reading] |
+| Code review | any implementation | Opus 5.5 `high` (override), when at least as strong as the author | Claude Code | 57.9% on Terminal-Bench 4.0 [T] | if unavailable, no equal-or-higher cross-vendor reviewer is established for a High-level author |
 | Prose for humans | editing, simplification | Grok 4.6 `high` | Cursor | no reformulation benchmark found | usage choice of the skill author, unmeasured |
 
 Missing rows:

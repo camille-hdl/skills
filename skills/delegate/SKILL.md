@@ -57,8 +57,7 @@ Done when the tool is fixed and you know which rung.
 
 ## 4. Agent combination — scale
 
-By the user's decision on 2026-09-21, GPT-6 Astra is used only on explicit request because it is rare in ChatGPT Plus quotas.
-For task choice, fallback, and reviewer selection, skip models marked `explicit request only` unless the user explicitly requested them.
+Apply the “Overrides” section of `references/table.md` first: it replaces models of the table, pending benchmarks.
 
 For the task, then for the review if step 5 requires it:
 
@@ -115,7 +114,7 @@ Done when each agent has delivered, or has failed with an error you have read.
 
 Tell the user:
 
-- the tool and each combination, with the scale rung that fixed them;
+- the tool and each combination, with the scale rung that fixed them and any override applied;
 - the substitutions and their reason;
 - the warning on the age of the table, if any;
 - the result of the task and of the review, with the path of the deliverables.
