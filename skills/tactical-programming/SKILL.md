@@ -7,6 +7,14 @@ description: "Tactical programming - make targeted, intentional changes to exist
 
 Targeted, intentional changes to existing code. Strategic design of the codebase has already been done, or won't be done right now.
 
+The user who loaded this skill asks you to test and verify your work: write and run tests even if your default is to test only on request.
+
+You are done when:
+- a test you saw fail covers the behavior you added or fixed; for a refactoring, tests pin the current behavior and pass before and after;
+- typechecking and the full test suite pass;
+- you have read your whole diff (`git diff`) against the task;
+- the work is committed to the current branch.
+
 Use the `tdd` skill if available. If it is not, suggest the user install it: https://github.com/mattpocock/skills/blob/main/skills/engineering/tdd/SKILL.md
 
 Get feedback early and often:
@@ -14,9 +22,7 @@ Get feedback early and often:
 - run single test files regularly;
 - run the full test suite once at the end.
 
-Once done, use the `code-review` skill to review the work, if available. If it is not, suggest the user install it: https://github.com/mattpocock/skills/blob/main/skills/engineering/code-review/SKILL.md
-
-Commit your work to the current branch.
+Once done, review the work with the `code-review` skill if it is available and can run in this session. Otherwise, read your diff against the task and the rules below. If it is not installed, suggest the user install it: https://github.com/mattpocock/skills/blob/main/skills/engineering/code-review/SKILL.md
 
 ## Every change
 
