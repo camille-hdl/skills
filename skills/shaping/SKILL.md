@@ -10,14 +10,16 @@ metadata:
 
 Grill the user to turn their raw idea for a change (a new feature, or a change to an existing one) into a solved, bounded solution: a **pitch**.
 
-You are done when the user has approved a pitch that the agent building it can use without this conversation, and that contains:
+You are done when the user has approved a pitch that the agent building it can use without this conversation, and that contains, in the glossary's terms:
 
-- the problem to solve, clearly stated;
+- the problem: one specific story that shows why the way it works today fails;
 - the appetite;
 - the solution:
+  - the elements of each chosen sketch (places, affordances, arrows), with the sketch;
   - must-haves;
   - nice-to-haves;
   - no-gos;
+  - what is left to the builder;
 - the rabbit holes, each with the decision that avoids it.
 
 The **appetite** bounds the solution: an investment limit agreed with the user right after the problem, before exploring solutions. An agent builds it, so measure it in what stays scarce rather than in build time: the user's attention, the review and testing the user or team must do, the risk to existing data and behavior, and the tokens spent (scope drift, endless review cycles). Express it concretely, for example "small: reviewed in one sitting, no data migration". Move every must-have that exceeds it to the nice-to-haves or the no-gos, or revisit the appetite with the user.
@@ -40,7 +42,7 @@ Done when you have walked every step of the solution, and every rabbit hole foun
 
 ## 3. Write the pitch
 
-Write the pitch where the project keeps its specs or plans; if there is no such place, ask the user where. Copy each chosen sketch next to the pitch and link it from there.
+Write the pitch where the project keeps its specs or plans; if there is none, propose `docs/pitches/<date>-<slug>.md` and ask the user to confirm. Copy each chosen sketch next to the pitch and link it from there.
 
 Before showing it, read the pitch as the agent that will build it, without this conversation: list every point where it would have to guess (a limit, a time zone, what happens to existing data, who is notified). If you can dispatch a sub-agent, give it only the pitch and the repository, and ask it for that list. Settle each point with the user, or write it down as left to the builder. Then show the pitch to the user and revise it with them.
 
