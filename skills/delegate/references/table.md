@@ -46,13 +46,14 @@ Impact comes from no benchmark. It governs review: the higher it is, the more in
 
 ## Overrides
 
-User decisions that take precedence over the rest of this file: apply them to every row, grid, and cost line before choosing. The two replacements hold **until benchmarks** of the new models are compiled here (see “Updating”); meanwhile, evidence, grids, and costs still describe the replaced models.
+User decisions that take precedence over the rest of this file: apply them to every row, grid, and cost line before choosing. The replacements hold **until benchmarks** of the new models are compiled here (see “Updating”); meanwhile, evidence, grids, and costs still describe the replaced models.
 
 - **Astra: explicit request only** (2026-09-21), because it is rare in ChatGPT Plus quotas. For the task, fallback, and reviewer, skip models marked `explicit request only` unless the user explicitly requested them.
 - **Sol → GPT-6 Sol** (2026-09-22): wherever this file says Sol or `gpt-5.6-sol`, use `gpt-6-sol` in Codex. Its Codex default effort is `medium`, not `low`: keep passing effort explicitly. Absent from `cursor-agent --list-models` on 2026-09-22: Codex only.
+- **Luna → GPT-6 Luna** (2026-09-23): wherever this file says Luna or `gpt-5.6-luna`, use `gpt-6-luna` in Codex. Its Codex default effort is `medium`: keep passing effort explicitly. Absent from `cursor-agent --list-models` on 2026-09-23: Codex only.
 - **Opus 5 and Fable 5.1 → Opus 5.5** (2026-09-22): wherever this file says Opus 5 or Fable 5.1, use Opus 5.5: `claude-opus-5-5` in Claude Code, `claude-opus-5-5-<effort>` in Cursor (not marked “(NO ZDR)” on 2026-09-22). It takes the High level of the grids, reviewer included. The ‡ choice between Opus 5 and Fable 5.1, the Fable advisor notes, and the Fable retention caveats no longer apply.
 
-[I] GPT-6 Sol and Opus 5.5 are assumed at least as strong as the models they replace; no benchmark of them was read.
+[I] GPT-6 Sol, GPT-6 Luna, and Opus 5.5 are assumed at least as strong as the models they replace; no benchmark of them was read.
 
 ## Recommendations
 
