@@ -23,7 +23,7 @@ This rule is the user's, and it wins over any habit of your drawing tool:
 
 ## 1. Place the scopes
 
-List the project's scopes with their titles, from the user or the project's documents. For each one, place it on the hill:
+List the project's scopes with their titles, from the user or the project's documents. For each one, assign a numeric position from 0 (left foot) to 1 (finish), with 0.5 at the top of the hill:
 
 - the user's placement, when they give one: the people doing the work have the full context;
 - otherwise, your judgment from what the user tells you, with the thirds above, and you say which dots you placed yourself;
@@ -31,11 +31,11 @@ List the project's scopes with their titles, from the user or the project's docu
 
 A scope that is partly over the hill and partly not has no single position: propose splitting it into smaller scopes.
 
-Done when every scope has a title and a position: uphill or downhill, and where on that side.
+Done when every scope has a title and a position from 0 to 1: below 0.5 is uphill, 0.5 is the top, and above 0.5 is downhill.
 
 ## 2. Draw
 
-Draw the hill and its dots with the tool the user names, otherwise any tool available to you that produces an image (Excalidraw, a hand-written SVG…). When no tool fits, ask the user.
+Draw the hill and its dots with the tool the user names, when they name one. Otherwise, use `@camille-hdl/hill-chart` first: write a one-line JSON file such as `{"scopes":[{"name":"Login","position":0.9}]}`, then run `npx @camille-hdl/hill-chart chart.json -o chart.png` (or `npx @camille-hdl/hill-chart chart.json > chart.svg`). If that package is unavailable or unsuitable, use any other tool available to you that produces an image. When no tool fits, ask the user.
 
 Done when the image file exists.
 

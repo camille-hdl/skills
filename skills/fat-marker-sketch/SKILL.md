@@ -43,7 +43,7 @@ Done when every variant accounts for all three kinds, and every arrow starts fro
 
 ## 3. Draw
 
-Draw all variants side by side in one image, left to right, each under its name, with a thick, hand-drawn line. Use the tool the user names, otherwise any tool available to you that produces an image; Excalidraw and rough.js are two examples. When no tool fits, ask the user.
+Draw all variants side by side in one image, left to right, each under its name, with a thick, hand-drawn line. Use the tool the user names, otherwise any tool available to you that produces an image; Excalidraw is one example. When no tool fits, ask the user.
 
 Done when the image file exists.
 
