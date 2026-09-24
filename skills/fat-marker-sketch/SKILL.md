@@ -51,7 +51,9 @@ Done when the image file exists.
 
 Look at the image yourself before showing it: overlaps, clipped text, and arrows that miss their target show only there. Fix the drawing and check again. If you cannot view the image, say so when you show it.
 
-Done when each element from step 2 is visible and readable in its variant.
+With `@camille-hdl/fat-marker`, read stderr first: each `fat-marker: warning:` line names an arrow, by the field of its `to`, that runs through a place's name, or an affordance's label or scribble. Rearrange the data and render again until no warning is left: set the target place beside the affordance's place in a row, put the affordance last in its row, or move the crossed element. A warning does not fail the command. If one remains, say so when you show the image.
+
+Done when each element from step 2 is visible and readable in its variant, and the render printed no warning, or you said which remain.
 
 ## 5. Show and iterate
 
