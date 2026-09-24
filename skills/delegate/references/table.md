@@ -1,31 +1,34 @@
 ---
-date: 2026-09-16
+date: 2026-09-24
 ---
 
 # Recommendation table
 
-Compiled on **2026-09-16** from **published** benchmarks and documentation; no benchmark was run to write it. It covers seven models: GPT-6 Astra, GPT-5.6 Sol, Terra and Luna (OpenAI), Claude Opus 5 and Fable 5.1 (Anthropic), Grok 4.6 (SpaceXAI, served by Cursor). Other models have no rank in it.
+Compiled on **2026-09-24** from **published** benchmarks and documentation; no benchmark was run to write it. It ranks GPT-6 Astra, Sol and Luna (OpenAI), Claude Opus 5.5 (Anthropic), and Grok 4.7 (SpaceXAI, served by Cursor). GPT-5.6 Terra is still installed but has no recommended cell. Older versions remain selectable in some CLIs; they are not ranked here.
 
 ## Evidence levels
 
-- **[T]** independent third-party measurement. Weighs most.
-- **[V]** vendor statement: their harness, effort rarely specified, no replication. Counts as an indication, not a measurement.
-- **[I]** inference: the reasoning is given; no source asserts it.
-- **‡ subscription**: the order of the row depends on the user’s subscription; see “Cost: the subscription decides the order”.
+- **[T]** independent third-party measurement. Weighs most; a measured agent is still a model **plus a harness**.
+- **[V]** vendor statement or vendor-run evaluation. Effort and harness may differ; no independent replication implied.
+- **[I]** inference or usage choice: the reasoning is given; no benchmark directly asserts it.
+- **No data** means no published result for that model and task was found; it is not a zero score.
+
+Percentages from different benchmarks, efforts, and harnesses are not interchangeable. Differences of a few points can be run-to-run noise.
 
 ## Catalog
+
+Checked against `codex debug models`, `cursor-agent --list-models`, and `claude --help` on 2026-09-24. Cursor's listed identifiers, rather than API IDs, are the invocation source of truth.
 
 | Model | Vendor | Codex | Claude Code | Cursor | Default effort |
 | --- | --- | --- | --- | --- | --- |
 | Astra | OpenAI | `gpt-6-astra` | — | — | medium |
-| Sol | OpenAI | `gpt-5.6-sol` | — | yes | **low** |
-| Terra | OpenAI | `gpt-5.6-terra` | — | yes | medium |
-| Luna | OpenAI | `gpt-5.6-luna` | — | yes | medium |
-| Opus 5 | Anthropic | — | `opus` | yes | — |
-| Fable 5.1 | Anthropic | — | `fable` | yes, **without zero retention** | high |
-| Grok 4.6 | SpaceXAI / Cursor | — | — | `cursor-grok-4.6-<effort>` | high |
+| Sol | OpenAI | `gpt-6-sol` | — | — | medium |
+| Luna | OpenAI | `gpt-6-luna` | — | — | medium |
+| Opus 5.5 | Anthropic | — | `claude-opus-5-5` | `claude-opus-5-5-<effort>` | medium [V] |
+| Grok 4.7 | SpaceXAI / Cursor | — | — | `grok-4.7-<effort>` | high [V] |
+| Terra, no recommended cell | OpenAI | `gpt-5.6-terra` | — | `gpt-5.6-terra-<effort>` | medium |
 
-Efforts: `low`, `medium`, `high`, `xhigh`, `max`. Defaults differ from model to model: always pass effort explicitly. In Cursor, effort is part of the identifier (see `harness.md`).
+Codex supports `low`, `medium`, `high`, `xhigh`, `max` (and `ultra` for some models); pass effort explicitly. Opus 5.5 supports `low` through `max`; Grok 4.7 supports `low` through `xhigh`. Cursor also lists `-fast` variants; use the identifier **without** `-fast` to conserve its pool. GPT-6 Sol and Luna were absent from Cursor's list on this date. See `harness.md` for CLI permissions and web access. [OpenAI models](https://developers.openai.com/api/docs/models), [Anthropic Opus 5.5](https://platform.claude.com/docs/en/models/opus-5-5/overview), [Cursor Grok 4.7](https://cursor.com/docs/models/grok-4-7) [V].
 
 ## Complexity and impact
 
@@ -42,152 +45,143 @@ Impact:
 - **medium**: the error costs rework time;
 - **high**: the error touches production, data, security, or a decision that is costly to undo.
 
-Impact comes from no benchmark. It governs review: the higher it is, the more independent the review — different vendor, strong model.
+Impact comes from no benchmark. It governs review: the higher it is, the more independent the review — different vendor and a capable model.
 
 ## Overrides
 
-User decisions that take precedence over the rest of this file: apply them to every row, grid, and cost line before choosing. The replacements hold **until benchmarks** of the new models are compiled here (see “Updating”); meanwhile, evidence, grids, and costs still describe the replaced models.
+- **Astra: explicit request only** (user decision, 2026-09-21). Skip it for the task, fallback, and reviewer unless the user explicitly requests it. Its Plus quota is scarce: 5–45 local messages per five-hour window [V].
 
-- **Astra: explicit request only** (2026-09-21), because it is rare in ChatGPT Plus quotas. For the task, fallback, and reviewer, skip models marked `explicit request only` unless the user explicitly requested them.
-- **Sol → GPT-6 Sol** (2026-09-22): wherever this file says Sol or `gpt-5.6-sol`, use `gpt-6-sol` in Codex. Its Codex default effort is `medium`, not `low`: keep passing effort explicitly. Absent from `cursor-agent --list-models` on 2026-09-22: Codex only.
-- **Luna → GPT-6 Luna** (2026-09-23): wherever this file says Luna or `gpt-5.6-luna`, use `gpt-6-luna` in Codex. Its Codex default effort is `medium`: keep passing effort explicitly. Absent from `cursor-agent --list-models` on 2026-09-23: Codex only.
-- **Opus 5 and Fable 5.1 → Opus 5.5** (2026-09-22): wherever this file says Opus 5 or Fable 5.1, use Opus 5.5: `claude-opus-5-5` in Claude Code, `claude-opus-5-5-<effort>` in Cursor (not marked “(NO ZDR)” on 2026-09-22). It takes the High level of the grids, reviewer included. The ‡ choice between Opus 5 and Fable 5.1, the Fable advisor notes, and the Fable retention caveats no longer apply.
-
-[I] GPT-6 Sol, GPT-6 Luna, and Opus 5.5 are assumed at least as strong as the models they replace; no benchmark of them was read.
+The previous Sol, Luna, and Opus substitutions are incorporated into the catalog, recommendations, grids, and costs below. Their replacements now have published measurements; no model substitution remains pending. The preference for Grok on human-facing prose remains unmeasured and is marked [I] in its row.
 
 ## Recommendations
 
-Command form: the harness section in `harness.md`, with the catalog identifier and the row’s effort (in Cursor, effort is part of the identifier).
+Command form: use `harness.md` with the catalog identifier and the row's effort. For example, `codex exec --ephemeral -s workspace-write -m gpt-6-luna -c model_reasoning_effort="max" - < brief.md`; `claude -p --model claude-opus-5-5 --effort high < brief.md`; or `cursor-agent -p -f --sandbox enabled --model grok-4.7-high --output-format text < brief.md`. Use read-only permissions for planning, research, and review. Cursor requires `-f --sandbox enabled` for web or shell in print mode.
 
 | Kind | Complexity · impact | Model + effort | Harness | Evidence | Note |
 | --- | --- | --- | --- | --- | --- |
-| Code | mechanical | Luna `low` or `medium` | Codex ; Cursor | OpenAI points Luna at “extraction, classification, transformation” [V] | no third-party data on low effort in code |
-| Code | ready plan · low | Luna `high` | Codex ; Cursor | SWE-Bench Pro 62.7% vs Sol 64.6% [V] ; ARC-AGI-2: 7.4% at `medium`, 29.3% at `high` [T] | [I] `high` effort is worth its extra cost |
-| Code | long and autonomous · medium | Opus 5.5 `high` (override) | Claude Code | Terminal-Bench 4.0: 51.8%, vs Sol 37.3% and Luna 17.3% [T] | very verbose; in Claude Code, a Fable 5.1 advisor is possible; its contribution is unmeasured |
-| Code | no plan, or high impact | Opus 5.5 `high` (override) | Claude Code | Terminal-Bench 4.0: 57.9% in its own harness [T] | no other listed vendor reaches High for an equal-performance cross-vendor review |
-| Planning | complex · high | Opus 5.5 `high` (override) | Claude Code | Intelligence Index 53, ECI 164 [T] | no other listed vendor reaches High for an equal-performance cross-read |
-| Planning | medium | Opus 5.5 `high` (override) | Claude Code | Intelligence Index 51, ECI 162, ARC-AGI-3 30.2% vs Sol 7.8% [T] | |
-| Web search | low stakes, low cost | Luna `high` | Codex, web enabled ; Cursor | BrowseComp 83.3% [V] ; only cheap option with a data point | Grok 4.6 costs even less on Cursor, but with no data: to try, not to recommend |
-| Web search | high stakes, synthesis that decides | GPT-6 Sol `xhigh` (override) | Codex, web enabled | only third-party signal: 1st on Arena Search, at `xhigh`, as of 2026-08-24 [T] ; BrowseComp 90.4% [V] | Astra, Opus 5, and Fable 5.1 were absent from Arena Search. Without Codex: Opus 5 with web tools, BrowseComp 90.8% [V, uncertain reading] |
-| Code review | any implementation | Opus 5.5 `high` (override), when at least as strong as the author | Claude Code | 57.9% on Terminal-Bench 4.0 [T] | if unavailable, no equal-or-higher cross-vendor reviewer is established for a High-level author |
-| Prose for humans | editing, simplification | Grok 4.6 `high` | Cursor | no reformulation benchmark found | usage choice of the skill author, unmeasured |
+| Code | mechanical | Luna `low` or `medium` | Codex | [I] lowest Codex credit rate; focused high-volume positioning [V] | Check output; no low-effort coding measurement here. |
+| Code | ready plan · low | Luna `max` | Codex | Rails feature tickets: 18.3% at `max` vs Sol 21.7% at `medium`, a small gap, for $0.191 vs $0.453 per run [T] | [I] Good for checkable, bounded work; escalate failed or ambiguous tasks. |
+| Code | long and autonomous · medium | Opus 5.5 `medium`, escalate to `high` if needed | Claude Code | Rails tickets 33.3% at `medium` [T]; AA Terminal-Bench 4.0 57% at `high` [T] | Default `medium` saves quota. |
+| Code | no plan, or high impact | Opus 5.5 `high` | Claude Code | AA Intelligence Index 54 and Terminal-Bench 4.0 57% at `high` [T]; FrontierCode 54.6% at `medium` [V] | [I] Raise effort for hard code; review independently. |
+| Planning | complex · high | Opus 5.5 `xhigh` | Claude Code | AA Intelligence Index 56 at `xhigh`, 58 at `max` [T] | [I] Reasoning and knowledge-work proxies, not a planning test; cross-read costly decisions. |
+| Planning | medium | Opus 5.5 `medium` | Claude Code | AA Index 54 at `high`; Opus exceeds the other listed non-Astra models at their measured peaks [T] | [I] Medium effort conserves quota; no direct planning score. |
+| Web search | low stakes, low cost | Luna `high` | Codex, web enabled | No direct search score for GPT-6 Luna; $0.10/$0.50 per M tokens [V] | [I] Cheapest included Codex choice; verify sources. Grok's Cursor pool may be cheaper in quota, but its search quality is unmeasured. |
+| Web search | high stakes, synthesis that decides | Opus 5.5 `high` | Claude Code, `WebSearch,WebFetch` | Parallel Search Intelligence 75.5, first, on 2026-09-22 [T] | [I] Parallel used its own search harness; Claude Code may differ. Sol 6 has no comparable search result. |
+| Code review | routine | Opus 5.5 `high` for code by Sol, Luna, Grok, or Astra; independent Opus 5.5 `high` for Opus-authored code | Claude Code | AA code tier is High [T]; security-review recall was 56.25% at `high` [T] | [I] Use a different vendor where the grid permits; an Opus author has no established equal-tier cross-vendor reviewer except Astra, which requires explicit request. |
+| Code review | security-sensitive | Same primary reviewer as above; add Grok 4.7 `high` for code by OpenAI or Anthropic | Claude Code; Cursor | Grok recalled 77.5% vs Sol 63.75% and Opus 56.25% on 16 planted security bugs, five runs each at `high` [T] | [I] The Grok pass is a specialist check, not an equal-tier replacement for an Opus reviewer. Grok used 282k reasoning tokens and 18m per PR in that test; inspect false positives and the served model. |
+| Prose for humans | editing, simplification | Grok 4.7 `high` | Cursor | no reformulation benchmark found | [I] Carried-forward usage preference; judge the output. |
 
 Missing rows:
 
-- **Simple planning**: no row. [I] Take the least costly model at the “Good” level or above in the Planning grid.
-- **Terra: no cell.** [I] It costs 10 times Luna in Codex credits, for a Terminal-Bench 4.0 within Luna’s confidence intervals (21.5 ± 3.3 vs 17.3 ± 2.8) and a BrowseComp 4 points [V].
+- **Simple planning**: [I] Use Luna for checkable plans; Sol `high` when the plan requires decisions. No benchmark directly measures plan quality.
+- **Terra: no cell.** [I] Artificial Analysis found the installed GPT-5.6 Terra dominated by its Sol or Luna peers on intelligence versus cost (2026-07-13); the newer GPT-6 choices strengthen the reason to skip it. This is a cost choice, not a claim that Terra cannot solve a task.
 
 ## Performance grids
 
-For fallback and reviewer choice: one level per row, strongest to weakest. “Cost” follows the quota order [I] of the next section; among Opus 5, Astra, and Fable 5.1, it depends on the subscription.
+For fallback and reviewer choice, use measured tiers, then the subscription pools below. Tiers are approximate; a model's position is not proof that it beats every model in a lower tier on every task.
 
 ### Planning
 
-No benchmark measures planning. Proxies: reasoning on closed problems.
+No benchmark directly measures planning. [Artificial Analysis Intelligence Index v4.3](https://artificialanalysis.ai/articles/gpt-6-sol-and-luna-push-the-cost-efficiency-frontier) combines reasoning and work proxies; the 2026-09-22 results below are from its API harness, not the three agent CLIs [T].
 
-| Level | Models | Cost | Evidence |
+| Level | Models | Cost to this subscriber | Evidence |
 | --- | --- | --- | --- |
-| High | Astra (`explicit request only`), Fable 5.1 ; Opus 5 one step below | high ‡ | Intelligence Index 53 / 53 / 51 ; ECI 166 / 164 / 162 ; ARC-AGI-3: Astra 62.7%, Opus 5 30.2%, Fable 5.1 unpublished [T] |
-| Good | Sol | medium | Intelligence Index 47, ECI 162, ARC-AGI-2 92.5% at `max`, but ARC-AGI-3 7.8% [T] |
-| Medium | Grok 4.6 ; Terra | low ; medium | Intelligence Index 44 / 42 ; ARC-AGI-2 67.1% at `xhigh` / 83.9% at `max` [T] |
-| Low | Luna | low | Intelligence Index 38 ; ARC-AGI-2 59.5% at `max`, 7.4% at `medium` [T] |
+| High | Opus 5.5; Astra (`explicit request only`) | Claude Max quota; scarce Codex Plus quota | AA Index 58 at Opus `max`, Astra 53 at `max` [T] |
+| Good | Sol; Grok 4.7 | Codex Plus; Cursor Models pool | AA Index 48 at Sol `max`, 46 at Grok `xhigh`; Grok uses about 81k output tokens per Index task [T] |
+| Medium | Luna | small Codex Plus draw | AA Index 37 at Luna `max` [T] |
+| Unranked | Terra | Codex Plus or Cursor Other Models | No new planning measurement; its older cost/performance frontier is dominated [T]. |
+
+[ARC Prize's verified results](https://arcprize.org/results/anthropic-claude-opus-5-5) add a reasoning check [T]: on ARC-AGI-2, Opus 5.5 scores 93.3% at `high`, [Astra](https://arcprize.org/results/openai-gpt-6-astra) 95.0% at `max`, and [Luna](https://arcprize.org/results/openai-gpt-6-luna) 59.3% at `max`. ARC-AGI-2 is near saturation for the strongest models; these are not planning scores. On ARC-AGI-3's **standard** harness, Astra scores 62.71% and Luna 0.10% at `max`; Opus 5.5 has no published score. ARC-AGI-3's provider-adapter scores use a different harness and are excluded from this comparison. No current Sol or Grok score was found.
 
 ### Code
 
-| Level | Models | Cost | Evidence |
+| Level | Models | Cost to this subscriber | Evidence |
 | --- | --- | --- | --- |
-| High | Astra (`explicit request only`), Fable 5.1 | high ‡ | Terminal-Bench 4.0: 58.2%, 57.9% [T] |
-| Good | Opus 5 | high ‡ | Terminal-Bench 4.0: 51.8% [T] ; CursorBench 70.0% [V] |
-| Medium | Sol | medium | Terminal-Bench 4.0: 37.3% [T] ; SWE-Bench Pro 64.6% [V] |
-| Low on long tasks, close on well-scoped tasks | Terra, Grok 4.6, Luna | medium ; low ; low | Terminal-Bench 4.0: 21.5%, 20.3% (in Grok Build), 17.3% [T] ; SWE-Bench Pro Luna 62.7% [V] ; CursorBench Grok 4.6 69.9% [V, Cursor co-trains Grok] |
+| High | Opus 5.5; Astra (`explicit request only`) | Claude Max quota; scarce Codex Plus quota | AA Terminal-Bench 4.0: Opus 59.6% at `max`, Astra about 59% at `xhigh` [T]; Rails tickets: Opus 33.3% at `medium`, Astra 53.3% at `max` [T] |
+| Good | Sol; Grok 4.7 | Codex Plus; Cursor Models pool | AA Coding Agent Index: Sol 57 in Codex at `max`, Grok 56 in Grok Build at `xhigh` [T]; Rails: Sol 21.7% `medium`, Grok 31.7% `high` [T] |
+| Scoped only | Luna | smallest Codex Plus draw | AA Coding Agent Index 41 in Codex at `max`; Rails tickets 18.3% `max` and 11.7% `medium` [T] |
+| Unranked | Terra | Codex Plus or Cursor Other Models | No new comparison with the current models. |
 
-[I] The gap between SWE-Bench Pro [V] and Terminal-Bench 4.0 [T] suggests a small model suffices when the task is broken down, and drops off on long autonomous tasks.
+AA Coding Agent Index scores measure a model in its **native** harness: Codex, Claude Code, or Grok Build. They do not establish the same result in Cursor. The vendor's Opus 5.5 Terminal-Bench 4.0 figure is 66.4% at `xhigh` [V], while AA measures 59.6% at `max` [T]: different setups, not a reproducible seven-point advantage. The vendor's Grok 4.7 Terminal-Bench 4.0 figure is 37.6% [V], while AA reports about 33% in Grok Build [T].
+
+**Agents on Rails (2026-09-24 snapshot).** Rails' [Stage 2](https://rubyonrails.org/2026/9/9/agents-on-rails-stage-2) uses 20 feature tickets against one Rails app. Its [leaderboard and method](https://rubyonrails.org/ai) run each ticket three times per model and effort in the same minimal shell harness, with 90-minute, 400-step, and $60 caps; the app suite and hidden feature checks must pass. Opus 5.5 `medium` scored 33.3%, Grok 4.7 `high` 31.7%, Sol `medium` 21.7%, Luna `max` 18.3%, and Astra `max` 53.3% [T]. A few points are within run-to-run noise. [I] Feature tickets, MVC conventions, repository navigation, and tests transfer conceptually to PHP/Symfony; Ruby APIs, app conventions, hidden checks, and this harness do **not** predict a Symfony pass rate. PHP benchmarks exist: [Laravel's benchmark](https://laravel.com/blog/which-ai-model-is-best-for-laravel), [RuBench's Laravel tasks](https://arxiv.org/abs/2607.06411), and [Octomind's mixed PHP/Symfony repositories](https://octomind.run/blog/coding-agent-benchmark-real-prs). None publishes a head-to-head for these five current models on Symfony.
 
 ### Web search
 
-No third-party benchmark of agentic search. The only independent signal is Arena Search.
+The only current direct third-party search result among the selected models found here is [Parallel's 2026-09-22 leaderboard](https://parallel.ai/leaderboard): a common search/extraction harness on DSQA, HLE, and WISER, not Codex, Claude Code, or Cursor [T]. The older Arena Search lead and BrowseComp numbers concern superseded models; they do not transfer.
 
-| Level | Models | Cost | Evidence |
+| Level | Models | Cost to this subscriber | Evidence |
 | --- | --- | --- | --- |
-| High | Sol ; Astra, Opus 5, Fable 5.1 | medium ; high ‡ | Sol 1st on Arena Search [T] ; BrowseComp Astra 91.5%, Sol 90.4%, Opus 5 90.8% [V] ; HLE with tools Fable 5.1 65.0%, Opus 5 63.6% [V] |
-| Good | Terra ; Luna | medium ; low | BrowseComp 87.5% ; 83.3% [V] |
-| Unknown | Grok 4.6 | low | no data |
+| High in Parallel's harness | Opus 5.5; Astra (`explicit request only`) | Claude Max quota; scarce Codex Plus quota | Search Intelligence 75.5 and 70.8 respectively [T] |
+| Unranked | Sol; Luna; Grok 4.7; Terra | Codex Plus; Cursor Models pool; Codex Plus or Cursor Other Models | No directly comparable published search score for these exact models. |
 
 ## Cost: the subscription decides the order
 
-The cost that matters is not the token price, but what the delegation consumes **from the user’s subscription**: a scarce quota, paid credits, or money on an API key. The same model can go through two pools: Sol, Terra, and Luna via Codex or Cursor; Opus 5 and Fable 5.1 via Claude Code or Cursor. When one pool is low, the other takes over.
+Cost assumptions: **ChatGPT Plus (Codex), Claude Max, and Cursor Pro**. The relevant cost is depletion of three separate included pools. API rates are reference points, not a subscriber's direct bill; effort, caching, context, retries, and token use affect cost per completed task.
 
 ### Subscription-independent reference points
 
-| Model | Codex credits per M output [V] | Output tokens for the Intelligence Index [T] | API price, $ per M, input → output [V] | Cost of a Terminal-Bench 4.0 run [T] |
-| --- | --- | --- | --- | --- |
-| Luna | 30 (×1) | 150 M | 0.20 → 1.20 | 0.3 k$ |
-| Terra | 300 (×10) | 120 M | 2 → 12 | 1.7 k$ |
-| Sol | 500 (×17) | 90 M | 4 → 20, promotion announced at least through 21 November 2026 | 2.5 k$ |
-| Astra | 1,250 (×42) | **60 M**, the most concise | 10 → 50 | 3.3 k$ |
-| Grok 4.6 | — | 94 M | 2 → 6 | 3.6 k$ (in Grok Build) |
-| Opus 5 | — | 140 M | 5 → 25 | 6.0 k$ |
-| Fable 5.1 | — | 190 M, the most verbose | 10 → 50 | 6.2 k$ |
+Standard short-context API prices in dollars per million **input → output** tokens [V]; Codex credits per million output tokens [V]. Prices can rise for long context and fast processing.
 
-- Contradiction [V]: the GPT-5.6 announcement gives Sol 5 → 30, Terra 2.50 → 15, Luna 1 → 6.
-- Tokens are not one-to-one comparable across vendors: Anthropic’s tokenizer produces “approximately 30% more tokens for the same text” [V].
-- [T] Astra costs 2.5 times Sol per token, but consumes three times less: its Terminal-Bench 4.0 run costs 1.3 times Sol’s, for 58.2% vs 37.3%.
+| Model | Codex output credits | API input → output | Useful efficiency observation |
+| --- | --- | --- | --- |
+| Luna | 12.5 (×1) | $0.10 → $0.50 | AA Index task $0.07 at `max`, using 51k output tokens per task [T]. |
+| Terra | 300 (×24) | $2 → $12 | Older model, no recommended cell. |
+| Sol | 250 (×20) | $2 → $10 | AA Index task $1.06 at `max`, using 31k output tokens per task [T]. |
+| Astra | 1,250 (×100) | $10 → $50 | Explicit request only. |
+| Grok 4.7 | — | $2 → $6 | AA finds about 81k output tokens per Index task at `xhigh` [T]. |
+| Opus 5.5 | — | $4 → $20 | Anthropic reports 40% lower run cost than its predecessor from price and token savings [V]. |
+
+Prices: [OpenAI API](https://developers.openai.com/api/docs/pricing), [Codex credits](https://learn.chatgpt.com/docs/pricing), [Anthropic](https://www.anthropic.com/claude-opus-5-5), [Cursor](https://cursor.com/docs/models/grok-4-7) [V]. Task token/cost observations: [Artificial Analysis, 2026-09-22](https://artificialanalysis.ai/articles/gpt-6-sol-and-luna-push-the-cost-efficiency-frontier) and [Grok 4.7, 2026-09-21](https://artificialanalysis.ai/articles/benchmarking-grok-4-7) [T]. Different benchmark workloads and tokenizers prevent a direct tokens-per-task ranking across vendors.
 
 ### By subscription
 
-| Subscription | Public limits | Effect on order |
+| Subscription | Public limits as of 2026-09-24 | Effect on order |
 | --- | --- | --- |
-| ChatGPT Plus (Codex) | local messages per 5 h window: Astra 5–45, Sol 10–100, Terra 25–200, Luna 250–2,000 ; “Weekly limits may also apply” [V] | Prefer Fable 5.1 if the Claude subscription includes it; Luna is the workhorse |
-| ChatGPT Pro 5x / Pro 20x | Astra 25–225 / 100–900 ; Luna 1,250–10,000 / 5,000–40,000 [V] | Opus 5 is the strongest included alternative; Fable 5.1 requires Claude credits |
-| Codex Fast mode | Astra: “2.5x multiplier” ; other models unpublished [V] | avoid when quota matters |
-| Claude Pro | Opus 5 included, “strongest model on Claude Pro” ; Fable 5.1 **only through paid credits** [V] | Opus 5 first, Fable 5.1 last; a Fable advisor is included |
-| Claude Max | Fable 5.1 included up to “50% of your weekly usage limits”, consumed faster than other Claude models, with no published multiplier ; absolute limits unpublished [V] | **Fable 5.1 becomes the first resort** for heavy planning and no-plan code. A Fable advisor consumes quota, not money |
-| Cursor, paid subscriptions | two monthly pools: “Cursor Models”, with “significantly more included usage” for Grok 4.6 ; “Other Models” (GPT-5.6, Opus 5, Fable 5.1) billed at API price ; Astra absent ; amounts unpublished [V] | Grok 4.6 is the cheapest. Cursor serves as a fallback pool for Luna, Sol, Opus 5, and Fable 5.1 when Codex or Claude are exhausted, except confidential data for Fable 5.1 |
-| API key only | token price | order by run cost [T]: Luna < Terra < Sol < Astra < Grok 4.6 < Opus 5 ≈ Fable 5.1 |
+| ChatGPT Plus (Codex) | Estimated local messages per 5 h: Luna 350–3,000; Sol 15–150; Astra 5–45. Weekly limits may apply; Fast consumes 2.5× credits [V]. | Luna is the workhorse; Sol is the intermediate tier. Astra remains explicit request only. |
+| Claude Max | Opus 5.5 is included; Max 5× or 20× has five-hour and weekly limits shared with Claude Code. Absolute limits and an Opus-specific multiplier are unpublished [V]. | Opus 5.5 is the included high-capability pool; `medium` preserves quota for tasks that pass there. |
+| Cursor Pro | Separate monthly **Cursor Models** pool for Grok 4.7, with more included use, and **Other Models** for Opus 5.5 at API rates. Grok standard $2/$6, Fast $4/$12 per M; Fast is the default speed tier on Pro [V]. | Grok can conserve the Other Models pool; select a non-`-fast` identifier when quota matters. Opus in Cursor is a fallback if Claude Max is low. GPT-6 Sol/Luna are absent from the local Cursor list. |
+| API key | Usage billed by tokens at published rates [V]. | Separate paid path, outside the three subscriptions. |
 
-Contradiction [V]: the ChatGPT help center reserves Astra for Pro subscriptions and above; the Codex table gives it a quota on Plus. Verify with the Codex model list (`harness.md`).
+[Codex Plus limits](https://learn.chatgpt.com/docs/pricing), [Claude Max limits](https://support.claude.com/en/articles/11049741-what-is-the-max-plan), [Opus availability](https://www.anthropic.com/claude/opus), [Cursor pools](https://prod.cursor.com/help/models-and-usage/usage-limits), [Grok pricing/speed](https://cursor.com/docs/models/grok-4-7) [V]. Check the live usage dashboards before a large delegation; the actual remaining allowance is account-specific.
 
-**Unknown subscription.** Quota order [I], cheapest to most expensive: Grok 4.6 (dedicated Cursor pool) · Luna · Terra · Sol · then Opus 5 and Fable 5.1, **with no order between them**. Astra is available only on explicit request. When the choice falls between Opus 5 and Fable 5.1, the subscription decides: ask for it.
+**Quota order [I].** Within Codex, Luna < Sol < Astra. Grok spends a separate Cursor Models pool; Opus spends Claude Max or Cursor Other Models. There is no defensible single cheapest-to-costliest order across the three subscriptions without their remaining balances and actual task token use.
 
 ## Gaps
 
 Nothing reliable is published on these points. Say so rather than filling them in.
 
-- **Planning**: no benchmark. The proxies measure reasoning on closed problems, not breakdown, trade-offs, or the readability of a plan on a real repository.
-- **Combinations** — advisor, cross-read, cross-review: no benchmark.
-- **Harnesses**: Terminal-Bench 4.0 measures a model + vendor-harness pair (Codex, Claude Code, Grok Build). Nothing measures these models in Cursor.
-- **Grok 4.6**: no web-search data; in code, the third party (Terminal-Bench 4.0, in Grok Build) and the vendor (CursorBench) contradict each other. Nothing establishes that Grok 4.6 in Cursor and in the SpaceXAI API have the same weights.
-- **Independent SWE-bench**: no readable row for these models. SWE-bench Verified is set aside: OpenAI no longer publishes it, for contamination and defective tests. The SWE-Bench Pro scores for Fable 5.1 (81.2%) and Opus 5 (79.2%) come only from aggregators.
-- **Fable 5.1**: neither BrowseComp nor ARC-AGI-3.
-- **ARC-AGI-3**: the 99.9% for Astra announced by OpenAI comes from a custom harness (“Provider Adapter”); only the “Standard” harness, at 62.7%, is comparable to the others.
-- **Aggregated indexes**: vendors cite the Intelligence Index in v4.1; the Artificial Analysis site is on v4.3. Rankings differ; do not mix versions.
-- **Independent agentic search** (GAIA, DeepResearch Bench) and **METR time horizon**: nothing for these models.
-- **Quotas**: included amounts of Cursor pools, Claude absolute limits, Fable multiplier, Codex Fast multipliers except Astra: unpublished.
+- **Planning:** no benchmark tests the quality of a plan for a real repository. AA's Index and agentic-work scores are proxies.
+- **Search:** no current Codex/Claude Code/Cursor head-to-head for Sol 6, Luna 6, Opus 5.5, and Grok 4.7. Parallel's search harness is different; the old Arena Search and BrowseComp scores cannot be assigned to replacements.
+- **PHP/Symfony:** Rails Stage 2 is relevant but not a Symfony result. Published Laravel and mixed-PHP suites have not tested this full current set; no Symfony-specific head-to-head found.
+- **Review:** Dam Secure measures 16 security vulnerabilities, five runs per model at `high`; it is too narrow for a general code-review ranking, and its Grok run used Vercel rather than Cursor.
+- **Harnesses:** AA's Coding Agent Index combines native harnesses; Rails uses one shared minimal harness. No published result measures all selected models in the exact CLI setups. Opus 5.5 may automatically fall back to an older Claude model on flagged requests in Claude Code [V].
+- **Benchmark quality:** OpenAI estimates about 30% of SWE-bench Pro tasks are broken; an Anthropic internal 478-task subset is nearly saturated and not comparable to its public leaderboard. SWE-bench Verified has known contamination and defective tests. FrontierCode 1.1 restricts solution-bearing internet access, but its rubric includes subjective judgments. Do not rank these models from a few points on those sets.
+- **Combinations:** no measured benefit for an advisor, second reviewer, or cross-read on these exact models. Cross-vendor review is an impact rule [I], not a benchmark result.
+- **Quotas:** exact Claude Max allowance and model multiplier, Cursor included pool sizes, and actual remaining balances are not public. API cost per token does not establish subscription cost per task.
 
 ## Sources
 
-Accessed 2026-09-16.
+Accessed 2026-09-24. Dates below are publication dates or leaderboard snapshots. The named organization ran the evaluation unless otherwise stated.
 
 | Source | Kind | What it measures |
 | --- | --- | --- |
-| [Terminal-Bench 4.0](https://www.tbench.ai/leaderboard/terminal-bench/4.0) | [T] | terminal tasks, in the vendor harness; tokens and run cost |
-| [Artificial Analysis](https://artificialanalysis.ai/models) | [T] | Intelligence Index v4.3 (10 evaluations), output tokens and cost to run it |
-| [Epoch Capabilities Index](https://epoch.ai/eci) | [T] | capability aggregate |
-| [ARC Prize](https://arcprize.org/leaderboard) | [T] | ARC-AGI-2 and ARC-AGI-3, by effort, with cost per task |
-| [Arena Search](https://arena.ai/leaderboard/search) | [T] | human preference on answers with search; updated 2026-08-24 |
-| [OpenAI, GPT-6 Astra](https://openai.com/index/gpt-6-astra/) · [GPT-5.6](https://openai.com/index/gpt-5-6/) | [V] | SWE-Bench Pro, DeepSWE, BrowseComp, HLE |
-| [Anthropic, Fable 5.1](https://www.anthropic.com/claude-fable-and-mythos-5-1) · [Opus 5](https://www.anthropic.com/news/claude-opus-5) | [V] | HLE, CursorBench, Terminal-Bench |
-| [Cursor, Grok 4.6](https://cursor.com/grok) · [x.ai](https://x.ai/news/grok-4-6) | [V] | CursorBench, DeepSWE |
-| [OpenAI, SWE-bench Verified](https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified/) | [V] | reasons for dropping it |
-| [OpenAI API models](https://developers.openai.com/api/docs/models) · [pricing](https://developers.openai.com/api/docs/pricing) | [V] | identifiers, efforts, prices |
-| [Anthropic API pricing](https://platform.claude.com/docs/en/about-claude/pricing) | [V] | prices, tokenizer |
-| [Codex, subscriptions](https://learn.chatgpt.com/docs/pricing) · [ChatGPT help center](https://help.openai.com/en/articles/20001325-a-preview-of-gpt-56-sol-terra-and-luna) | [V] | messages per 5 h, credits, Astra availability |
-| [Claude, Fable by subscription](https://support.claude.com/en/articles/15424964-claude-fable-models-on-your-plan) · [usage limits](https://support.claude.com/en/articles/11647753-how-do-usage-and-length-limits-work) | [V] | Fable on Pro and Max |
-| [Cursor, models](https://cursor.com/docs/models) · [pricing](https://cursor.com/pricing) | [V] | pools, API-price billing |
+| [Artificial Analysis: GPT-6 Sol/Luna](https://artificialanalysis.ai/articles/gpt-6-sol-and-luna-push-the-cost-efficiency-frontier) (2026-09-22), [Opus 5.5](https://artificialanalysis.ai/articles/claude-opus-5-5) (2026-09-22), [Grok 4.7](https://artificialanalysis.ai/articles/benchmarking-grok-4-7) (2026-09-21) | [T] | Intelligence Index v4.3, native-harness Coding Agent Index, effort, token use, task cost. |
+| [Agents on Rails](https://rubyonrails.org/ai) (2026-09-24 snapshot), [Stage 2 method](https://rubyonrails.org/2026/9/9/agents-on-rails-stage-2) (2026-09-09, regraded 2026-09-15) | [T] | Rails feature tickets, shared harness, three runs per ticket and effort. |
+| [Parallel Search Capability](https://parallel.ai/leaderboard) (2026-09-22) | [T] | DSQA, HLE, WISER with common Parallel search and extraction. |
+| [ARC Prize: Opus 5.5](https://arcprize.org/results/anthropic-claude-opus-5-5), [Luna](https://arcprize.org/results/openai-gpt-6-luna) (2026-09-22), [Astra](https://arcprize.org/results/openai-gpt-6-astra) (2026-09-02) | [T] | Verified ARC-AGI-2 and ARC-AGI-3 scores by effort and harness. |
+| [Dam Secure security review](https://docs.damsecure.ai/blog/openai-gpt-6-sol-closes-in-on-deepseek-v4-1-flash-security-benchmark/) (2026-09-24) | [T] | 16 planted vulnerabilities, five reviews per model at high effort. |
+| [FrontierCode 1.1](https://cognition.com/frontiercode) (updated 2026-09-22) | [T] for its own runs | Mergeability rubric and tests; excludes solution-bearing web lookups. |
+| [OpenAI: Sol and Luna](https://openai.com/index/introducing-gpt-6-sol-and-luna/) (2026-09-22), [API models/prices](https://developers.openai.com/api/docs/models) | [V] | FrontierCode, DeepSWE, AutomationBench claims; model positioning and API prices. |
+| [Anthropic: Opus 5.5](https://www.anthropic.com/claude-opus-5-5) (2026-09-22), [model reference](https://platform.claude.com/docs/en/models/opus-5-5/overview) | [V] | Terminal-Bench, FrontierCode, efficiency, effort, price. |
+| [SpaceXAI: Grok 4.7](https://x.ai/news/grok-4-7) (2026-09-21), [Cursor Grok 4.7](https://cursor.com/docs/models/grok-4-7) | [V] | Terminal-Bench, CursorBench, model effort and pool pricing. |
+| [Codex subscriptions](https://learn.chatgpt.com/docs/pricing), [Claude Max](https://support.claude.com/en/articles/11049741-what-is-the-max-plan), [Cursor pools](https://prod.cursor.com/help/models-and-usage/usage-limits) (2026-09-24 snapshot) | [V] | Included usage and credits. |
+| [OpenAI, SWE-bench Pro audit](https://openai.com/index/separating-signal-from-noise-coding-evaluations/) (2026-07-08), [Anthropic cost/effort guide](https://platform.claude.com/docs/en/about-claude/models/optimizing-for-cost-and-intelligence) (2026-09 snapshot) | [V] | Broken tasks and saturated subset caveats. |
+| [Laravel benchmark](https://laravel.com/blog/which-ai-model-is-best-for-laravel) (2026-03-18), [RuBench](https://arxiv.org/abs/2607.06411) (2026-07), [Octomind](https://octomind.run/blog/coding-agent-benchmark-real-prs) (2026-07-31) | [T] | PHP/Laravel/Symfony-adjacent tasks, without a current five-model comparison. |
 
 ## Updating
 
-1. Reread each source above; add new models from the covered vendors, and those the user has installed.
-2. Keep the evidence level of each figure; a [T] figure replaces a [V] figure.
-3. Revisit the recommendations, grids, subscription effects, and gaps.
+1. Reread each source above and the live CLI catalogs; add only available models from the covered vendors.
+2. Keep each figure's evidence level, date, effort, and harness; prefer a [T] figure over a [V] figure only when they measure the same thing.
+3. Revisit recommendations, grids, subscription effects, benchmark defects, and gaps.
 4. Change the frontmatter `date`.
