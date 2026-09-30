@@ -1,5 +1,5 @@
 ---
-date: 2026-09-24
+date: 2026-09-30
 ---
 
 # Recommendation table
@@ -17,12 +17,12 @@ Percentages from different benchmarks, efforts, and harnesses are not interchang
 
 ## Catalog
 
-Checked against `codex debug models`, `cursor-agent --list-models`, and `claude --help` on 2026-09-24. Cursor's listed identifiers, rather than API IDs, are the invocation source of truth.
+Checked against `codex debug models`, `cursor-agent --list-models`, and `claude --help` on 2026-09-24. Cursor's listed identifiers, rather than API IDs, are the invocation source of truth. GPT-6.1 Sol's Codex identifier was verified in `codex debug models` on 2026-09-30; it supports `low`, `medium`, `high`, `xhigh`, `max`, and `ultra`.
 
 | Model | Vendor | Codex | Claude Code | Cursor | Default effort |
 | --- | --- | --- | --- | --- | --- |
 | Astra | OpenAI | `gpt-6-astra` | — | — | medium |
-| Sol | OpenAI | `gpt-6-sol` | — | — | medium |
+| Sol | OpenAI | `gpt-6.1-sol` | — | — | medium |
 | Luna | OpenAI | `gpt-6-luna` | — | — | medium |
 | Opus 5.5 | Anthropic | — | `claude-opus-5-5` | `claude-opus-5-5-<effort>` | medium [V] |
 | Grok 4.7 | SpaceXAI / Cursor | — | — | `grok-4.7-<effort>` | high [V] |
@@ -49,9 +49,10 @@ Impact comes from no benchmark. It governs review: the higher it is, the more in
 
 ## Overrides
 
+- **GPT-6 Sol → GPT-6.1 Sol (`gpt-6.1-sol`)** (user decision, 2026-09-30) [I]. Use GPT-6.1 Sol for every Sol recommendation and invocation. No benchmark specific to GPT-6.1 Sol is available here yet; use the GPT-6 Sol measurements provisionally [I]. Benchmark results, costs, and article references below retain their original GPT-6 Sol attribution.
 - **Astra: explicit request only** (user decision, 2026-09-21). Skip it for the task, fallback, and reviewer unless the user explicitly requests it. Its Plus quota is scarce: 5–45 local messages per five-hour window [V].
 
-The previous Sol, Luna, and Opus substitutions are incorporated into the catalog, recommendations, grids, and costs below. Their replacements now have published measurements; no model substitution remains pending. The preference for Grok on human-facing prose remains unmeasured and is marked [I] in its row.
+The previous Sol, Luna, and Opus substitutions are incorporated into the catalog, recommendations, grids, and costs below. Those replacements have published measurements; the GPT-6.1 Sol substitution above remains provisional. The preference for Grok on human-facing prose remains unmeasured and is marked [I] in its row.
 
 ## Recommendations
 
