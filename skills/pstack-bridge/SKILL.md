@@ -29,13 +29,15 @@ Keep it active for the selected workflow, including an `arena` called by
 
 ## Prepare the run
 
-1. Find the installed pstack skill and `delegate` through the skill catalog or
-   `~/.agents/skills/`. A repository checkout can use `skills/delegate/`.
+1. For `no-comments`, first follow [no-comments.md](references/no-comments.md)
+   to resolve its workflow, agent, and dependencies from one pstack source.
+   Its absence from the installed skill catalog alone does not stop resolution.
+   For other workflows, find the installed pstack skill through the skill catalog
+   or `~/.agents/skills/`. Find `delegate` there too. A repository checkout can
+   use `skills/delegate/`.
    Read `delegate/SKILL.md`, `references/harness.md`, and `references/table.md`.
    If a required skill is missing, report the paths searched and stop before
    launching.
-   For `no-comments`, also resolve its agent source and dependencies through
-   [no-comments.md](references/no-comments.md) before dispatch.
 2. Follow delegate's request collection, live inventory, table age, tool scale,
    subscription rules, confidentiality checks, and model overrides. Inventory
    accessible models as well as installed CLIs. A CLI's presence alone does not
@@ -73,6 +75,9 @@ Concrete model IDs, providers, efforts, and prices belong to delegate's inventor
 and table, not to this bridge. A user's explicit combination takes precedence.
 For reviews and judges, capability outranks vendor diversity. If equal-tier review
 is unavailable, report the shortfall instead of claiming an equivalent review.
+For Comment Sicko's seat, the different-provider requirement in
+[no-comments.md](references/no-comments.md) takes precedence over this capability
+rule and the single-provider fallback below.
 
 If the family is unavailable or cannot meet the requested level, substitute through
 delegate. Report every departure from the requested family or capability level
@@ -91,7 +96,7 @@ isolation before launching.
 | --- | --- |
 | `prompt`, `description` | A delegate brief with the complete upstream prompt, reachable reference paths, seed context, scope, done criterion, and deliverable. Use the description as a seat label. |
 | `subagent_type: generalPurpose` | An agent able to run the whole brief with the required tools. Adapt the type to the native tool's actual schema. |
-| `subagent_type: "Comment Sicko"` | Read the upstream `agents/comment-sicko.md` at runtime and pass it unchanged to a delegate-selected seat from a different family than the diff's author. Follow [no-comments.md](references/no-comments.md). |
+| `subagent_type: "Comment Sicko"` | Read the upstream `agents/comment-sicko.md` at runtime and pass it unchanged to a delegate-selected seat from a different provider than the diff's author. The seat reports investigation needs to the parent. Follow [no-comments.md](references/no-comments.md). |
 | `model` | The installed combination selected above. Pass only model and effort options the chosen transport supports. |
 | `readonly: true` | Enforced read-only permissions or a native read-only type. Return findings through the response or transport capture. |
 | `readonly: false` | Tool-capable mode within the brief's scope. This flag alone grants no permission to edit. |
@@ -116,8 +121,8 @@ Preserve these workflow boundaries:
 - `no-comments`: run only on a manual request, after implementation and before
   independent review. Read [no-comments.md](references/no-comments.md) for source
   resolution, protected annotations, report inspection, and the explicit approval
-  required for `/architect`. Publication and Gestion/SIA are excluded from this
-  pilot because the cleanup is too disruptive. Use small projects.
+  required for `/architect`. Refuse the pass if user or project policy excludes
+  it. If applicability is uncertain, ask before launching. Pilot on small projects.
 
 ## Finish the run
 

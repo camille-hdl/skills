@@ -19,11 +19,13 @@ Delegate's [recommendation table](skills/delegate/references/table.md) includes 
 
 The bridge's [no-comments workflow](skills/pstack-bridge/references/no-comments.md)
 reads Comment Sicko from the pstack source at runtime and chooses a model from a
-different family than the diff's author. Tool-readable annotations stay intact.
-Invoke it manually between implementation and independent review. The pilot is
-for small projects, with Publication and Gestion/SIA excluded because the cleanup
-is too disruptive. `/architect` requires explicit user approval. The workflow
-lists the global installation commands for the upstream skills.
+different provider than the diff's author. The seat preserves tool-readable
+annotations and reports investigation needs to the parent. The parent can remove
+an annotation only after fixing its cause and confirming with its tool that it
+is unnecessary. Invoke the pass manually between implementation and independent
+review. Pilot on small projects, subject to user and project exclusions.
+`/architect` requires explicit user approval. The workflow lists the global
+installation commands for the upstream skills.
 
 ## Install the skills
 
