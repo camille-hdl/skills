@@ -1,6 +1,6 @@
 ---
 name: pstack-bridge
-description: Run pstack why, how, arena, and blast-radius outside Cursor. Use alongside a pstack invocation in Claude Code or Codex to translate Task calls into delegate, Herdr, or compatible native agents.
+description: Run pstack why, how, arena, blast-radius, and manually requested no-comments outside Cursor. Use alongside a pstack invocation in Claude Code or Codex to translate Task calls into delegate, Herdr, or compatible native agents.
 metadata:
   source: https://github.com/cursor/plugins/tree/main/pstack/skills
 ---
@@ -19,6 +19,8 @@ Explicit invocation works even when automatic discovery does not:
 - Claude Code: `/pstack-bridge`, then `/why <question>` or `/arena <task>`.
 - Codex: `$pstack-bridge` alongside `$why` or `$arena` in the same request.
 - Either: "Use pstack-bridge with how" or "Use pstack-bridge with blast-radius".
+- Comment cleanup: `/pstack-bridge`, then `/no-comments <scope>` in Claude Code,
+  or `$pstack-bridge $no-comments <scope>` in Codex.
 
 When invoked alone, acknowledge loading and wait for the pstack request.
 The bridge is an instruction adapter, not a registered `Task` tool or a hook.
@@ -32,6 +34,8 @@ Keep it active for the selected workflow, including an `arena` called by
    Read `delegate/SKILL.md`, `references/harness.md`, and `references/table.md`.
    If a required skill is missing, report the paths searched and stop before
    launching.
+   For `no-comments`, also resolve its agent source and dependencies through
+   [no-comments.md](references/no-comments.md) before dispatch.
 2. Follow delegate's request collection, live inventory, table age, tool scale,
    subscription rules, confidentiality checks, and model overrides. Inventory
    accessible models as well as installed CLIs. A CLI's presence alone does not
@@ -87,6 +91,7 @@ isolation before launching.
 | --- | --- |
 | `prompt`, `description` | A delegate brief with the complete upstream prompt, reachable reference paths, seed context, scope, done criterion, and deliverable. Use the description as a seat label. |
 | `subagent_type: generalPurpose` | An agent able to run the whole brief with the required tools. Adapt the type to the native tool's actual schema. |
+| `subagent_type: "Comment Sicko"` | Read the upstream `agents/comment-sicko.md` at runtime and pass it unchanged to a delegate-selected seat from a different family than the diff's author. Follow [no-comments.md](references/no-comments.md). |
 | `model` | The installed combination selected above. Pass only model and effort options the chosen transport supports. |
 | `readonly: true` | Enforced read-only permissions or a native read-only type. Return findings through the response or transport capture. |
 | `readonly: false` | Tool-capable mode within the brief's scope. This flag alone grants no permission to edit. |
@@ -108,6 +113,11 @@ Preserve these workflow boundaries:
   Keep pick, graft, verification, and the synthesis note in the upstream order.
 - `blast-radius`: perform its proof against real code. A wide investigation uses
   the same adapted `arena`; model substitution does not replace the proof.
+- `no-comments`: run only on a manual request, after implementation and before
+  independent review. Read [no-comments.md](references/no-comments.md) for source
+  resolution, protected annotations, report inspection, and the explicit approval
+  required for `/architect`. Publication and Gestion/SIA are excluded from this
+  pilot because the cleanup is too disruptive. Use small projects.
 
 ## Finish the run
 
