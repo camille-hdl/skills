@@ -7,6 +7,8 @@ description: Write a simple pull request description for humans.
 
 Use this skill whenever you need to write a pull request (PR) description intended for an audience of human reviewers.  
 
+Use `/technical-writing` as the drafting baseline, then revise the description with `/unslop`. If either skill is unavailable, continue without it.
+
 The conceptual model captures the business scope of the problem, the logical model the business solution, and the physical model the technical solution.
 
 The conceptual model is the ticket or spec.
