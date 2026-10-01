@@ -12,6 +12,8 @@ phases, evidence rules, and output format. This bridge replaces its Cursor
 `Task` transport and model selection for the current run. Leave installed pstack
 files untouched so `npx skills update` can maintain them.
 
+Requires `delegate`; install it globally with this repository's skills.
+
 Explicit invocation works even when automatic discovery does not:
 
 - Claude Code: `/pstack-bridge`, then `/why <question>` or `/arena <task>`.
@@ -28,7 +30,8 @@ Keep it active for the selected workflow, including an `arena` called by
 1. Find the installed pstack skill and `delegate` through the skill catalog or
    `~/.agents/skills/`. A repository checkout can use `skills/delegate/`.
    Read `delegate/SKILL.md`, `references/harness.md`, and `references/table.md`.
-   If a required skill is missing, report its path and stop before launching.
+   If a required skill is missing, report the paths searched and stop before
+   launching.
 2. Follow delegate's request collection, live inventory, table age, tool scale,
    subscription rules, confidentiality checks, and model overrides. Inventory
    accessible models as well as installed CLIs. A CLI's presence alone does not
@@ -49,14 +52,28 @@ Keep it active for the selected workflow, including an `arena` called by
 | Cross-judge pool | Prefer a vendor different from the parent's, at equal or higher performance than every candidate being judged. |
 | Unknown identifier or family | Record that it is unmapped. Select by the role through delegate, rather than inventing a replacement slug. |
 
-Resolve each seat with delegate's model scale and fallback order. Use the family
-preference when compatible with its recommendations and actual availability.
+Pass upstream effort into delegate step 1 as stated difficulty. A suffix asking
+for high or maximum depth also supplies an `expensive` preference. For that
+high-depth request, step 4 uses the demanding or complex row for the role before
+an automatic estimate of the task's complexity. A speed suffix supplies a
+latency preference only.
+
+Resolve each seat with delegate's model scale and fallback order. Apply delegate's
+overrides first and infer the requested capability level from the upstream model
+in the task's performance grid. Keep the requested family when an accessible
+model in it meets that level, even if the selected row recommends another family.
+For a seat retained by family, use the selected row's effort if specified,
+otherwise the catalog's default effort. Verify that the selected model and
+transport support it.
 Concrete model IDs, providers, efforts, and prices belong to delegate's inventory
 and table, not to this bridge. A user's explicit combination takes precedence.
 For reviews and judges, capability outranks vendor diversity. If equal-tier review
 is unavailable, report the shortfall instead of claiming an equivalent review.
 
-If a requested family is unavailable, substitute through delegate and record why.
+If the family is unavailable or cannot meet the requested level, substitute through
+delegate. Report every departure from the requested family or capability level
+as a substitution with its reason. An unranked model cannot establish equivalence;
+record that gap instead of assuming it meets the level.
 With one provider, keep independent seats and report that provider diversity was
 impossible. Continue with available combinations and state any performance loss.
 

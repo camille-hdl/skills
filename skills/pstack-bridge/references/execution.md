@@ -43,10 +43,15 @@ its assigned work itself, with no additional delegation unless the upstream phas
 explicitly requires it.
 
 With Herdr, retain the actual pane and agent handles returned at creation. Start
-the selected CLI with delegate's permissions, model, and effort options. Send the
-brief pointer using `herdr agent prompt` without `--wait` for a background seat.
-Check `herdr agent get` and `herdr agent read` to confirm submission and progress.
-Wait in bounded intervals with `herdr agent wait`, accepting `idle`, `done`, and
+the selected CLI with delegate's permissions, model, and effort options. For an
+arena candidate, create its pane with `herdr pane split --cwd <worktree>`.
+Send the brief pointer with
+`herdr agent prompt <name> "<brief pointer>" --wait --until working --until blocked --timeout <ms>`.
+This waits for the turn to start, not for its result. After observing `working`,
+dispatch the next independent seat. If submission stalls or times out, inspect
+`herdr agent get` and `herdr agent read` before deciding whether to retry; do not
+resend blindly. Wait for completion in bounded intervals with
+`herdr agent wait <name> --timeout <ms>`, accepting `idle`, `done`, and
 `blocked`. Inspect a blocked state or error. An idle pane without the required
 deliverable is incomplete. Read the full result file when terminal output is cut.
 
