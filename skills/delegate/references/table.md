@@ -52,7 +52,7 @@ Impact is low when an error is quickly spotted and reversible, medium when it ca
 - Use GPT-6.1 Sol for every Sol recommendation and invocation, following the user decision of 2026-09-30 [I]. It now has its own [AA measurements dated 2026-09-29][aa-sol]. Older GPT-6 Sol scores remain attributed to that older model.
 - Use Astra only when the user explicitly requests it for the task, fallback, or reviewer, following the decision of 2026-09-21 [I]. The published Plus estimate remains 5 to 45 messages per five hours [V, [Codex pricing][codex-price]].
 
-Fable 5.1 has no general exclusion. The user's conditional removal decision of 2026-10-01 is not activated: planning lacks a direct test, and security coding and review have contrary measurements. See the [task comparison](benchmark-notes.md#fable-51-versus-opus-55).
+Fable 5.1 has no general exclusion. The user's conditional removal decision of 2026-10-01 is not activated: planning lacks a direct test, and Endor supplies a coding counterexample, strongest on functional correctness. Dam Secure is only a weak security-review signal. See the [task comparison and activation criteria](benchmark-notes.md#fable-51-versus-opus-55).
 
 ## Recommendations
 
@@ -66,13 +66,13 @@ Use the catalog identifier and the row's effort with [harness.md](harness.md). P
 | Code | Long autonomous, medium impact | Opus 5.5 `medium` | Claude Code | FrontierCode 1.1 Main 54.64%/$0.802 at `medium` [T]. [I] Good default; greater effort is not consistently better. |
 | Code | No plan or high impact | Opus 5.5 `high` | Claude Code | AA Index 54 at `high` [T]; FrontierCode 53.99% at `high` versus 54.64% at `medium` [T]. [I] Retain for ambiguous work, with independent review. |
 | Planning | Simple and checkable | Luna `medium` | Codex | [I] Cost and checkability; no direct plan-quality test. |
-| Planning | Medium | Sol `max` | Codex | AA Index 52/$0.72 per task [T] versus Opus `medium` 51/$1.34 [T]. [I] Reasoning proxy and API efficiency; included quota may change the choice. |
+| Planning | Medium, subscription-dependent | Opus 5.5 `medium`; Sol `max` is a candidate | Claude Code; Codex for the candidate | AA Index Opus 51/$1.34 versus Sol 52/$0.72 per task [T]. [I] Retain Opus: one point without uncertainty does not justify replacement. Claude Max and Codex Plus are separate pools; API cost proves no included-quota saving. No direct plan-quality test. |
 | Planning | Complex or high impact | Opus 5.5 `xhigh` | Claude Code | AA Index 56 at `xhigh`, 58 at `max` [T]. [I] Proxy only; independently check consequential assumptions. |
 | Web research | Low stakes, lowest Codex draw | Luna `high` | Codex, web enabled | Parallel score 61.9, $33.1/1,000 tasks [T]. [I] Effort transfer to Codex is unmeasured. |
 | Web research | Moderate stakes, cost matters | Sol `high` | Codex, web enabled | Parallel score 70.4, $130/1,000 tasks [T]. [I] New measured model, different search tools in Codex. |
 | Web research | High stakes or decisive synthesis | Opus 5.5 `high` | Claude Code, web tools | Parallel score 75.4, highest on its 2026-09-30 board [T]. [I] Validate sources; effort and CLI transfer are unmeasured. |
-| Code review | Routine | Sonnet 5.5 `max`; add Sol `xhigh` for Anthropic-authored code | Claude Code; Codex | Native coding tier 68.4 versus Opus 66.0 [T]. [I] Equal or higher coding tier for the primary review; Sol adds another vendor. General review quality is unmeasured. |
-| Code review | Security-sensitive | Same primary review; add Grok 4.7 `high` | Claude Code; Cursor | Dam Secure recall 77.5%, $9.28/PR, 18m23s [T]. [I] Specialist supplement. Fable `high` is another candidate for permitted data, with 62.5% recall versus Opus 56.25%; neither replaces an equal-tier primary review. |
+| Code review | Routine | Independent Opus 5.5 `high`; add Sol `xhigh` for Anthropic-authored code | Claude Code; Codex | [I] Retain Opus as the primary reviewer, subject to the author's configuration/tier. FrontierCode Opus `high` 53.99% versus `medium` 54.64% supports the inferred tier [T]. Sonnet's 2.4-point native AA lead without uncertainty conflicts with FrontierCode; see the candidate assessment below. Sol supplies vendor diversity, not a primary-review replacement. |
+| Code review | Security-sensitive | Same primary review; add Grok 4.7 `high` | Claude Code; Cursor | Dam Secure recall 77.5%, $9.28/PR, 18m23s [T]. [I] Specialist supplement. Fable `high` is an unvalidated candidate for permitted data; its five extra detections in 80 reviews do not establish superiority. Neither replaces an equal-tier primary review. |
 | Prose for humans | Editing and simplification | Grok 4.7 `high` | Cursor | [I] Existing usage preference; no reproducible direct reformulation comparison used. |
 | Professional documents | Complex analysis and presentation | Opus 5.5 `high`; Sonnet 5.5 `max` as an alternative | Claude Code | AA-Briefcase combined Elo at `max`: Opus 1822, Sonnet 1811 [T]. [I] Professional-output proxy, not proof about literary style. |
 
@@ -104,7 +104,7 @@ AA Coding Agent Index combines DeepSWE v1.1, Terminal-Bench 4.0, and SWE-Atlas-Q
 | High | Opus 5.5 `max`, Claude Code | 66.0 | 13.04 | 2.1.280 |
 | Good | Sol `xhigh`, Codex | 62.9 | 1.04 | 0.154.0 |
 | Good | Sonnet 5.5 `xhigh`, Claude Code | 62.9 | 3.33 | 2.1.280 |
-| Good | Fable 5.1 `max`, Claude Code with fallback | 62.2 | 12.39 | 2.1.259 to 2.1.263 |
+| Good | Fable 5.1 `max`, Claude Code | 62.2 | 12.39 | 2.1.259 to 2.1.263 |
 | Good | Astra `max`, Codex, explicit request only | 61.6 | 7.47 | 0.151.0 to 0.153.4 |
 | Good | Sol `medium`, Codex | 61.4 | 0.70 | 0.154.0 |
 | Intermediate | Grok 4.7 `xhigh`, Grok Build | 56.3 | 8.82 | 1.0.40 |
@@ -112,6 +112,8 @@ AA Coding Agent Index combines DeepSWE v1.1, Terminal-Bench 4.0, and SWE-Atlas-Q
 | Scoped | Luna `max`, Codex | 41.1 | 0.18 | 0.154.0 |
 
 Source: [AA coding-agent board][aa-code], 2026-10-01 snapshot, including its embedded public results. A native Grok Build result does not establish the same result in Cursor. Transfer to another effort or harness is [I], including Opus `medium`/`high` recommendations. Newer CLI versions do not inherit measured gains automatically.
+
+AA's native runs include fallback for all Anthropic entries in this grid [T]: Opus `max` 8.90% and Fable `max` 8.84% to Opus 4.8/5; Sonnet `max` 4.50%, `xhigh` 3.28%, and `medium` 1.86% to Opus 4.8. Rates are the benchmark-weighted fallback rates in the embedded public results, rounded to two decimals. These are configuration results, not pure-model scores.
 
 [FrontierCode 1.1 Main][frontier-data] measures mergeable changes separately [T]. Native harness scores: Opus `medium` 54.64%, Astra `max` 53.26%, Sonnet `xhigh` 52.09%, Fable `medium` 50.91%, Sol `medium` 50.23%, Grok `high` 47.59%, and Luna `max` 42.42%. Sonnet falls to 46.21% at `max`. Use `new_score`, which excludes flagged solution-bearing internet use; `correct` is not the revised score. CLI versions are unstated. [Cognition's changelog][frontier] added Sonnet on September 28 and Sol 6.1 on September 29.
 
@@ -136,13 +138,15 @@ These scores do not measure the three installed CLIs' web tools. Cost records ma
 
 ### Code review
 
-There is no general-review ranking here. The primary reviewer uses the code grid as a proxy [I]; Sonnet's stronger coding index is not a review measurement.
+There is no general-review ranking here. Retain Opus `high` as the primary default [I]. Check the author's exact configuration against step 5 in `SKILL.md`; choose a measured equal-or-higher tier when the default's inferred tier is insufficient.
+
+Sonnet remains a candidate, not a demonstrated replacement [I]. Its native AA `max` index is 68.4 versus Opus `max` 66.0, a small gap without uncertainty [T]. FrontierCode instead gives Sonnet `max` 46.21%/$20.78 per task versus Opus `medium` 54.64%/$0.802, `high` 53.99%, and `max` 54.43% [T]. Sonnet `xhigh` is the candidate worth evaluating before `max`: it scores 52.09% on FrontierCode and 62.9/$3.33 on native AA, versus 68.4/$14.19 at `max` [T]. Neither coding test directly establishes review quality. AA's Sonnet API sweep was pre-release and awaits relevant reruns; its Intelligence Index `max` output-token use was about 60% above Opus `max` [T, [AA Sonnet][aa-sonnet]]. This is not a measured Claude Max quota ratio.
 
 | Security-review setup | Grok 4.7 | Fable 5.1 | Opus 5.5 | Sol 6.1 / Sonnet 5.5 |
 | --- | --- | --- | --- | --- |
 | Dam Secure, 16 planted bugs, five runs per PR, `high` [T] | 77.5% recall, via Vercel | 62.5% recall | 56.25% recall | No data |
 
-Source: [Dam Secure, 2026-09-24][dam], reread on 2026-10-01. Its Sol 6 result is 63.75%; that score does not belong to Sol 6.1. Fable's advantage is a counterexample, not proof of better general review. Endor tests generated secure code, not review; see the [Fable comparison](benchmark-notes.md#fable-51-versus-opus-55).
+Source: [Dam Secure, 2026-09-24][dam], reread on 2026-10-01. Fable's 62.5%/$7.31 per PR versus Opus's 56.25%/$1.92 is five extra detections over 80 reviews of only 16 distinct bugs. This is a weak signal without uncertainty, not a reliable security-review winner. Sol 6 scores 63.75%/$1.81; those figures do not belong to Sol 6.1. Fable remains an unvalidated specialist candidate. Endor tests code generation, not review; see the [Fable comparison](benchmark-notes.md#fable-51-versus-opus-55).
 
 ### Writing and professional outputs
 
@@ -213,12 +217,12 @@ All accessed 2026-10-01. Dates are publication dates where given; a snapshot rec
 
 ## Updating
 
-1. Search dated announcements, release notes, model cards, independent evaluator feeds, and agent leaderboards for new models, versions, and CLI harnesses. Include vendors outside current recommendations. Record the cutoff and distinguish released, preview, announced, and inaccessible products.
+1. Search dated announcements, release notes, model cards, independent evaluator feeds, and agent leaderboards for new models, versions, and CLI harnesses. Start with the feeds, changelog, and vendor announcements named in [discovery decisions](benchmark-notes.md#discovery-decisions). Include vendors outside current recommendations. Record the cutoff and distinguish released, preview, announced, and inaccessible products.
 2. Run `command -v` for known CLI names and newly discovered executable names. Read installed versions and `--help`. Read exposed model catalogs with [harness.md](harness.md); record failures and missing non-interactive catalogs. Compare with the previous inventory. Use listing commands without starting agents or installing software.
 3. Give every newly released or newly considered model/harness a disposition: ranked for named tasks, unranked with missing evidence/access stated, or ignored with a reason. Record exact IDs, effort, visibility, retention flags, and harness version. Separate listing/documented availability from a verified inference request.
 4. Reread retained sources and search newer revisions and counterexamples. Record publication/snapshot and access dates, task, metric, revision, effort, harness/version, and evidence level. Read public datasets or embedded results when dynamic charts omit values. Retrieval failures are gaps, not confirmation.
-5. Rebuild grids and recommendations from comparable results. Mark proxy transfers [I]. Keep old measurements under the old model. Resolve contradictions by task/setup; avoid averaging unrelated scores or treating benchmark counts as real-world task frequencies.
-6. Recheck prices, pools, caps, availability, confidentiality, and user overrides. Activate a conditional exclusion only when supported, retaining counterexamples beside the decision.
+5. Rebuild grids and recommendations from comparable results. Mark proxy transfers [I]. Keep old measurements under the old model. Resolve contradictions by task/setup; avoid averaging unrelated scores or treating benchmark counts as real-world task frequencies. Retain the previous recommendation when small gaps lack uncertainty or applicable results conflict; record the challenger as a candidate.
+6. Recheck prices, pools, caps, availability, confidentiality, and user overrides. Assess the Fable conditional exclusion against the [activation criteria](benchmark-notes.md#fable-51-versus-opus-55), retaining counterexamples beside the decision.
 7. Record every recommendation change and reason in [benchmark notes](benchmark-notes.md). Update examples and `SKILL.md`; update `README.md` when descriptions or links change. Verify actual catalog IDs, source links, local pointers, table structure, and the final diff.
 8. Set both frontmatter `date` and compilation date after completion. Distinguish sources reread this time from retained older snapshots. Finish when every discovery/change is accounted for and every number has dated, named evidence.
 

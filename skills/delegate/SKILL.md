@@ -19,7 +19,7 @@ To ask the user something, write the question in your reply and wait.
 
 ## 1. Collect the request
 
-For each item, note "given" (with the value) or "missing":
+For each item, note “given” (with the value) or “missing”:
 
 - the task, and what completes it;
 - the delegation tool (Herdr, a specific CLI…);
@@ -27,19 +27,19 @@ For each item, note "given" (with the value) or "missing":
 - the stated difficulty, and the preference for an expensive or economical model;
 - the impact: what an error costs;
 - the confidentiality of the data the agent will see;
-- the user's subscriptions (ChatGPT, Claude, Cursor, API key…).
+- the user’s subscriptions (ChatGPT, Claude, Cursor, API key…).
 
 Also look in `AGENTS.md`, `CLAUDE.md`, and accessible project documentation: delegation tool, models, subscriptions.
 
-Done when each item is marked "given" or "missing".
+Done when each item is marked “given” or “missing”.
 
 ## 2. Inventory and age of the table
 
 Run the executable inventory in `references/harness.md`, regardless of your shell. Read exposed model catalogs without starting agents.
 
-- **Installed harnesses**: the CLIs found. For models that are actually accessible, see "Model inventory" in `references/harness.md`.
+- **Installed harnesses**: the CLIs found. For models that are actually accessible, see “Model inventory” in `references/harness.md`.
 - **Herdr available**: `herdr` is found **and** `HERDR_ENV=1`, meaning you are running in a Herdr pane.
-- **Age of the table**: compare today's date with the `date` in the frontmatter of `references/table.md`. If the gap exceeds one month, tell the user, with the table's date, and recommend updating it from recent benchmarks (the table's "Updating" section). Then continue with the table as it stands.
+- **Age of the table**: compare today’s date with the `date` in the frontmatter of `references/table.md`. If the gap exceeds one month, tell the user, with the table’s date, and recommend updating it from recent benchmarks (the table’s “Updating” section). Then continue with the table as it stands.
 
 When the user requests an update, follow the table's "Updating" procedure: discover new models, versions, and harnesses; give every candidate a disposition; record recommendation changes and dated evidence. An update does not authorize launching agents or testing inference access.
 
@@ -62,21 +62,21 @@ For the task, then for the review if step 5 requires it:
 
 1. The one the user specifies.
 2. Otherwise, **chosen from the table**, based on the difficulty the user stated, and on their expensive / economical preference if they stated one.
-3. Otherwise, **determined automatically**: estimate the complexity and impact of the task with the table's definitions, then take the matching row.
+3. Otherwise, **determined automatically**: estimate the complexity and impact of the task with the table’s definitions, then take the matching row.
 
-**Subscription.** When the chosen row depends on the subscription (the table flags this) and the subscription is missing from the request and from the project documentation, ask the user for it before launching. Then apply the table section "Cost: the subscription decides the order".
+**Subscription.** When the chosen row depends on the subscription (the table flags this) and the subscription is missing from the request and from the project documentation, ask the user for it before launching. Then apply the table section “Cost: the subscription decides the order”.
 
 **Confidentiality.** If the agent will see confidential data, keep only models and harnesses that retain zero data: `references/harness.md` says which ones do not.
 
 **Fallback.** When the chosen model is unavailable through the selected harness:
 
-1. the same model through another installed harness (the table's catalog says which ones);
+1. the same model through another installed harness (the table’s catalog says which ones);
 2. otherwise, in the grid for the same kind of task, the installed model at the same performance level with the closest cost;
 3. otherwise, the neighboring level, and you tell the user.
 
 A model marked unranked or absent from the table has no task rank: place the exact model/effort/harness from a dated applicable benchmark, with its evidence level, or ask the user. A catalog listing alone confirms neither access nor performance. Do not transfer an older version's score without marking that transfer [I].
 
-Done when each agent has an installed harness and a listed/documented model and effort, access is confirmed before the full brief is sent, and each substitution is noted with its reason.
+Done when each agent has an installed harness and a listed/documented model and effort, access is confirmed under the rule in `references/harness.md` before the full brief is sent, and each substitution is noted with its reason.
 
 ## 5. Review
 

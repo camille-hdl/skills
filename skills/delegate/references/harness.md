@@ -16,7 +16,7 @@ Run in any shell; missing names are absence from PATH, not proof that a product 
 sh -c 'date +%F; for c in herdr codex claude cursor-agent agent gemini agy antigravity grok grokbuild opencode kimi muse devin fusion aider goose amp droid pi copilot qwen; do command -v "$c"; done; echo "HERDR_ENV=${HERDR_ENV:-}"'
 ```
 
-Add executable names found in current release notes. For installed CLIs, read `--version` and `--help` before selecting catalog or launch commands. Do not install software or start sessions as part of discovery. The October 1 [inventory and candidate decisions](benchmark-notes.md#harness-inventory) include benchmarked harness versions and unavailable local paths.
+Add executable names found in current release notes. For installed CLIs, read `--version` and `--help` before selecting catalog or launch commands. Confirm product identity before classifying generic names such as `agent` or `pi`; an unrelated executable is not a harness match. Do not install software or start sessions as part of discovery. The October 1 [inventory and candidate decisions](benchmark-notes.md#harness-inventory) include benchmarked harness versions and local absence observations.
 
 ## Model inventory
 
@@ -25,7 +25,7 @@ Add executable names found in current release notes. For installed CLIs, read `-
 - **Claude Code**: `claude --help` documents `--model` aliases `opus`, `sonnet`, and `fable`, or an exact model ID. No non-interactive model-list command was found on October 1. Use dated vendor documentation for IDs and record account access as unverified.
 - **Other installed CLIs**: use the catalog/list command exposed by their help; record a missing command or authentication failure as a gap.
 
-A listing or documented model is not proof that an inference request succeeds. Once launching is authorized, a trivial prompt with the selected model/effort can confirm access before sending the full brief. It incurs usage and must obey the same data/permission constraints. Skip it when the user forbids agent launches.
+A listing or documented model is not proof that an inference request succeeds. Before sending the full brief, confirm access to the selected model/effort through this account and harness. A prior successful request in the current session suffices; otherwise, once launching is authorized, run a trivial prompt and check the served model. The probe incurs usage and follows the same data/permission constraints. When agent launches are forbidden, keep access unverified and stop at discovery.
 
 ## Common form
 
