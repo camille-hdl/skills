@@ -19,10 +19,12 @@ visible in the catalog, decisions, and verification results. Label omitted
 evidence so reviewers do not treat the digest as the full transcript.
 
 Resolve upstream's `encode-lessons-in-structure` reference as
-`principle-encode-lessons-in-structure`. Read its installed `SKILL.md`, or resolve
-it from the same pstack revision as the loaded workflow. Report a missing or
-unreadable principle before dispatch. Reading this dependency does not require
-installing additional skills.
+`principle-encode-lessons-in-structure`. Find its installed `SKILL.md` through
+the skill catalog, then check `<workspace>/.agents/skills/` and
+`~/.agents/skills/` if needed. Read the installed file before dispatch. If no
+readable installed copy is found, report the paths searched and stop before
+launching reviewers or the synthesizer. Use only an installed copy for this
+dependency; do not read it from a pstack checkout or remote source.
 
 For substantive edits, new skills, and description tuning, resolve Cursor's
 `create-skill` to the harness's available skill-authoring workflow, such as Codex's
