@@ -1,6 +1,6 @@
 ---
 name: pstack-bridge
-description: Run pstack why, how, arena, blast-radius, and manually requested no-comments outside Cursor. Use alongside a pstack invocation in Claude Code or Codex to translate Task calls into delegate, Herdr, or compatible native agents.
+description: Run pstack why, how, arena, blast-radius, reflect, and manually requested no-comments outside Cursor. Use alongside a pstack invocation in Claude Code or Codex to translate Task calls into delegate, Herdr, or compatible native agents.
 metadata:
   source: https://github.com/cursor/plugins/tree/main/pstack/skills
 ---
@@ -19,6 +19,8 @@ Explicit invocation works even when automatic discovery does not:
 - Claude Code: `/pstack-bridge`, then `/why <question>` or `/arena <task>`.
 - Codex: `$pstack-bridge` alongside `$why` or `$arena` in the same request.
 - Either: "Use pstack-bridge with how" or "Use pstack-bridge with blast-radius".
+- Session reflection: `/pstack-bridge`, then `/reflect` in Claude Code,
+  or `$pstack-bridge $reflect` in Codex.
 - Comment cleanup: `/pstack-bridge`, then `/no-comments <scope>` in Claude Code,
   or `$pstack-bridge $no-comments <scope>` in Codex.
 
@@ -36,6 +38,8 @@ Keep it active for the selected workflow, including an `arena` called by
    or `~/.agents/skills/`. Find `delegate` there too. A repository checkout can
    use `skills/delegate/`.
    Read `delegate/SKILL.md`, `references/harness.md`, and `references/table.md`.
+   For `reflect`, also read [reflect.md](references/reflect.md) to resolve the
+   active session input, structural principle, and skill-authoring route.
    If a required skill is missing, report the paths searched and stop before
    launching.
 2. Follow delegate's request collection, live inventory, table age, tool scale,
@@ -118,6 +122,9 @@ Preserve these workflow boundaries:
   Keep pick, graft, verification, and the synthesis note in the upstream order.
 - `blast-radius`: perform its proof against real code. A wide investigation uses
   the same adapted `arena`; model substitution does not replace the proof.
+- `reflect`: three tool-capable reviewers, then the synthesizer with their full
+  outputs. Follow [reflect.md](references/reflect.md) for session boundaries,
+  approval before skill edits, backlog handling, and `create-skill` adaptation.
 - `no-comments`: run only on a manual request, after implementation and before
   independent review. Read [no-comments.md](references/no-comments.md) for source
   resolution, protected annotations, report inspection, and the explicit approval
