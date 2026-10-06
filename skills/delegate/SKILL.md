@@ -82,7 +82,7 @@ Done when each agent has an installed harness and a listed/documented model and 
 
 A review is required for code, and for any deliverable whose impact is high. It is given to an agent of **equal or higher performance** than the one that did the task, in the grid for the same kind of task, and **preferably from a different vendor**. Choose it with the scale in step 4. If the combination given by the user places the review under the agent that did the task, flag it before launching.
 
-Use the measured configuration's tier, not the model family's best score. If its exact effort or harness is unmeasured, state the inferred tier [I] and the evidence used. For code, general review transfers the coding grid [I]; a security supplement is not a replacement for the primary reviewer. A same-model review uses an independent session, including Sonnet reviewing Sonnet-authored code. Add the recommended cross-vendor pass when the table calls for it. Explicit instructions about whether to delegate still govern.
+Use the measured configuration's tier, not the model family's best score. If its exact effort or harness is unmeasured, state the inferred tier [I] and the evidence used. For code, general review transfers the coding grid [I]; a security supplement is not a replacement for the primary reviewer. A same-model review uses an independent session, including Sonnet reviewing Sonnet-authored code. Add the recommended cross-vendor pass when the table calls for it. Commits made after a review are reviewed in turn before the deliverable is declared mergeable. Explicit instructions about whether to delegate still govern.
 
 Done when the review is set aside with its reason, or its agent is fixed.
 
@@ -93,7 +93,7 @@ The brief contains, and nothing else:
 - **the objective**: what to produce, in one or two sentences;
 - **the done criterion**: a condition the agent can verify on its own;
 - **the entry points**: paths, commands, URLs. A pointer is enough for what the agent can read; copy only what it cannot reach;
-- **decisions already made** and constraints, with their reason when it prevents an error;
+- **decisions already made** and constraints, with their reason when it prevents an error. Each constraint names its source: the user, a project rule, or your own assumption. A vague wish becomes a criterion to weigh, never a filter that drops an option the user named. Stop criteria list the exceptions already accepted for the same operation (same diff, same degraded state);
 - **the scope**: what it may read, modify, execute; whether it commits; where it stops;
 - **the deliverable**: what, in what form, where to write it.
 
