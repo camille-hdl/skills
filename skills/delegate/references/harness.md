@@ -63,6 +63,7 @@ Print/stdin/model/effort form executed September 16 ✔ with alias `opus`; the e
 - **Read-only**: expose only read/web tools; exclude `Bash`, `Write`, and `Edit`. Audit configured plugin/MCP tools before launch; the built-in tool list does not constrain external tools. October 16 help also lists `--restricted`, which removes command-running tools and WebFetch unless `--tools` names them and ignores user, project, and local settings; it was not executed.
 - **Write and shell**: use `--permission-mode` and `--allowedTools` for the brief's rights; read current help values first.
 - **Sonnet/Haiku/Fable**: use `claude-sonnet-5-5` / `claude-haiku-5-5` / `claude-fable-5-1` and an explicit `--effort`. Haiku has no alias in the October 16 help.
+- **Billing**: the authentication picks the pool. Signed in with a Claude plan, `claude -p` draws the plan's usage limits. Run with an API key from the Console organization linked to a Max or Team plan, it spends that plan's monthly API credits instead ([credits article](https://support.claude.com/en/articles/17154008-monthly-api-credits-for-max-and-team-plans), read 2026-10-16). `claude auth status` shows the current authentication. October 16 help says `--bare` reads only `ANTHROPIC_API_KEY` or an `apiKeyHelper`, never OAuth or the keychain. Neither form was executed.
 
 ## Cursor
 

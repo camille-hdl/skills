@@ -48,12 +48,15 @@ Complexity, from simplest to hardest:
 
 Impact is low when an error is quickly spotted and reversible, medium when it causes substantial rework, and high when it affects production, data, security, or a costly decision. Impact governs review [I]; it is not a model benchmark.
 
-## Overrides
+## User and project preferences
 
-- Use GPT-6.1 Sol for every Sol recommendation and invocation, following the user decision of 2026-09-30 [I]. It now has its own [AA measurements dated 2026-09-29][aa-sol]. Older GPT-6 Sol scores remain attributed to that older model.
-- Use Astra only when the user explicitly requests it for the task, fallback, or reviewer, following the decision of 2026-09-21 [I]. The published Plus estimate remains 5 to 45 messages per five hours [V, [Codex pricing][codex-price]].
+This table holds general recommendations drawn from published measurements. Before applying it, read the model preferences documented for the user and the project: the request, `AGENTS.md`, `CLAUDE.md`, project documentation, and any memory or preference file the agent can read. A preference can replace a model, restrict a model to explicit requests, exclude a model, or fix the fallback and the reviewer. A preference wins over the table for the task, the fallback, and the review. Keep preferences out of this file; report each one applied (step 8 of `SKILL.md`).
 
-Fable 5.1 has no general exclusion. The user's conditional removal decision of 2026-10-01 is not activated: planning lacks a direct test, and Endor supplies a coding counterexample, strongest on functional correctness. Dam Secure is only a weak security-review signal. See the [task comparison and activation criteria](benchmark-notes.md#fable-51-versus-opus-55).
+"Sol" in this table means GPT-6.1 Sol (`gpt-6.1-sol`), released 2026-09-29 [V, [OpenAI][openai-sol]]. Its [AA measurements dated 2026-09-29][aa-sol] belong to it; GPT-6 Sol scores stay attributed to that older model.
+
+Astra has no recommended cell. It reaches the same measured tiers as Fable and Sol, but it draws the most from a ChatGPT plan: the Plus estimate is 5 to 45 messages per five hours, against 15 to 160 for Sol [V, [Codex pricing][codex-price], read 2026-10-16]. Use it when a preference or the request names it.
+
+Fable 5.1 has no general exclusion. Opus is the better-supported general default, but planning lacks a direct test and Endor supplies a coding counterexample, strongest on functional correctness. Dam Secure is only a weak security-review signal. See the [task comparison](benchmark-notes.md#fable-51-versus-opus-55).
 
 ## Recommendations
 
@@ -67,14 +70,14 @@ Use the catalog identifier and the row's effort with [harness.md](harness.md). P
 | Code | Long autonomous, medium impact | Opus 5.5 `medium`; `xhigh` is a candidate | Claude Code | FrontierCode 1.1 Main 54.64%/$0.802 at `medium` versus 51.42% at `xhigh` [T]. Rails combined 56.1%/$3.84 at `medium` versus 65.3%/$10.53 at `xhigh`, 72.2% on its multi-step stage [T]. [I] The setups conflict on effort; keep `medium` and record `xhigh` for multi-step work. |
 | Code | No plan or high impact | Opus 5.5 `high` | Claude Code | AA Index 54 at `high` [T]; FrontierCode 53.99% at `high` versus 54.64% at `medium` [T]. [I] Retain for ambiguous work, with independent review. |
 | Planning | Simple and checkable | Luna `medium` | Codex | [I] Cost and checkability; no direct plan-quality test. |
-| Planning | Medium, subscription-dependent | Opus 5.5 `medium`; Sol `max` is a candidate | Claude Code; Codex for the candidate | AA Index Opus 51/$1.34 versus Sol 52/$0.72 per task [T]. [I] Retain Opus: one point without uncertainty does not justify replacement. Claude Max and Codex Plus are separate pools; API cost proves no included-quota saving. No direct plan-quality test. |
+| Planning | Medium, subscription-dependent | Opus 5.5 `medium`; Sol `max` is a candidate | Claude Code; Codex for the candidate | AA Index Opus 51/$1.34 versus Sol 52/$0.72 per task [T]. [I] Retain Opus: one point without uncertainty does not justify replacement. Claude and ChatGPT plans are separate pools; API cost proves no included-quota saving. No direct plan-quality test. |
 | Planning | Complex or high impact | Opus 5.5 `xhigh` | Claude Code | AA Index 56 at `xhigh`, 58 at `max` [T]. [I] Proxy only; independently check consequential assumptions. |
 | Web research | Low stakes, lowest Codex draw | Luna `high`; Haiku 5.5 `medium` when the Claude pool is preferred | Codex, web enabled; Claude Code, web tools | Parallel Luna 61.9/$33.1, Haiku 62.9/$24.3 per 1,000 tasks [T]. [I] One point without uncertainty; effort and CLI transfer are unmeasured. |
 | Web research | Moderate stakes, cost matters | Sol `high` | Codex, web enabled | Parallel score 70.4, $130/1,000 tasks [T]. [I] New measured model, different search tools in Codex. |
 | Web research | High stakes or decisive synthesis | Opus 5.5 `high` | Claude Code, web tools | Parallel score 75.4, still highest on its 2026-10-13 board; Sonnet 5.5 74.1/$796 versus Opus $949 per 1,000 tasks [T]. [I] Sonnet is a candidate, not a replacement: 1.3 points without uncertainty. Validate sources; effort and CLI transfer are unmeasured. |
 | Code review | Routine | Independent Opus 5.5 `high`; add Sol `xhigh` for Anthropic-authored code | Claude Code; Codex | [I] Retain Opus as the primary reviewer, subject to the author's configuration/tier. FrontierCode Opus `high` 53.99% versus `medium` 54.64% supports the inferred tier [T]. Sonnet's 2.4-point native AA lead without uncertainty conflicts with FrontierCode; see the candidate assessment below. Sol supplies vendor diversity, not a primary-review replacement. |
 | Code review | Security-sensitive | Same primary review; add Grok 4.7 `high` | Claude Code; Cursor | Dam Secure recall 77.5%, $9.28/PR, 18m23s [T]. [I] Specialist supplement. Fable `high` is an unvalidated candidate for permitted data; its five extra detections in 80 reviews do not establish superiority. Neither replaces an equal-tier primary review. |
-| Prose for humans | Editing and simplification | Grok 4.7 `high` | Cursor | [I] Existing usage preference; no reproducible direct reformulation comparison used. |
+| Prose for humans | Editing and simplification | A documented user or project preference; otherwise Opus 5.5 `high` | Claude Code | [I] No reproducible direct reformulation comparison found. The fallback transfers the professional-output proxy: AA-Briefcase `max` Opus 1822, Sonnet 1811 [T]. |
 | Professional documents | Complex analysis and presentation | Opus 5.5 `high`; Sonnet 5.5 `max` as an alternative | Claude Code | AA-Briefcase combined Elo at `max`: Opus 1822, Sonnet 1811 [T]. [I] Professional-output proxy, not proof about literary style. |
 
 Coding figures come from [AA's native-agent board][aa-code] and [Cognition's public dataset][frontier-data]. Rails uses its [minimal harness and Stage 3 grading][rails-stage3]. Search uses [Parallel][parallel]; security review uses [Dam Secure][dam]. Reasoning and document proxies use [AA's Opus/Fable comparison][aa-pair], [Sol page][aa-sol-model], [Sonnet evaluation][aa-sonnet], and [Haiku evaluation][aa-haiku]. Boards and datasets were read 2026-10-16; the [sources](#sources) give each date and the setups are described below.
@@ -85,12 +88,12 @@ Coding figures come from [AA's native-agent board][aa-code] and [Cognition's pub
 
 No cited benchmark grades a repository plan separately from execution. These tiers are [I], based on AA Intelligence Index v4.3.2 in its API evaluation. They are not planning pass rates.
 
-| Tier | Models and measured effort | Index [T] | Included pool |
+| Tier | Models and measured effort | Index [T] | Subscription pool |
 | --- | --- | --- | --- |
-| High | Opus 5.5 `max`; Sonnet 5.5 `max` | 58; 56 | Claude Max |
-| Good | Fable 5.1 `max`; Astra `max`, explicit request only; Sol `max` | 53; 53; 52 | Claude Max with Fable cap; Codex Plus |
+| High | Opus 5.5 `max`; Sonnet 5.5 `max` | 58; 56 | Claude plan |
+| Good | Fable 5.1 `max`; Astra `max`; Sol `max` | 53; 53; 52 | Claude plan with Fable cap; ChatGPT plan |
 | Intermediate | Grok 4.7 `xhigh` | 46 | Cursor Models |
-| Scoped | Haiku 5.5 `max`; Luna `max` | 43; 38 | Claude Max; Codex Plus |
+| Scoped | Haiku 5.5 `max`; Luna `max` | 43; 38 | Claude plan; ChatGPT plan |
 | Unranked | Terra; other discovery candidates | No current planning comparison used | See discovery notes |
 
 Sources: [Opus/Fable][aa-pair], [effort comparison][aa-efforts], [Sol][aa-sol-model], [Sonnet][aa-sonnet-model], [Astra][aa-astra], [Grok][aa-grok], [Luna][aa-luna-model], and [Haiku][aa-haiku]. Opus's lower-effort scores are 51 at `medium`, 54 at `high`, and 56 at `xhigh` [T]. Haiku scores 38 at `high` [T]; at `max` it used about 162k output tokens per task, versus about 50k for Luna `max` [T]. Luna `max` read 37 on 2026-10-01 and 38 on 2026-10-16, both on Index v4.3.2; AA gives no rerun note. Their use in plans is [I].
@@ -106,7 +109,7 @@ AA Coding Agent Index combines DeepSWE v1.1, Terminal-Bench 4.0, and SWE-Atlas-Q
 | Good | Sol `xhigh`, Codex | 62.9 | 1.04 | 0.154.0 |
 | Good | Sonnet 5.5 `xhigh`, Claude Code | 62.9 | 3.33 | 2.1.280 |
 | Good | Fable 5.1 `max`, Claude Code | 62.2 | 12.39 | 2.1.259 to 2.1.263 |
-| Good | Astra `max`, Codex, explicit request only | 61.6 | 7.47 | 0.151.0 to 0.153.4 |
+| Good | Astra `max`, Codex | 61.6 | 7.47 | 0.151.0 to 0.153.4 |
 | Good | Sol `medium`, Codex | 61.4 | 0.70 | 0.154.0 |
 | Intermediate | Grok 4.7 `xhigh`, Grok Build | 56.3 | 8.82 | 1.0.40 |
 | Scoped | Sonnet 5.5 `medium`, Claude Code | 45.9 | 0.62 | 2.1.280 |
@@ -133,7 +136,7 @@ AA's separate mini-swe-agent API test gives Sonnet `max` about 64% on Terminal-B
 | High in this setup | Opus 5.5 | 75.4 | 949 |
 | High in this setup | Sonnet 5.5 | 74.1 | 796 |
 | High in this setup | Fable 5.1 | 73.4 | 1,762 |
-| Good in this setup | Astra, explicit request only | 70.8 | 401 |
+| Good in this setup | Astra | 70.8 | 401 |
 | Good in this setup | Sol 6.1 | 70.4 | 130 |
 | Intermediate in this setup | Grok 4.7 `medium` | 66.0 | 252 |
 | Scoped in this setup | Haiku 5.5 | 62.9 | 24.3 |
@@ -146,7 +149,7 @@ These scores do not measure the three installed CLIs' web tools. Cost records ma
 
 There is no general-review ranking here. Retain Opus `high` as the primary default [I]. Check the author's exact configuration against step 5 in `SKILL.md`; choose a measured equal-or-higher tier when the default's inferred tier is insufficient.
 
-Sonnet remains a candidate, not a demonstrated replacement [I]. Its native AA `max` index is 68.4 versus Opus `max` 66.0, a small gap without uncertainty [T]. FrontierCode instead gives Sonnet `max` 46.21%/$20.78 per task versus Opus `medium` 54.64%/$0.802, `high` 53.99%, and `max` 54.43% [T]. Sonnet `xhigh` is the candidate worth evaluating before `max`: it scores 52.09% on FrontierCode and 62.9/$3.33 on native AA, versus 68.4/$14.19 at `max` [T]. Neither coding test directly establishes review quality. AA's Sonnet API sweep was pre-release and awaits relevant reruns; its Intelligence Index `max` output-token use was about 60% above Opus `max` [T, [AA Sonnet][aa-sonnet]]. This is not a measured Claude Max quota ratio.
+Sonnet remains a candidate, not a demonstrated replacement [I]. Its native AA `max` index is 68.4 versus Opus `max` 66.0, a small gap without uncertainty [T]. FrontierCode instead gives Sonnet `max` 46.21%/$20.78 per task versus Opus `medium` 54.64%/$0.802, `high` 53.99%, and `max` 54.43% [T]. Sonnet `xhigh` is the candidate worth evaluating before `max`: it scores 52.09% on FrontierCode and 62.9/$3.33 on native AA, versus 68.4/$14.19 at `max` [T]. Neither coding test directly establishes review quality. AA's Sonnet API sweep was pre-release and awaits relevant reruns; its Intelligence Index `max` output-token use was about 60% above Opus `max` [T, [AA Sonnet][aa-sonnet]]. This is not a measured Claude plan quota ratio.
 
 | Security-review setup | Grok 4.7 | Fable 5.1 | Opus 5.5 | Sol 6.1 / Sonnet 5.5 / Haiku 5.5 |
 | --- | --- | --- | --- | --- |
@@ -159,35 +162,36 @@ Source: [Dam Secure, 2026-09-24][dam], reread on 2026-10-01; its blog had no new
 | Use | Evidence | Routing consequence [I] |
 | --- | --- | --- |
 | Professional deliverables | AA-Briefcase combined Elo: Opus `max` 1822, Sonnet `max` 1811, Fable `max` 1678, Haiku 5.5 `max` 1578; GDPval-AA Elo: 1846, 1844, 1735 [T] | Opus or Sonnet; these tests combine analysis, execution, and presentation. Haiku is not a substitute here. |
-| Human-facing prose and reformulation | No reproducible direct comparison used for the selected models | Retain the Grok preference as [I]; excluded reports are recorded in the notes. |
+| Human-facing prose and reformulation | No reproducible direct comparison found for the selected models | No measured default. Apply a documented preference; otherwise transfer the professional-output proxy [I]. Excluded reports are recorded in the notes. |
 
 Sources: [AA comparison][aa-pair] and [Sonnet evaluation][aa-sonnet]. AA's September 22 Opus article reported Fable's Briefcase Elo as 1679, versus 1678 now. It also noted Fable's slightly better rubric subscore. Neither rounding nor the aggregate establishes superiority on every document or writing task.
 
 ## Cost: the subscription decides the order
 
-The existing assumptions are ChatGPT Plus, Claude Max, and Cursor Pro [I]. These are separate pools. API dollars cannot establish exact subscription cost per completed task.
+Plans are separate pools: a ChatGPT plan pays for Codex, a Claude plan for Claude Code, and a Cursor plan for Cursor. Ask for the user's subscriptions when a row depends on them (step 4 of `SKILL.md`). API dollars cannot establish exact subscription cost per completed task.
 
-| Model | Standard API input/output dollars per million [V] | Codex output credits/million [V] |
+| Model | Standard API input/output dollars per million [V] | Cache read dollars per million [V] | Codex output credits/million [V] |
+| --- | --- | --- | --- |
+| Luna 6 | 0.10 / 0.50 | N/A | 12.5 |
+| Sol 6.1 | 2 / 10 | 0.10 | 250 |
+| Astra | 10 / 50 | N/A | 1,250 |
+| Opus 5.5 | 4 / 20 | 0.20 | N/A |
+| Sonnet 5.5 | 2 / 10 | 0.10 since 2026-10-07, previously 0.20 | N/A |
+| Haiku 5.5 | 0.10 / 0.50 up to 100k-token prompts; 0.50 / 2.50 above | 0.01; 0.05 above 100k | N/A |
+| Fable 5.1 | 10 / 50 | 0.25 | N/A |
+| Grok 4.7 | 2 / 6 | N/A | N/A |
+
+Sources: [Anthropic pricing][anthropic-price] and [Haiku launch][haiku-vendor], read 2026-10-16, for every Claude row; [Codex credits][codex-price], read 2026-10-16; [OpenAI API][openai-price] and [Grok][grok-doc], read 2026-10-01. N/A means the price was not recorded here. Prices exclude tools, long context beyond Haiku's step, and special processing. Haiku's price steps up five times above 100k-token prompts [V]; long agent sessions can cross that threshold [I]. Sonnet's cache read now costs half of Opus's, and Fable's costs 1.25 times Opus's [V]. The benchmark task costs elsewhere in this table were measured at the prices of their run date; do not rescale them by the new Sonnet cache price.
+
+| Plan or access | Published limits and billing [V] | Routing implication [I] |
 | --- | --- | --- |
-| Luna 6 | 0.10 / 0.50 | 12.5 |
-| Sol 6.1 | 2 / 10 | 250 |
-| Astra | 10 / 50 | 1,250 |
-| Opus 5.5 | 4 / 20 | N/A |
-| Sonnet 5.5 | 2 / 10 | N/A |
-| Haiku 5.5 | 0.10 / 0.50 up to 100k-token prompts; 0.50 / 2.50 above | N/A |
-| Fable 5.1 | 10 / 50 | N/A |
-| Grok 4.7 | 2 / 6 | N/A |
+| ChatGPT plan, Codex | Plus five-hour estimate: Luna 350 to 3,000, Sol 6.1 15 to 160, Astra 5 to 45; weekly limits may apply. Pro has no five-hour limit. Fast uses included allowance at 2.5 times Standard; Ultrafast, on Astra and Sol 6.1, at 8 times. | Luna conserves this pool; Sol is intermediate; Astra draws it fastest. |
+| Claude plan, Claude Code signed in with the subscription | Max: five-hour limits and a weekly limit across all models. Fable may use at most 50% of the weekly limit; it adds no allowance. `claude -p` and the Agent SDK signed in with the plan draw these limits, not the API credits. A numeric per-task quota multiplier per model is unpublished. | Opus is the general default; Fable remains a specialist candidate. Sonnet `max` costs more API dollars than Opus in AA's coding workload; its quota ratio is unmeasured. Haiku is the low-cost alternative inside this pool; its per-task quota draw is unpublished. |
+| Claude plan, monthly API credits | Since 2026-10-07, Max 5x includes $100 and Max 20x $200 of Claude Platform credit per month; Team up to $500, pooled. Credits work with any model and expire at the end of each billing cycle. They cover `claude -p` and the Agent SDK run with an API key from the linked Console organization. They do not cover interactive Claude Code, IDE, desktop, web, or GitHub Action runs. | A second, dollar-denominated pool for non-interactive delegation. Choosing it is choosing the authentication: pass an API key from the linked organization. Benchmark API costs apply here directly. |
+| Cursor Pro | Separate Cursor Models and Other Models pools. Grok and Composer draw the former; third-party models draw the latter. The page does not list which providers count as third-party. Grok Standard $2/$6, Fast $4/$12. | Grok preserves the third-party pool. Balances, routing, and subagents determine actual consumption. |
+| API outside any plan | Token and tool billing on the provider's account. | Confirm a paid API path separately from included CLI access. |
 
-Sources: [OpenAI API][openai-price], [Codex credits][codex-price], [Anthropic references][fable-doc], [Sonnet launch][sonnet-vendor], and [Grok][grok-doc], accessed 2026-10-01; [Haiku][haiku-doc], accessed 2026-10-16. Haiku's price steps up five times above 100k-token prompts [V]; long agent sessions can cross that threshold [I]. Prices exclude tools, caching, long context, and special processing. Sol 6.1 cached input is $0.10/million versus Sol 6's $0.20 [V]. Fable cached input is $0.25 versus Opus $0.20 [V]; the 2.5-times input/output ratio is not a cached-token ratio.
-
-| Subscription | Published limits and billing [V] | Routing implication [I] |
-| --- | --- | --- |
-| Codex Plus | Five-hour estimate: Luna 350 to 3,000, Sol 6.1 15 to 160, Astra 5 to 45; weekly limits may apply. Fast uses included allowance at 2.5 times Standard. | Luna conserves this pool; Sol is intermediate. Astra remains explicit request only. |
-| Claude Max | Five-hour and weekly limits shared with Claude Code. Fable may use at most 50% of the existing weekly allowance; it adds no allowance. A numeric Fable/Opus per-task quota multiplier is unpublished. | Opus is the general default; Fable remains a specialist candidate. Sonnet `max` costs more API dollars than Opus in AA's coding workload; its quota ratio is unmeasured. Haiku is the low-cost alternative inside this pool; its per-task quota draw is unpublished too. |
-| Cursor Pro | Separate Cursor Models and Other Models pools. Grok/Composer draw the former; Anthropic models draw the latter. Grok Standard $2/$6, Fast $4/$12. | Grok preserves the third-party pool. Balances, routing, and subagents determine actual consumption. |
-| API | Token and tool billing, outside these subscriptions | Confirm a paid API path separately from included CLI access. |
-
-Sources: [Codex][codex-price], [Claude Max][max-plan], [Fable limits][fable-plan], [Cursor pools][cursor-pools], and [Grok prices][grok-doc], accessed 2026-10-01. On Claude Pro, Fable uses paid usage credits from the start [V].
+Sources: [Codex][codex-price], [Claude Max][max-plan], [Fable limits][fable-plan] (dated 2026-09-02), [monthly API credits][claude-credits], and [Cursor pools][cursor-pools], read 2026-10-16; [Grok prices][grok-doc], read 2026-10-01. The credit amounts and start date come from the [Haiku launch][haiku-vendor] of 2026-10-07; the credits article states coverage and authentication. On Claude Pro, Fable uses paid usage credits from the start [V].
 
 Fable/Opus cost depends on workload [T]: AA Intelligence Index `max` costs $7.63/$5.98 per task, but native Coding Agent Index `max` costs $12.39/$13.04. Opus is cheaper in the former and about 5% more expensive in the latter. [Comparison notes](benchmark-notes.md#fable-51-versus-opus-55) include Rails, Parallel, and Endor costs. No single quota multiplier follows.
 
@@ -224,10 +228,12 @@ Sources read on 2026-10-16 are marked "read 2026-10-16"; the others were retaine
 | [AA Grok][aa-grok], [Sol/Luna 6][aa-luna], [Astra][aa-astra] | 2026-09-21, 2026-09-22, 2026-09-09 | [T] Same-version reasoning and efficiency. |
 | [Dam Secure][dam] | 2026-09-24; blog index read 2026-10-16 | [T] Planted-bug review, `high`, five runs; routes differ. No newer post. |
 | [Endor][endor] | 2026-09-24 | [T] Secure-code generation, Claude Code, 200 tasks/179 graded, memorization excluded; CLI versions differ. |
-| [OpenAI catalog][openai-models], [Sol][openai-sol], [API prices][openai-price], [Codex prices][codex-price] | Sol release 2026-09-29; snapshots 2026-10-01 | [V] IDs, effort, prices, credits, and limits. |
+| [OpenAI catalog][openai-models], [Sol][openai-sol], [API prices][openai-price] | Sol release 2026-09-29; snapshots 2026-10-01 | [V] IDs, effort, and API prices. |
 | [Opus][opus-doc], [Fable][fable-doc], [Sonnet][sonnet-vendor] | Releases 2026-09-22, 2026-09-01, 2026-09-28 | [V] Specifications and vendor-run coding figures. |
-| [Fable limits][fable-plan], [Claude Max][max-plan] | Snapshot 2026-10-01 | [V] Shared usage/Fable cap, not a per-task multiplier. |
-| [Cursor pools][cursor-pools], [Grok][grok-doc] | Snapshot 2026-10-01 | [V] Pools, speed tiers, and context pricing. |
+| [Anthropic pricing][anthropic-price], [monthly API credits][claude-credits] | Read 2026-10-16 | [V] Claude token and cache prices; credit coverage by authentication. |
+| [Fable limits][fable-plan], [Claude Max][max-plan] | Fable page dated 2026-09-02; both read 2026-10-16 | [V] Shared usage/Fable cap, not a per-task multiplier. |
+| [Codex prices][codex-price], [Cursor pools][cursor-pools] | Read 2026-10-16 | [V] Plan estimates, credits, speed multipliers, and Cursor pools. |
+| [Grok][grok-doc] | Snapshot 2026-10-01 | [V] Grok speed tiers and context pricing. |
 
 ## Updating
 
@@ -236,7 +242,7 @@ Sources read on 2026-10-16 are marked "read 2026-10-16"; the others were retaine
 3. Give every newly released or newly considered model/harness a disposition: ranked for named tasks, unranked with missing evidence/access stated, or ignored with a reason. Record exact IDs, effort, visibility, retention flags, and harness version. Separate listing/documented availability from a verified inference request.
 4. Reread retained sources and search newer revisions and counterexamples. Record publication/snapshot and access dates, task, metric, revision, effort, harness/version, and evidence level. Read public datasets or embedded results when dynamic charts omit values. Retrieval failures are gaps, not confirmation.
 5. Rebuild grids and recommendations from comparable results. Mark proxy transfers [I]. Keep old measurements under the old model. Resolve contradictions by task/setup; avoid averaging unrelated scores or treating benchmark counts as real-world task frequencies. Retain the previous recommendation when small gaps lack uncertainty or applicable results conflict; record the challenger as a candidate.
-6. Recheck prices, pools, caps, availability, confidentiality, and user overrides. Assess the Fable conditional exclusion against the [activation criteria](benchmark-notes.md#fable-51-versus-opus-55), retaining counterexamples beside the decision.
+6. Recheck prices, pools, caps, availability, and confidentiality, with the date of each check. Reassess the [Fable/Opus comparison](benchmark-notes.md#fable-51-versus-opus-55), retaining counterexamples beside the verdict. Do not write user or project preferences into this table or the notes.
 7. Record every recommendation change and reason in [benchmark notes](benchmark-notes.md). Update examples and `SKILL.md`; update `README.md` when descriptions or links change. Verify actual catalog IDs, source links, local pointers, table structure, and the final diff.
 8. Set both frontmatter `date` and compilation date after completion. Distinguish sources reread this time from retained older snapshots. Finish when every discovery/change is accounted for and every number has dated, named evidence.
 
@@ -272,6 +278,8 @@ Sources read on 2026-10-16 are marked "read 2026-10-16"; the others were retaine
 [sonnet-vendor]: https://www.anthropic.com/claude-sonnet-5-5
 [haiku-doc]: https://platform.claude.com/docs/en/models/haiku-5-5/overview
 [haiku-vendor]: https://www.anthropic.com/news/claude-haiku-5-5
+[anthropic-price]: https://platform.claude.com/docs/en/about-claude/pricing
+[claude-credits]: https://support.claude.com/en/articles/17154008-monthly-api-credits-for-max-and-team-plans
 [fable-plan]: https://support.claude.com/en/articles/15424964-claude-fable-models-on-your-plan
 [max-plan]: https://support.claude.com/en/articles/11049741-what-is-the-max-plan
 [cursor-pools]: https://prod.cursor.com/help/models-and-usage/usage-limits

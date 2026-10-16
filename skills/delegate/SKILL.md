@@ -56,7 +56,7 @@ Done when the tool is fixed and you know which rung.
 
 ## 4. Agent combination selection
 
-Apply the "Overrides" section of `references/table.md` first. User decisions can replace a model or restrict its use for the task, fallback, and review.
+Apply the user's and the project's documented model preferences first, as the "User and project preferences" section of `references/table.md` describes. Look in the request, `AGENTS.md`, `CLAUDE.md`, project documentation, and any memory or preference file you can read. A preference can replace a model or restrict its use for the task, fallback, and review.
 
 For the task, then for the review if step 5 requires it:
 
@@ -115,7 +115,7 @@ Done when each agent has delivered, or has failed with an error you have read.
 
 Tell the user:
 
-- the tool and each combination, with the scale rung that fixed them and any override applied;
+- the tool and each combination, with the scale rung that fixed them and any preference applied;
 - the substitutions and their reason;
 - the warning on the age of the table, if any;
 - the result of the task and of the review, with the path of the deliverables.

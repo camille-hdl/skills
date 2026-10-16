@@ -19,8 +19,12 @@ Compared with the table dated 2026-10-01:
 | High-stakes web research | Keep Opus `high`; record Sonnet 5.5 as a candidate. | [T] Parallel now measures Sonnet: 74.1/$796 versus Opus 75.4/$949. Fable moves to 73.4/$1,762. |
 | Planning proxy grid | Add Haiku 5.5 `max` (43) to the scoped tier; Luna `max` reads 38. | [T] AA Index v4.3.2. Luna's 37 to 38 change carries no rerun note, so it is a snapshot difference, not a measured trend. |
 | Code grid | Add Haiku 5.5 at every effort, with fallback rates and the tiered-cost caveat; add AA's separate Stirrup FrontierCode run. | [T] AA board 2026-10-16; AA FrontierCode article 2026-10-12. Costs for Haiku exclude the step-up above 100k-token prompts. |
+| Overrides section | Replace it with "User and project preferences": read the request, `AGENTS.md`, `CLAUDE.md`, project documentation, and readable memory or preference files, then let those preferences win over the table. Drop the user-specific decisions it held and the restrictions they repeated in the grids. Keep the Sol naming as a fact. | [I] The skill is public and reusable, so it carries recommendations drawn from measurements. One user's choices belong in that user's preference files. No measurement is removed. |
+| Astra | No recommended cell, now for a stated reason: same measured tiers as Fable and Sol, with the heaviest draw on a ChatGPT plan. | [V] Plus estimate 5 to 45 messages per five hours against 15 to 160 for Sol, read 2026-10-16. |
+| Prose for humans | Replace the Grok usage preference with a documented preference, otherwise Opus 5.5 `high`. | [I] No reproducible reformulation comparison exists for any candidate. The fallback transfers the professional-output proxy (AA-Briefcase `max` Opus 1822, Sonnet 1811 [T]) instead of keeping an unmeasured personal choice. |
+| Cost section | Add monthly API credits of Claude plans, split Claude access by authentication, add cache read prices with Sonnet's new $0.10, add Ultrafast and the Pro five-hour rule for Codex, and date each check. Replace the fixed Plus, Max, and Cursor Pro assumption with asking for the user's plans. | [V] Haiku launch 2026-10-07; credits article, Anthropic pricing, Codex pricing, Claude Max, and Cursor pools read 2026-10-16. Benchmark task costs stay at their run-date prices. |
 
-Unchanged: medium-impact ready-plan code uses Sol `medium`/`xhigh`; unplanned/high-impact code uses Opus `high`; all planning rows; moderate web research uses Sol `high`; review rows; professional documents; human-facing editing uses Grok `high`; Astra requires an explicit request; Terra has no recommended cell. No new Dam Secure or Endor result appeared, so the security-review row stands.
+Unchanged: medium-impact ready-plan code uses Sol `medium`/`xhigh`; unplanned/high-impact code uses Opus `high`; all planning rows; moderate web research uses Sol `high`; review rows; professional documents; Terra has no recommended cell. No new Dam Secure or Endor result appeared, so the security-review row stands.
 
 Sources for changes: [AA Haiku, October 7][haiku-aa], [native coding board][coding], [FrontierCode data][frontier], [AA FrontierCode, October 12][aa-frontier], [Rails Stage 3, October 13][rails-stage3], and [Parallel, October 13][parallel]. Live boards and datasets were read on October 16.
 
@@ -79,9 +83,9 @@ Executable names are search candidates, not inferred installation instructions. 
 
 ## Fable 5.1 versus Opus 5.5
 
-The user's conditional exclusion is not activated. Opus is the better-supported general default [I], but "Fable is inferior on most real tasks, especially planning" is not proved by these evaluations. A benchmark-component count is not a distribution of the user's tasks. Reassessed on 2026-10-16: no direct planning comparison appeared and Endor's counterexample stands. Parallel and AA's Stirrup FrontierCode run add small Opus leads without uncertainty, which do not meet the criteria below.
+Fable 5.1 has no general exclusion. Opus is the better-supported general default [I], but these evaluations do not prove that Fable is inferior on most real tasks, planning included. A count of benchmark components is not a distribution of real tasks. Reassessed on 2026-10-16: no direct planning comparison appeared and Endor's counterexample stands. Parallel and AA's Stirrup FrontierCode run add small Opus leads without uncertainty, which do not meet the criteria below.
 
-For a future update to activate that conditional exclusion, require a direct repository-planning comparison that favors Opus beyond uncertainty on representative tasks, and comparable current coding evidence that resolves Endor's adjusted functional-pass counterexample. Establish that the affected categories cover most of the user's work rather than counting benchmark components. Keep the same evidence threshold for both models: a small gap without uncertainty is insufficient. These are evidence requirements for the existing conditional decision [I], not new model restrictions. Until they are met, keep Fable eligible and record remaining counterexamples.
+For a future update to exclude Fable from general routing, require a direct repository-planning comparison that favors Opus beyond uncertainty on representative tasks, and comparable current coding evidence that resolves Endor's adjusted functional-pass counterexample. Keep the same evidence threshold for both models: a small gap without uncertainty is insufficient [I]. Until both are met, keep Fable eligible and record remaining counterexamples. A user or project may still exclude it by preference; that choice belongs in their preference files, not here.
 
 | Task | Published comparison, Opus versus Fable | Verdict and limits |
 | --- | --- | --- |
@@ -91,7 +95,7 @@ For a future update to activate that conditional exclusion, require a direct rep
 | Security review | Dam Secure, September 24: recall 56.25% versus 62.5%, both `high` [T]. | Weak signal, five extra detections in 80 reviews of only 16 distinct bugs, without uncertainty. Custom isolated API agent, CLI versions N/A. Fable costs $7.31/PR versus Opus $1.92; Sol 6 scores 63.75%/$1.81. No reliable security or general-review winner follows; Fable is an unvalidated candidate. |
 | Research | Parallel, updated October 13: 75.4 versus 73.4; $949 versus $1,762 per 1,000 tasks [T]. | Opus leads this common Search Fast/Extract setup. Exact model effort is unstated; installed CLI search tools differ. |
 | Professional outputs | AA-Briefcase combined Elo `max` 1822 versus 1678; GDPval-AA 1846 versus 1735 [T]. | Opus leads aggregates, but Fable's rubric subscore is slightly higher in AA's September 22 discussion. Analytical/presentation quality is not pure prose quality. |
-| Prose and reformulation | No reproducible direct comparison used. Anthropic's Opus writing improvement is a vendor claim [V]. | Insufficient evidence for a general prose verdict or a replacement of the Grok usage preference [I]. |
+| Prose and reformulation | No reproducible direct comparison used. Anthropic's Opus writing improvement is a vendor claim [V]. | Insufficient evidence for a general prose verdict or a measured prose default [I]. |
 
 The [Anthropic Opus launch][opus-vendor], September 22, adds vendor evidence [V]: Terminal-Bench 4.0 66.4% Opus `xhigh` versus 55.8% Fable `max`, and CursorBench 57.8% versus 51.8% under its reported settings. Vendor harness and effort differences prevent treating these as replication of AA's native runs.
 
@@ -107,9 +111,9 @@ Endor counted 51 Opus versus 17 Fable tasks as memorization/cheating. Before tho
 | FrontierCode 1.1 Main, `medium` [T] | $0.802 versus $3.284/task. | Opus costs about 76% less in this workload. |
 | Rails Stage 2 before the October regrade, Opus `medium` / Fable `high` [T] | $2.78 versus $9.14/run. | Historical; different efforts; not a universal price multiplier. |
 | Endor, entire 200-task run [T] | $116 versus $672. | Opus costs about 83% less in that run; grading exclusions affect quality, not this total. |
-| Claude Max [V] | Shared weekly allowance; Fable capped at 50% of the existing weekly allowance. | Fable adds no allowance. A model-specific per-task deduction ratio is unpublished; no exact quota comparison can be proved. |
+| Claude Max, signed in with the plan [V] | Shared weekly allowance; Fable capped at 50% of the existing weekly allowance. | Fable adds no allowance. A model-specific per-task deduction ratio is unpublished; no exact quota comparison can be proved. |
 
-Costs use the matching source in the task table, [Anthropic model documentation][fable-doc], [Opus documentation][opus-doc], and [Claude's Fable plan limits][fable-plan]. All accessed October 1. These API benchmark costs are not bills under Claude Max.
+Costs use the matching source in the task table, [Anthropic model documentation][fable-doc], [Opus documentation][opus-doc], and [Claude's Fable plan limits][fable-plan]. All accessed October 1; Claude prices and the Fable cap were reread October 16 and are unchanged for Opus and Fable. These API benchmark costs are not bills under a plan's included limits. A plan's monthly API credits, spent through an API key, are billed at these API prices [V, [credits][claude-credits]].
 
 ### Evidence excluded from ranking
 
@@ -148,3 +152,4 @@ Sources for the comparison: [AA Opus article, September 22][opus], [AA effort co
 [nemotron]: https://artificialanalysis.ai/articles/nemotron-3-5-super-and-bolt
 [cyber]: https://artificialanalysis.ai/articles/trusted-access-models-cyber-index
 [decision]: https://artificialanalysis.ai/articles/artificial-analysis-decision-index
+[claude-credits]: https://support.claude.com/en/articles/17154008-monthly-api-credits-for-max-and-team-plans
