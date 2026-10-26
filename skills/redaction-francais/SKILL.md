@@ -2,6 +2,7 @@
 name: redaction-francais
 description: Rédaction technique en français, en langage clair (plain language, ISO 24495-1) et selon la typographie française. À utiliser pour écrire ou relire en français une documentation, un README, un guide, une note de décision, une description de PR, un message de commit ou un message d'erreur, ou quand un skill ou l'utilisateur demande `redaction-francais`.
 metadata:
+  source-diataxis: "Daniele Procida, Diátaxis, licence CC BY-SA 4.0 : les quatre formes de documentation et la boussole action ou connaissance, acquisition ou application (section 1, en mots propres, sans reprise du texte). Termes français tirés de la traduction partielle du projet. https://diataxis.fr/"
   source-iso-24495-1: "ISO 24495-1:2023, Langage clair et simple — Partie 1 : Principes directeurs et lignes directrices. Norme payante, non reproduite ici. https://www.iso.org/standard/78907.html"
   source-can-asc-3-1: "CAN-ASC-3.1:2025, Langage clair, Normes d'accessibilité Canada. Norme gratuite, en français, dont les exigences recoupent en partie celles de l'ISO 24495-1. Article 13 : public cible au centre de la démarche (sections 1 et 8), 13.5 et 13.6 (section 2), 13.3 (section 3), 13.1 (section 4), 13.7 (section 6). Préface : https://accessibilite.canada.ca/normes-et-guides-techniques/base-de-donnees-des-normes-et-des-guides-techniques/can-asc-312025-langage-clair/5-preface ; article 13 : https://accessibilite.canada.ca/node/985"
   source-canada-ca: "Guide de rédaction du contenu du site Canada.ca, section 2 « Langage clair » : 2.1 formules de lisibilité (section 8), 2.2 pyramide inversée (sections 2 et 5), 2.3 et 2.5 termes techniques (section 4), 2.4 et 2.6 phrases de moins de 20 mots, verbes plutôt que noms, forme affirmative, négation réservée aux conséquences graves (section 3), 3.1 « vous » (section 6), 5.2 listes homogènes (sections 2 et 5). https://conception.canada.ca/guide-redaction/"
@@ -15,8 +16,9 @@ metadata:
   source-academie-dire-ne-pas-dire: "Académie française, « Dire, ne pas dire », liste des entrées à remarque normative ; la recommandation « affecter » pour « impacter » est rapportée par la presse (section 4). https://www.dictionnaire-academie.fr/article/DNP0797"
   source-ulaval-anglicismes: "Chaire de rédaction juridique de l'Université Laval, capsule sur les anglicismes, « supporter » (section 4). https://www.redactionjuridique.chaire.ulaval.ca/sites/redactionjuridique.chaire.ulaval.ca/files/uploads/Capsules/Capsule-anglicismes-vf.pdf"
   source-franceterme: "FranceTerme, termes recommandés au Journal officiel (section 4). https://www.culture.gouv.fr/thematiques/langue-francaise-et-langues-de-france/agir-pour-les-langues/moderniser-et-enrichir-la-langue-francaise/vous-avez-besoin-d-un-terme-francais"
+  source-asd-ste100: "ASD-STE100 Simplified Technical English, Issue 9 (janvier 2025), langue contrôlée née dans la maintenance aéronautique, en anglais seulement (section « Langage clair, FALC et langue contrôlée »). https://www.asd-ste100.org/"
   source-unapei-falc: "Unapei, L'information pour tous, règles européennes du FALC (section « Langage clair, FALC et langue contrôlée »). https://www.unapei.org/document/explication-liste-verification-falc/"
-  editorial-choices: "Choix propres à ce skill, sans source directe : la distinction entre faire agir et faire comprendre (section 1) ; les chaînes de compléments, le participe présent en remorque, le conditionnel de prudence, les pronoms et les liens logiques, adaptés à la documentation technique (section 3) ; « librairie » et « consistant » comme faux amis, et la priorité au vocabulaire du projet (section 4) ; le résultat attendu et la place de l'avertissement (section 5) ; l'espace ordinaire dans un fichier source, qui étend la réserve du guide Microsoft sur les insécables dans le contenu en ligne (section 7 et section « Fichiers sources » de references/typographie.md)."
+  editorial-choices: "Choix propres à ce skill, sans source directe : les textes qui sortent de la grille de documentation (section 1) ; les chaînes de compléments, le participe présent en remorque, le conditionnel de prudence, les pronoms et les liens logiques, adaptés à la documentation technique (section 3) ; « librairie » et « consistant » comme faux amis, et la priorité au vocabulaire du projet (section 4) ; le résultat attendu et la place de l'avertissement (section 5) ; l'espace ordinaire dans un fichier source, qui étend la réserve du guide Microsoft sur les insécables dans le contenu en ligne (section 7 et section « Fichiers sources » de references/typographie.md)."
 ---
 
 # Rédaction en français
@@ -37,7 +39,14 @@ Avant d'écrire, répondez à trois questions :
 - Que sait-elle déjà ? Le vocabulaire du domaine, le code, rien ?
 - Que doit-elle faire ou savoir après la lecture ?
 
-Un document sert un usage principal : faire agir (installer, corriger, déployer) ou faire comprendre (expliquer un choix, décrire une API). Quand un texte mélange les deux, séparez-les en sections ou en documents liés. Une procédure n'explique pas le pourquoi en cours de route. Elle renvoie à l'explication.
+Un document sert un usage principal. Pour la documentation d'un produit, deux questions le fixent : le lecteur veut-il agir ou comprendre ? Apprend-il, ou travaille-t-il déjà ?
+
+| | Apprendre | Travailler |
+| --- | --- | --- |
+| **Agir** | tutoriel : mène un débutant, pas à pas, jusqu'à un premier résultat sûr | guide pratique : mène un lecteur compétent vers un but précis |
+| **Comprendre** | explication : donne le contexte et les raisons d'un choix | référence : décrit sans commenter (API, options, configuration) |
+
+Quand un texte mélange deux usages, séparez-les en sections ou en documents liés. Une procédure n'explique pas le pourquoi en cours de route. Elle renvoie à l'explication. Une description de PR, un message de commit et une note de décision n'entrent pas dans cette grille : chacun sert un seul lecteur à un moment précis.
 
 Si le public est inconnu et que le choix change le texte, demandez-le.
 
