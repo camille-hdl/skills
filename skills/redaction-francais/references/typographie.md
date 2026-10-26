@@ -7,17 +7,19 @@ Référence de la section 7 de [`SKILL.md`](../SKILL.md). Ces règles portent su
 | Signe | France | Québec (OQLF) | Après le signe |
 | --- | --- | --- | --- |
 | `.` `,` | aucune espace | aucune espace | espace ordinaire |
-| `:` | espace insécable | espace insécable | espace ordinaire |
+| `:` entre deux mots | espace insécable | espace insécable | espace ordinaire |
 | `;` | espace insécable | aucune espace (fine insécable admise) | espace ordinaire |
 | `!` `?` | espace insécable | aucune espace (fine insécable admise) | espace ordinaire |
-| `«` | espace ordinaire avant | espace ordinaire avant | espace insécable |
+| `«` | espace ordinaire avant, aucune après une apostrophe (d'« exemple ») | idem | espace insécable |
 | `»` | espace insécable avant | espace insécable avant | espace ordinaire |
 | `%` | espace insécable | espace insécable | espace ordinaire |
 | `€`, `$` | espace insécable | espace insécable | espace ordinaire |
 | unités (`Go`, `km`, `°C`) | espace insécable | espace insécable | espace ordinaire |
 | heures | `14 h 30` | `14 h 30` | |
 
-Sources : guide de style Microsoft pour le français de France (section « Nonbreaking space ») et tableau de l'OQLF « Espacement avant et après les signes de ponctuation et les symboles ». Pour la France, la référence des imprimeurs est le *Lexique des règles typographiques en usage à l'Imprimerie nationale*, ouvrage payant, non consulté ici.
+Sources : guide de style Microsoft pour le français de France (section « Nonbreaking space ») et tableau de l'OQLF [« Espacement avant et après les signes de ponctuation et les symboles »](https://vitrinelinguistique.oqlf.gouv.qc.ca/22039/la-typographie/espacement/espacement-avant-et-apres-les-signes-de-ponctuation-et-les-symboles), qui traite aussi les signes contigus. Pour la France, la référence des imprimeurs est le *Lexique des règles typographiques en usage à l'Imprimerie nationale*, ouvrage payant, non consulté ici.
+
+Les notations spécialisées gardent leur forme : heure `13:52:45`, code, URL.
 
 Mettez aussi une espace insécable :
 
@@ -38,11 +40,13 @@ Mettez aussi une espace insécable :
 
 ## Fichiers sources
 
+Cette section est un choix de ce skill, pas une règle tirée des sources.
+
 Une espace insécable est invisible dans un éditeur et dans une revue de code. Elle peut aussi gêner certains outils de publication : le guide Microsoft déconseille les espaces insécables dans le contenu publié en ligne. Dans un fichier Markdown, un message de commit ou une chaîne de code :
 
 - suivez l'usage du dépôt ;
 - si le dépôt n'utilise pas d'espace insécable, mettez une espace ordinaire avant `:` `;` `!` `?` et à l'intérieur des guillemets (variante de France) ;
-- n'écrivez jamais un signe collé au mot avant `:` ni à l'intérieur de « ».
+- entre deux mots, ne collez jamais les deux-points au mot qui précède, ni les guillemets « » au mot qu'ils entourent.
 
 L'apostrophe suit la même logique : gardez l'apostrophe droite `'` si le dépôt l'utilise, et ne mélangez pas les deux formes dans un fichier.
 
