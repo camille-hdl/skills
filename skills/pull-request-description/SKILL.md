@@ -48,7 +48,7 @@ submitForm
   navigateToSession
 ```
 
-- Show component interaction, control flow, or data flow with [Pele](https://pele.run), using Mermaid syntax:
+- Show component interaction, control flow, or data flow as a Mermaid diagram when the forge renders Mermaid in pull requests. [GitHub supports this](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams). [Bitbucket Cloud's documented Markdown support](https://support.atlassian.com/bitbucket-cloud/docs/markup-comments/) does not include Mermaid. Otherwise, use a call tree in a text block:
 
 ```mermaid
 flowchart LR
