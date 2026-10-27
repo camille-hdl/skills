@@ -9,14 +9,9 @@ Use this skill whenever you need to write a pull request (PR) description intend
 
 Draft French descriptions with `redaction-francais`, and all other descriptions with `technical-writing-agent`. Then revise with `unslop-agent`. If a required skill is missing, report the missing pass outside the description.
 
-The conceptual model captures the business scope of the problem, the logical model the business solution, and the physical model the technical solution.
-
-The conceptual model is the ticket or spec.
-The diff is the physical model.
-**The PR description is the logical model.**
+The reviewer knows the ticket's goal and can read the diff, so describe the solution without restating the ticket or the code.
 
 The PR description is an abstraction of the diff. It should be far simpler than the code it describes, useful and honest, and omit unimportant details.  
-The reviewer is aware of the conceptual model and does not need to know the details of the technical solution.  
 
 The reviewer WILL have to operate the code in production.  
 **If they deploy this change right now in production, what do they NEED to know?**
@@ -51,6 +46,15 @@ submitForm
     persistPrompt
     launchAgent
   navigateToSession
+```
+
+- Show component interaction, control flow, or data flow with [Pele](https://pele.run), using Mermaid syntax:
+
+```mermaid
+flowchart LR
+	API -->|enqueue export| Queue
+	Queue --> Worker
+	Worker -->|write CSV| Storage
 ```
 
 - File responsibility or a broad refactor as a shallow file tree:
