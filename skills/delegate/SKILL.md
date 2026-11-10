@@ -38,18 +38,23 @@ Done when each item is marked “given” or “missing”.
 Run the executable inventory in `references/harness.md`, regardless of your shell. Read exposed model catalogs without starting agents.
 
 - **Installed harnesses**: the CLIs found. For models that are actually accessible, see “Model inventory” in `references/harness.md`.
-- **Herdr available**: `herdr` is found **and** `HERDR_ENV=1`, meaning you are running in a Herdr pane.
+- **Herdr available**: one of two variants, or none.
+  - **Herdr TUI**: `herdr` is found **and** `HERDR_ENV=1`, meaning you are running in a Herdr pane.
+  - **Herdr App**: `hc` is found **and** `HC_TERMINAL_ID` is set, meaning you are running in a herdr-core terminal.
+  - **None**: neither condition holds. A Herdr executable alone is not enough. You must be running inside it.
+
+  If both conditions hold, one environment runs inside the other. Use the variant that the user or the project documentation names. Otherwise, ask.
 - **Age of the table**: compare today’s date with the `date` in the frontmatter of `references/table.md`. If the gap exceeds one month, tell the user, with the table’s date, and recommend updating it from recent benchmarks (the table’s “Updating” section). Then continue with the table as it stands.
 
 When the user requests an update, follow the table's "Updating" procedure: discover new models, versions, and harnesses; give every candidate a disposition; record recommendation changes and dated evidence. An update does not authorize launching agents or testing inference access.
 
-Done when you have the list of harnesses, the answer on Herdr, and the age of the table in days.
+Done when you have the list of harnesses, the Herdr variant (TUI, App, or none), and the age of the table in days.
 
 ## 3. Delegation tool selection
 
 1. The one the user specifies.
 2. Otherwise, the one indicated by `AGENTS.md` or other accessible project documentation.
-3. Otherwise, **Herdr**, if it is available.
+3. Otherwise, **Herdr**, in the variant found in step 2, if one is available.
 4. Otherwise, **ask the user**, offering the harnesses found in step 2.
 
 Done when the tool is fixed and you know which rung.
