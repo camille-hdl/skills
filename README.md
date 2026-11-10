@@ -18,7 +18,7 @@ Collection of skills installable with the [`skills`](https://skills.sh/) CLI.
 | [`technical-writing-agent`](skills/technical-writing-agent/SKILL.md) | Lets an agent run pstack's user-invoked [`technical-writing`](https://github.com/cursor/plugins/tree/main/pstack/skills/technical-writing) by reading its installed `SKILL.md`. Carries no rules of its own, so it follows `npx skills update`. | Writing or reviewing docs, RFCs, READMEs, PR descriptions, or commit messages. |
 | [`unslop-agent`](skills/unslop-agent/SKILL.md) | Lets an agent run pstack's user-invoked [`unslop`](https://github.com/cursor/plugins/tree/main/pstack/skills/unslop) by reading its installed `SKILL.md`, and report that the pass ran. Carries no rules of its own, so it follows `npx skills update`. | Before delivering any prose a human will read. |
 
-Delegate's [recommendation table](skills/delegate/references/table.md) includes a discovery/update procedure. Its [benchmark notes](skills/delegate/references/benchmark-notes.md) record recommendation changes, candidate dispositions, and the Fable 5.1 / Opus 5.5 comparison.
+Delegate's [recommendation table](skills/delegate/references/table.md) includes a discovery/update procedure. Its [benchmark notes](skills/delegate/references/benchmark-notes.md) record recommendation changes, candidate dispositions, and the Fable 5.2 / Opus 5.5 comparison.
 
 The bridge's [no-comments workflow](skills/pstack-bridge/references/no-comments.md)
 reads Comment Sicko from the pstack source at runtime and chooses a model from a
