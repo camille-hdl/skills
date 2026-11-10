@@ -2,11 +2,11 @@
 
 ## Choose the transport
 
-Honor delegate's user and project tool choices, then prefer Herdr when available.
-Herdr is available only when its CLI exists and `HERDR_ENV=1`. Follow delegate's
-Herdr procedure and the installed Herdr skill when using it. When none of these
-rungs selects a tool, this bridge permits the compatible native option below
-before delegate's question rung.
+Honor delegate's user and project tool choices, then prefer Herdr when available,
+in the variant that delegate detects: Herdr TUI or Herdr App. When using Herdr,
+follow delegate's procedure for that variant, and the installed Herdr skill or
+the `hc --skill` manual. When none of these rungs selects a tool, this bridge
+permits the compatible native option below before delegate's question rung.
 
 In Claude Code, a seat can use native `Agent` when no higher-priority tool choice
 requires Herdr or a CLI, and all these conditions hold:
@@ -42,7 +42,7 @@ constraints, not just a request to invoke the bridge again. Have each seat perfo
 its assigned work itself, with no additional delegation unless the upstream phase
 explicitly requires it.
 
-With Herdr, retain the actual pane and agent handles returned at creation. Start
+With Herdr TUI, retain the actual pane and agent handles returned at creation. Start
 the selected CLI with delegate's permissions, model, and effort options. For an
 arena candidate, create its pane with `herdr pane split --cwd <worktree>`.
 Send the brief pointer with
@@ -54,6 +54,27 @@ resend blindly. Wait for completion in bounded intervals with
 `herdr agent wait <name> --timeout <ms>`, accepting `idle`, `done`, and
 `blocked`. Inspect a blocked state or error. An idle pane without the required
 deliverable is incomplete. Read the full result file when terminal output is cut.
+
+With Herdr App, launch each seat with `hc run --bg --json --name <seat> --cwd <dir>`
+and the brief pointer as the agent's first task. Delegate's Herdr App procedure
+gives the full form. For an arena candidate, `<dir>` is its worktree. Retain the
+returned address and name. Check delivery as delegate describes for the launch
+form. Only a template launch returns `first_message.sent`. For a direct launch,
+check the seat with `hc get`, then `hc read`, before you send the task again.
+Launch every independent seat before waiting.
+
+Ask a seat that can write to put its result in a file and to report the path with
+`hc send <parent address>`. A read-only seat can do neither. It cannot write the
+file, and a read-only sandbox, such as Codex with `-s read-only`, also blocks
+hc's socket. Ask such a seat to end its turn with its full result instead.
+
+Run `hc wait --children any` after each event until every seat has reported,
+stopped, or failed. A `timeout` reason is a check-in, not a failure. When a
+read-only seat's turn ends, capture its result with `hc read --lines <n> <seat>`
+and store it outside the reviewed tree. Inspect a `blocked` or `error` status
+with `hc get` and `hc read`. A seat that stops without its deliverable is
+incomplete. Seats end with the parent unless they were launched with
+`--outlive-parent`.
 
 With native tools, retain each returned handle and use the session's completion
 notification, wait, resume, or output-reading mechanism. Forward the full prompt
@@ -93,4 +114,5 @@ the strongest candidate comes before a different vendor from the parent.
 The parent picks and grafts into the designated final location. Retain candidates
 until verification and the synthesis note are complete. Follow user or project
 policy for commits, cleanup, and publication. Finish or stop owned agents before
-releasing their workspaces, and preserve unrelated user panes and files.
+releasing their workspaces (with Herdr App, `hc kill` then `hc rm`), and preserve
+unrelated user panes, terminals, and files.

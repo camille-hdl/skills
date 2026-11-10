@@ -81,12 +81,13 @@ claiming equivalence. A different model from the same
 provider does not qualify. If no other provider is accessible, stop the pass.
 
 Follow [execution.md](execution.md) for transport, handles, and result collection.
-Honor explicit tool choices and prefer Herdr when available. Start the seat in
-the project's repository or worktree, with writes limited to the allowed scope.
+Honor explicit tool choices and prefer Herdr, TUI or App, when available.
+Start the seat in the project's repository or worktree, with writes limited to
+the allowed scope.
 A native transport must express the selected provider and permissions. The brief
 contains the unchanged agent file, scope, snapshot location, deliverable, and the
 annotation and investigation context below. The seat executes its brief itself,
-with no additional agents or tabs.
+with no additional agents, tabs, or terminals.
 
 Include this transport adaptation separately from the unchanged upstream prompt:
 

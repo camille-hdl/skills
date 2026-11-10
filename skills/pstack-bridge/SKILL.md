@@ -1,6 +1,6 @@
 ---
 name: pstack-bridge
-description: Run pstack why, how, arena, blast-radius, reflect, and manually requested no-comments outside Cursor. Use alongside a pstack invocation in Claude Code or Codex to translate Task calls into delegate, Herdr, or compatible native agents.
+description: Run pstack why, how, arena, blast-radius, reflect, and manually requested no-comments outside Cursor. Use alongside a pstack invocation in Claude Code or Codex to translate Task calls into delegate, Herdr (TUI or App), or compatible native agents.
 metadata:
   source: https://github.com/cursor/plugins/tree/main/pstack/skills
 ---
@@ -44,7 +44,7 @@ Keep it active for the selected workflow, including an `arena` called by
    launching.
 2. Follow delegate's request collection, live inventory, table age, tool scale,
    subscription rules, confidentiality checks, and user and project model
-   preferences. Inventory accessible models as well as installed CLIs. A CLI's
+   preferences. The live inventory includes the Herdr variant: TUI, App, or none. Inventory accessible models as well as installed CLIs. A CLI's
    presence alone does not establish access to its models or the parent's MCPs.
 3. Read `~/.cursor/rules/pstack-models.mdc` if present. For each role, use its
    configured value, or the upstream default when the file or line is absent.
