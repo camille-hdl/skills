@@ -58,15 +58,23 @@ deliverable is incomplete. Read the full result file when terminal output is cut
 With Herdr App, launch each seat with `hc run --bg --json --name <seat> --cwd <dir>`
 and the brief pointer as the agent's first task. Delegate's Herdr App procedure
 gives the full form. For an arena candidate, `<dir>` is its worktree. Retain the
-returned address and name. Check `first_message.sent` in each launch result. If
-it is false, read the seat with `hc read` before you send the task again. Launch
-every independent seat before waiting. Ask each seat to write its result to a
-file and to report the path with `hc send <parent address>`. Then run
-`hc wait --children any` after each event until every seat has reported,
-stopped, or failed. A `timeout` reason is a check-in, not a failure. Inspect a
-`blocked` or `error` status with `hc get` and `hc read`. A seat that stops
-without its deliverable is incomplete. Seats end with the parent unless they
-were launched with `--outlive-parent`.
+returned address and name. Check delivery as delegate describes for the launch
+form. Only a template launch returns `first_message.sent`. For a direct launch,
+check the seat with `hc get`, then `hc read`, before you send the task again.
+Launch every independent seat before waiting.
+
+Ask a seat that can write to put its result in a file and to report the path with
+`hc send <parent address>`. A read-only seat can do neither. It cannot write the
+file, and a read-only sandbox, such as Codex with `-s read-only`, also blocks
+hc's socket. Ask such a seat to end its turn with its full result instead.
+
+Run `hc wait --children any` after each event until every seat has reported,
+stopped, or failed. A `timeout` reason is a check-in, not a failure. When a
+read-only seat's turn ends, capture its result with `hc read --lines <n> <seat>`
+and store it outside the reviewed tree. Inspect a `blocked` or `error` status
+with `hc get` and `hc read`. A seat that stops without its deliverable is
+incomplete. Seats end with the parent unless they were launched with
+`--outlive-parent`.
 
 With native tools, retain each returned handle and use the session's completion
 notification, wait, resume, or output-reading mechanism. Forward the full prompt
