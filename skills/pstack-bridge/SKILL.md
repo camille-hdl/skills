@@ -43,9 +43,9 @@ Keep it active for the selected workflow, including an `arena` called by
    If a required skill is missing, report the paths searched and stop before
    launching.
 2. Follow delegate's request collection, live inventory, table age, tool scale,
-   subscription rules, confidentiality checks, and model overrides. Inventory
-   accessible models as well as installed CLIs. A CLI's presence alone does not
-   establish access to its models or the parent's MCPs.
+   subscription rules, confidentiality checks, and user and project model
+   preferences. Inventory accessible models as well as installed CLIs. A CLI's
+   presence alone does not establish access to its models or the parent's MCPs.
 3. Read `~/.cursor/rules/pstack-models.mdc` if present. For each role, use its
    configured value, or the upstream default when the file or line is absent.
    Translate that value into the intentions below. An absent rule needs no new
@@ -68,10 +68,11 @@ high-depth request, step 4 uses the demanding or complex row for the role before
 an automatic estimate of the task's complexity. A speed suffix supplies a
 latency preference only.
 
-Resolve each seat with delegate's model scale and fallback order. Apply delegate's
-overrides first and infer the requested capability level from the upstream model
-in the task's performance grid. Keep the requested family when an accessible
-model in it meets that level, even if the selected row recommends another family.
+Resolve each seat with delegate's model scale and fallback order. Apply the user
+and project preferences that delegate reads first, and infer the requested
+capability level from the upstream model in the task's performance grid. Keep
+the requested family when an accessible model in it meets that level, even if
+the selected row recommends another family.
 For a seat retained by family, use the selected row's effort if specified,
 otherwise the catalog's default effort. Verify that the selected model and
 transport support it.
