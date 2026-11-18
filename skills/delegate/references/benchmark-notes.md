@@ -1,40 +1,58 @@
 ---
-date: 2026-11-10
+date: 2026-11-18
 ---
 
 # Benchmark update notes
 
-Update cutoff and source access: 2026-11-10. Evidence levels and current routing are defined in [table.md](table.md). This update used published results, local version/help commands, and model listings. It launched no agent, inference request, benchmark, or installation.
+Update cutoff and source access: 2026-11-18. Evidence levels and current routing are defined in [table.md](table.md). This update used published results, local version/help commands, and model listings. It launched no agent, inference request, benchmark, or installation.
 
 ## Recommendation changes
 
-Compared with the table dated 2026-10-16:
+Compared with the table dated 2026-11-10:
 
 | Cell or rule | Change | Reason and limit |
 | --- | --- | --- |
-| Unplanned or high-impact code | Opus 5.5 `high` becomes Fable 5.2 `high`, with Opus `xhigh` when Fable is excluded. Fable `xhigh` is recorded as a candidate. | [T] FrontierCode 2.0 in Claude Code: Fable `high` 45.3%/$8.40 versus Opus `high` 34.5%/$2.42 and `max` 45.5%/$12.82; AA's Stirrup run gives 49.1% versus 35.9%. Fable `xhigh` leads Cognition's run (49.1%) but trails Fable `high` in AA's, so it stays a candidate [I]. |
-| Long autonomous code | Opus `medium` becomes Opus `xhigh`; Fable 5.2 `high` is a candidate. | [T] The 2026-10-16 cell kept `medium` because FrontierCode 1.1 and Rails disagreed on effort. FrontierCode 2.0 (43.4% versus 30.1%) now agrees with Rails Stage 3 (65.3% versus 56.1%). Fable `high` leads Opus `xhigh` by 1.9 points without uncertainty, at 1.6 times the cost, with no long-horizon independent test. |
-| Complex planning | Opus `xhigh` becomes Fable 5.2 `high`, with Opus `xhigh` when Fable is excluded. | [T] AA Index v5.0.1: Fable `high` 61.8/$9.08 versus Opus `xhigh` 57.4/$6.05 and `max` 59.1/$10.04. Proxy only [I]. |
-| Medium planning | Opus `medium` (Sol `max` candidate) becomes Sol `max` on a ChatGPT plan, Fable 5.2 `medium` on a Claude plan that includes Fable, otherwise Opus `high`. | [T] Index v5.0.1: Fable `medium` 56.4/$3.80, Sol `max` 54.6/$1.27, Opus `high` 51.8/$3.46, Opus `medium` 48.2/$2.45. The one-point v4.3.2 gap that kept Opus `medium` is now 6 to 8 points. This follows from the index revision, not only from Fable 5.2. |
-| High-stakes web research | Keep Opus `high`; add Fable 5.2 `medium` as a vendor-measured candidate. | [V] No independent search result for Fable 5.2. Anthropic's WANDR run gives 82.1% versus Opus 72.3%. Parallel, updated 2026-10-31, still has Opus first and no Fable 5.2 row. |
-| Routine code review | Keep Opus `high` for authors up to its tier; use Fable 5.2 `high` or Opus `max` above it. | [I] Review transfers the coding grid. On FrontierCode 2.0 several authors now sit above Opus `high` (34.5%): Fable 5.2 `high`, Opus `xhigh`/`max`, Sonnet `max`, Sol `max`. |
-| Security-sensitive review | Fable 5.1 candidate becomes an unvalidated Fable 5.2 candidate, with a safeguard caveat. | [V] Dam Secure measured only Fable 5.1. Anthropic says Fable's safeguards block most cybersecurity tasks and route them to Opus 4.8, with about 60% fewer cybersecurity blocks than Fable 5.1. |
-| Code cells' FrontierCode figures | FrontierCode 1.1 figures replaced by FrontierCode 2.0. | [T] Cognition replaced 1.1 with 2.0 on 2026-10-27. The order in the mechanical and ready-plan cells is unchanged. |
-| Planning proxy grid | Rebuilt on AA Intelligence Index v5.0.1. | [T] v5 replaced v4.3.2 on 2026-10-27; values are not comparable across versions. Grok 4.7 `xhigh` drops to the scoped tier (35.5). |
-| Code grid | Adds a FrontierCode 2.0 table, keeps the native AA v1.5 grid as a dated snapshot, and lists v2.0 values. | [T] AA's native board moved to Coding Agent Index v2.0 with fewer configurations and no Fable 5.2 entry. |
-| Catalog | Fable 5.1 row becomes Fable 5.2; GPT-5.6 Terra row becomes GPT-6.1 Terra, candidate. | Local catalogs, 2026-11-10. |
-| Cost section | Fable 5.2 prices; Fable cap and plan coverage reread; Ultra noted. | [V] Anthropic pricing, Fable plan page, and Max plan page, read 2026-11-10. |
-| Professional documents and prose fallback | Figures move to AA-Briefcase v1.1; order kept. | [T] Sonnet `max` 1816 now leads Opus `max` 1801: a 15-point gap without uncertainty, so the previous order stays. Fable 5.2 (1785) does not enter. |
+| Ready-plan code, medium impact | GPT-6.1 Sol `medium`, `xhigh` for harder work, becomes GPT-6.2 Sol `medium` and `xhigh`. Sol 6.2 `max` is a candidate. | [T] FrontierCode 2.0, rescored: 6.2 `medium` 38.3%/$0.69 versus 6.1 `medium` 30.3%/$0.49 and 6.1 `high` 35.1%/$0.65; native AA v2.1 6.2 `medium` 45.4/$0.57. Counterexample: AA v2.1 at `max`, 6.2 48.6 versus 6.1 52.2, all from SWE-Atlas-QnA (46.2% versus 59.9%); 6.2 gains on Terminal-Bench. `max` leads on Cognition's data and trails `xhigh` on AA's, so it stays a candidate [I]. |
+| Medium planning | GPT-6.1 Sol `max` becomes GPT-6.2 Sol `max` on a ChatGPT plan. | [T] AA Index v5.0.1: 57.3/$1.01 versus 54.6/$1.27. |
+| Complex planning | Fable 5.2 `high`, Opus `xhigh` when Fable is excluded, becomes subscription-dependent: Fable `high` on a Claude plan that includes Fable, GPT-6.2 Astra `xhigh` on a ChatGPT plan, otherwise Opus `xhigh`. | [T] Index v5.0.1: Astra `xhigh` 61.6/$2.52 versus Fable `high` 61.8/$9.08, Opus `xhigh` 57.4/$6.05 and `max` 59.1/$10.04. The Astra-Fable gap is 0.2 point, so the pool decides, as in medium planning. Proxy only [I]. |
+| Astra rule | "No recommended cell" becomes one cell, complex planning on a ChatGPT plan. | The old rule rested on Astra reaching the same tiers as Sol. On the planning proxy, Astra 6.2 `xhigh` now leads Sol 6.2 `max` by 4.3 points [T]. In code, Sol 6.2 `max` sits 0.4 point under Astra `max` on FrontierCode for a fifth of the cost [T], so Astra stays out of code cells. Astra draws a ChatGPT plan about three times as fast as Sol 6.2 [V]. |
+| Long autonomous code | Opus `xhigh` kept; Sol 6.2 `max` added as a candidate. | [T] FrontierCode 2.0: Sol `max` 43.8%/$1.29 versus Opus `xhigh` 44.7%/$5.18. AA v2.1: Sol `max` 48.6 versus Opus `max` 58.2. The results conflict, so the cell keeps Opus [I]. |
+| Ready-plan code, low impact | Luna `max` kept; Sol 6.2 `low` added as a candidate. | [T] Sol `low` 33.1%/$0.40 versus Luna `max` 22.7%/$0.17 on FrontierCode, 37.2 versus 25.9 on AA v2.1. [V] Plus draw 17 to 20 times Luna's. |
+| Routine code review | The cross-vendor pass keeps GPT-6.1 Sol `xhigh`, now named in full; Sol 6.2 `xhigh` is a candidate. Authors above Opus `high` now include Astra 6.2 at `medium` or above and Sol 6.2 `max`. | [T] FrontierCode favors 6.2 `xhigh` (39.8% versus 33.0%), but AA's SWE-Atlas-QnA, the closest test to answering questions about a codebase, drops 14 points because 6.2 omits key facts. [V] GPT-6.2 launched with tighter cybersecurity safeguards. Applicable results conflict, so the previous model stays [I]. |
+| Moderate-stakes web research | Keeps GPT-6.1 Sol `high`, now named in full; Sol 6.2 `high` is an unmeasured candidate. | [T] Parallel's 2026-11-14 board has no GPT-6.2 row. Scores do not transfer between versions. |
+| High-stakes web research | Opus `high` kept; Fable 5.2 `medium` becomes an independently measured candidate. | [T] Parallel, 2026-11-14: Fable 5.2 80.1/$2,426 versus Opus 76.1/$896. Four points without uncertainty, 2.7 times the cost, effort unstated [I]. |
+| Unplanned or high-impact code | Unchanged; GPT-6.2 Astra does not enter. | [T] Astra `max` 44.2% on FrontierCode and 53.5 on AA v2.1, below Fable `high` (46.2%, 58.2) and Opus `max` (47.3%, 58.2). |
+| Code figures | FrontierCode 2.0 figures replaced by Cognition's 2026-11-11 rescore; AA Coding Agent Index v1.5 and v2.0 replaced by v2.1. | [T] The rescore changed every score, for example Opus `max` 45.5% to 47.3% and Fable `high` 45.3% to 46.2%. No cell order changed. v2.1 swaps FrontierCode v1.1 for FrontierCode-AA 2.0 and now lists Fable 5.2, which ties Opus `max` at `high`. |
+| Planning, search, and writing grids | Rebuilt with GPT-6.2 rows and the 2026-11-18 reads. | [T] AA comparisons and Parallel's 2026-11-14 board. Briefcase Elo shifted (Sonnet 1815, Opus 1800); GPT-6.2 does not enter professional documents (Astra 1644, Sol 1612). |
+| Catalog | GPT-6 Astra row becomes GPT-6.2 Astra; the GPT-6.1 Sol row becomes GPT-6.2 Sol, plus a GPT-6.1 Sol row marked previous generation. | Local Codex catalog, 2026-11-18. The Cursor list failed with an authentication error. |
+| Cost section | GPT-6.2 prices and credits, Plus estimates, Pro tiers, Fast and Ultrafast multipliers; Terra 6.1 credits recorded. | [V] Model pages and Codex pricing, read 2026-11-18. |
 
-Unchanged: mechanical code, ready-plan code at low and medium impact, simple planning, low- and moderate-stakes web research, professional documents, the prose fallback, and Astra's absence from recommended cells.
+Unchanged: mechanical code, unplanned or high-impact code, simple planning, low-stakes web research, security-sensitive review, professional documents, and the prose fallback.
 
-Sources for changes: [Fable 5.2 launch][fable52-vendor], [Fable 5.2 documentation][fable52-doc], [FrontierCode 2.0 data][frontier2-data], [AA Opus/Fable 5.2 comparison][aa-pair52], [AA Index v5][aa-v5], [Vals][vals-fable], [Parallel][parallel], and the [Fable plan page][fable-plan]. All were read on 2026-11-10.
+Sources for changes: [GPT-6.2 announcement][openai-62], [GPT-6.2 model pages][openai-sol62], [Codex pricing][codex-price], [FrontierCode 2.0][frontier2] and its [data][frontier2-data], [AA's GPT-6.2 article][aa-gpt62] and [comparisons][aa-astra-fable], [AA's coding board][coding], [Vals][vals-sol62], and [Parallel][parallel]. All were read on 2026-11-18.
 
 ## Discovery decisions
 
-Discovery covered [AA's dated article feed][feed] back to 2026-10-16, its [coding-agent board][coding], [Cognition's FrontierCode page][frontier2], [Vals' model list][vals-fable], [Parallel][parallel], the [OpenAI changelog][openai], the [Anthropic Fable 5.2 launch][fable52-vendor], the [Dam Secure blog][dam-blog], the [Rails blog][rails-blog], a search for independent Fable 5.2 evaluations, and local catalogs. Newly considered does not mean newly released: release dates are asserted only when a source states them.
+Discovery on 2026-11-18 covered [AA's dated article feed][feed] and [changelog][aa-changelog] back to 2026-11-10, its [coding-agent board][coding], [Cognition's FrontierCode page][frontier2] and changelog, [Vals' model list][vals-sol62], [Parallel][parallel], the [OpenAI changelog][openai], the GPT-6.2 model pages and guide, [Codex pricing][codex-price], OpenAI's [developer-forum announcement][openai-62], the [Dam Secure blog][dam-blog], the [Rails blog][rails-blog], and local catalogs. [OpenAI's launch page][openai-launch62] returned HTTP 403. Newly considered does not mean newly released: release dates are asserted only when a source states them.
 
-### New since 2026-10-16
+### New since 2026-11-10
+
+| Model or version | Status / local identifier | Disposition and reason |
+| --- | --- | --- |
+| GPT-6.2 Sol, released 2026-11-17 | Codex `gpt-6.2-sol`, visible, default `low`, `low` through `max` plus `ultra`, Fast and Ultrafast; API `gpt-6.2-sol`, guide starts at `medium` [V]. Cursor unchecked because the list required authentication. ZDR for approved API organizations [V]. | Ranked: ready-plan medium-impact code, medium planning on a ChatGPT plan. Candidate: low-impact code at `low`, long autonomous code at `max`, moderate research, the review pass. AA evaluated Codex 0.166.0; local 0.169.0. Inference access unverified. |
+| GPT-6.2 Astra, released 2026-11-17 | Codex `gpt-6.2-astra`, visible, default `low`, Fast only in the local catalog; API `gpt-6.2-astra`. | Ranked: complex planning on a ChatGPT plan. Not in code cells: below Fable 5.2 `high` and Opus `max` on both coding boards, and Sol 6.2 comes close for less. No search or review result. Inference access unverified. |
+| GPT-6 Astra; GPT-6.1 Sol | Still listed; Codex labels 6.1 Sol the previous generation, and AA marks both deprecated. | GPT-6 Astra is replaced by Astra 6.2. GPT-6.1 Sol stays only in moderate web research and the review pass, for the reasons in the change table. Their measurements stay attributed to them. |
+| Astra for Law 6.2 | AA changelog, 2026-11-17; no Codex slug. | Ignored: domain product with no installed path. |
+| Gemini 4 Hydrogen, Vals date 2026-11-12 | Absent locally; Antigravity CLI absent. | Unranked locally: Index v5 `xhigh` 53.9, FrontierCode 2.0 `xhigh` 38.9%/$4.95 and native AA v2.1 52.3/$4.45 in Antigravity CLI, Parallel 72.7/$175 [T]. |
+| Qwen4 Max, 2026-11-15 | Absent locally. | Ignored: Index v5 43 [T], no installed path. |
+| Hy4, Hy4 Flash | Absent locally; Hy4 first appeared on Parallel's 2026-11-14 board. | Ignored for routing: Parallel Hy4 75.4/$94.4 [T], no installed path. |
+| K2 Horizon 32B, JoyAI-VL-Preview, Inkling, LFM3, MiniMax-M3.1-Flash, JT-4.1 Flash; d1.2, Decider V1.3, Gemini Decision 1 | Absent locally. | Ignored: no installed path; Index v5 28 or below where measured, or decision models. |
+| GPT-6.1 Terra, reassessed | Codex `gpt-6.1-terra`; Plus estimate 35 to 285 messages, 125 output credits per million [V]. | Still a candidate, unranked. Native AA v2.1 `max` 48.6/$1.53 [T] trails Sol 6.2 `xhigh` (49.8/$0.90) on score and cost, and Terra is absent from FrontierCode 2.0. Against Luna for low-impact code it costs more per task; Sol 6.2 `low` is the nearer candidate there. |
+| GPT-6 Cyber, 2026-11-05 | OpenAI Daybreak program. | Ignored: trusted-access model, not selectable here. |
+| FrontierCode 2.0 rescore, 2026-11-11; AA Coding Agent Index v2.1; Gemini 4 Carbon moved to Antigravity CLI on FrontierCode, 2026-11-12 | Methodology revisions. | Grids rebuilt. Pre-rescore and v2.0 values are no longer compared with current ones. |
+| AA Multimodal Knowledge Agent, 2026-11-10; Endpoint Accuracy Index v1.1 | New AA evaluations. | Ignored: no routing cell uses them. |
+
+### Considered on 2026-11-10, new since 2026-10-16
 
 | Model or version | Status / local identifier | Disposition and reason |
 | --- | --- | --- |
@@ -69,7 +87,7 @@ Discovery covered [AA's dated article feed][feed] back to 2026-10-16, its [codin
 
 | Model or version | Status / local identifier | Disposition and reason |
 | --- | --- | --- |
-| GPT-6.1 Sol; Claude Sonnet 5.5 | Codex `gpt-6.1-sol`; Claude `claude-sonnet-5-5`, Cursor `claude-sonnet-5-5-<effort>`. | Ranked as in the table. Sonnet now has a same-version Parallel score; AA's announced Sonnet reruns had no update note on October 16. |
+| GPT-6.1 Sol; Claude Sonnet 5.5 | Codex `gpt-6.1-sol`; Claude `claude-sonnet-5-5`, Cursor `claude-sonnet-5-5-<effort>`. | Sonnet ranked as in the table. GPT-6.1 Sol was replaced by GPT-6.2 Sol on 2026-11-18, except in moderate web research and the review pass. |
 | Solar Mini 4 | Absent locally. | Ignored: no installed path; [AA Index 24][solar] [T]. |
 | Claude Fable 5.1 | Claude `claude-fable-5-1`; Cursor variants all marked NO ZDR; still listed on 2026-11-10. | Replaced by Fable 5.2 in every cell on 2026-11-10; its measurements stay attributed to it. |
 | Gemini 3.8/3.7/3.6 Flash and 3.1 Pro | Cursor `gemini-3.8-flash-<effort>` and others. | Unranked for Cursor: results come from Antigravity SDK or chisel, not Cursor. |
@@ -86,13 +104,13 @@ Preview and new-model sources: [AA Haiku][haiku-aa], [Haiku documentation][haiku
 
 ### Harness inventory
 
-| Harness or executable | Local observation on 2026-11-10 | Disposition |
+| Harness or executable | Local observation on 2026-11-18 | Disposition |
 | --- | --- | --- |
-| Codex | `codex-cli 0.167.0`; `debug models` succeeds; ten slugs, adding `gpt-6.1-terra`. | Retain. AA Sol/Luna runs used 0.154.0; Terra 6.1 used 0.163.0. |
-| Claude Code | 2.1.322; `--help` exposes aliases `fable`, `opus`, `sonnet`, full model names, and `--effort` `low` through `max`. | Retain. No non-interactive model-list command. Fable 5.2 needs 2.1.321 or later [V]. |
-| Cursor | 2026.09.28-64d2043, unchanged; `cursor-agent` and `agent` resolve to the same executable. | Retain one harness. The server-side list gained Fable 5.2 variants without a CLI update. |
-| Herdr | Found; `HERDR_ENV=1`. | Retain as an orchestration tool. No pane or session created. |
-| Mistral Vibe | `vibe` 2.14.1, a uv tool, found for the first time because earlier inventories did not search for it. `-p` runs non-interactively; help lists no model catalog. | Unranked locally; no recommended model runs in it. |
+| Codex | `codex-cli 0.169.0`; `debug models` succeeds; twelve slugs, adding `gpt-6.2-sol` and `gpt-6.2-astra`. | Retain. AA's GPT-6.2 runs used 0.166.0; Sol 6.1 and Luna 0.154.0; Terra 6.1 0.163.0 and 0.166.0. |
+| Claude Code | 2.1.327; `--help` exposes aliases `fable`, `opus`, `sonnet`, full model names, `--effort`, and `--restricted`. | Retain. No non-interactive model-list command. Fable 5.2 needs 2.1.321 or later [V]; AA's Fable 5.2 runs used 2.1.291. |
+| Cursor | 2026.09.28-64d2043, unchanged; `cursor-agent` and `agent` resolve to the same executable. `--list-models` failed: "Authentication required". | Retain one harness. GPT-6.2 availability in Cursor is unchecked. |
+| Herdr | `herdr` found with `HERDR_ENV` unset; `hc` 0.1.21 found with `HC_TERMINAL_ID` set, so this session ran in Herdr App. | Retain as an orchestration tool. No terminal or session created. |
+| Mistral Vibe | `vibe` 2.14.1, unchanged. `-p` runs non-interactively; help lists no model catalog. | Unranked locally; no recommended model runs in it. |
 | Antigravity CLI, Muse Code, Devin Fusion, Grok Build, Kimi Code, OpenCode, GitHub Copilot CLI | `agy`, `antigravity`, `gemini`, `muse`, `devin`, `fusion`, `grok`, `kimi`, `opencode`, `copilot` absent. | Unranked locally. |
 | Other known CLIs | `aider`, `goose`, `amp`, `droid`, `pi`, `qwen` absent. | No local ranking or launch form assumed; recheck at the next update. |
 
@@ -100,23 +118,23 @@ Executable names are search candidates, not inferred installation instructions. 
 
 ## Fable 5.2 versus Opus 5.5
 
-Reassessed on 2026-11-10, the day after Fable 5.2's release. Independent results favor Fable 5.2 at equal effort on mergeable code and on reasoning proxies. They do not favor it on terminal tasks, professional documents, multimodal SWE-bench, or cost per task. Opus stays the default where Fable's limits apply: plan cap, retention, and safeguard fallbacks [I].
+Reassessed on 2026-11-18, after Cognition's FrontierCode rescore and AA's Coding Agent Index v2.1. The verdict of 2026-11-10 holds. Independent results favor Fable 5.2 at equal effort on mergeable code and on reasoning proxies. They do not favor it on terminal tasks, professional documents, multimodal SWE-bench, or cost per task. Opus stays the default where Fable's limits apply: plan cap, retention, and safeguard fallbacks [I].
 
-The 2026-10-16 notes set a symmetric threshold: comparable current evidence beyond small gaps, and no small gap without uncertainty treated as a winner. FrontierCode 2.0 gaps at equal effort are 5.7 to 19.5 points from `low` to `xhigh`, with a tie at `max`. Index v5 gaps are 4.8 to 10.0 points from `medium` to `max`. They exceed the 3.7- and 5-point Opus leads that kept Opus first over Fable 5.1. Neither source reports uncertainty, so differences between neighboring efforts are not used to choose an effort.
+The 2026-10-16 notes set a symmetric threshold: comparable current evidence beyond small gaps, and no small gap without uncertainty treated as a winner. Rescored FrontierCode 2.0 gaps at equal effort are 5.5 to 20.5 points from `low` to `xhigh`, and 0.9 point at `max`. Index v5 gaps are 4.8 to 10.0 points from `medium` to `max`. They exceed the 3.7- and 5-point Opus leads that kept Opus first over Fable 5.1. Neither source reports uncertainty, so differences between neighboring efforts are not used to choose an effort.
 
 For a future update to move Fable 5.2 out of its cells, require comparable current evidence that Opus matches it beyond uncertainty on mergeable code or reasoning proxies, at equal or lower cost. A user or project may still exclude Fable by preference; that choice belongs in their preference files, not here.
 
 | Task | Published comparison, Opus 5.5 versus Fable 5.2 | Verdict and limits |
 | --- | --- | --- |
 | Planning | AA Index v5.0.1: `max` 59.1 versus 64.6; `xhigh` 57.4 versus 62.2; `high` 51.8 versus 61.8; `medium` 48.2 versus 56.4. HLE-Diamond `max` 67.9% versus 80.2%; Terminal-Bench-Science 59.0% versus 73.3% [T, API with default fallback]. | Fable leads every reasoning proxy at equal effort. No direct repository-plan test. Fable `high` for complex planning [I]. |
-| General code | FrontierCode 2.0 in Claude Code: `low` 14.7% versus 34.2%, `medium` 30.1% versus 37.6%, `high` 34.5% versus 45.3%, `xhigh` 43.4% versus 49.1%, `max` 45.5% versus 45.6%. AA's Stirrup run: `max` 46.4% versus 48.8%, `high` 35.9% versus 49.1%. Terminal-Bench 4.0: AA `max` 59.6% each; Vals 65.15% each. Vals SWE-bench Multimodal 70.21% versus 62.29%; ProgramBench 18.50% versus 19.00% [T]. | Fable leads mergeability in two harnesses. Terminal tasks tie and multimodal SWE-bench favors Opus. No native AA board or Rails result exists for Fable 5.2. |
+| General code | FrontierCode 2.0 in Claude Code, rescored 2026-11-11: `low` 14.8% versus 35.3%, `medium` 31.4% versus 38.8%, `high` 36.3% versus 46.2%, `xhigh` 44.7% versus 50.2%, `max` 47.3% versus 48.2%. AA's Stirrup run: `max` 46.4% versus 48.8%, `high` 35.9% versus 49.1%. Native AA v2.1: Opus `max` 58.2/$12.61 versus Fable `high` 58.2/$7.51 and `xhigh` 58.5/$15.47. Terminal-Bench 4.0: AA `max` 59.6% each; Vals 65.15% each. Vals SWE-bench Multimodal 70.21% versus 62.29%; ProgramBench 18.50% versus 19.00% [T]. | Fable leads mergeability in two harnesses and matches Opus `max` on AA's native board at lower cost. Terminal tasks tie and multimodal SWE-bench favors Opus. No Rails result exists for Fable 5.2. |
 | Secure-code generation | No Fable 5.2 result. | Endor's Fable 5.1 counterexample does not transfer. |
 | Security review | No independent Fable 5.2 result. Anthropic: safeguards block most cybersecurity tasks and route them to Opus 4.8, with about 60% fewer cybersecurity blocks than Fable 5.1; its CVE Rediscovery figures measure Mythos 5.2, not Fable [V]. | Unvalidated candidate; check the served model. |
-| Research | No independent result; Parallel lists Fable 5.1 only. Anthropic's WANDR run: 72.3% versus 82.1%, Fable `medium` matching Opus's best for about 40% of the cost [V]. | Vendor-measured candidate for high-stakes research. |
-| Professional outputs | AA-Briefcase v1.1 `max` 1801 versus 1785; GDPval-AA 1866 versus 1831 [T]. Anthropic's Briefcase rubric 61.2% versus 66.1% [V]. | Opus and Sonnet lead on Elo; Fable does not enter. |
+| Research | Parallel, 2026-11-14: Opus 76.1/$896 versus Fable 80.1/$2,426 per 1,000 tasks, effort unstated [T]. Anthropic's WANDR run: 72.3% versus 82.1%, Fable `medium` matching Opus's best for about 40% of the cost [V]. | Independently measured candidate for high-stakes research. Four points without uncertainty at 2.7 times the cost keep Opus first. |
+| Professional outputs | AA-Briefcase v1.1 `max`, 2026-11-18: 1800 versus 1785; GDPval-AA, 2026-11-10: 1866 versus 1831 [T]. Anthropic's Briefcase rubric 61.2% versus 66.1% [V]. | Opus and Sonnet lead on Elo; Fable does not enter. |
 | Prose and reformulation | No reproducible direct comparison. | No verdict. |
 
-The [Anthropic launch][fable52-vendor] adds vendor evidence [V]: FrontierSWE v2 69.9% versus 62.3%, AutomationBench 51.4% versus 42.5%, OSWorld 2.1 89.3% versus 87.2%, and Remote Labor Index 41.3% versus 21.3%. It recommends starting most coding and knowledge tasks with Opus 5.5 and moving to Fable for the most ambitious open-ended technical work. It says Fable `high` matched Opus `max` on FrontierCode 2.0 for roughly half the cost; Cognition's data give $8.40 versus $12.82, about two-thirds.
+The [Anthropic launch][fable52-vendor] adds vendor evidence [V]: FrontierSWE v2 69.9% versus 62.3%, AutomationBench 51.4% versus 42.5%, OSWorld 2.1 89.3% versus 87.2%, and Remote Labor Index 41.3% versus 21.3%. It recommends starting most coding and knowledge tasks with Opus 5.5 and moving to Fable for the most ambitious open-ended technical work. It says Fable `high` matched Opus `max` on FrontierCode 2.0 for roughly half the cost; Cognition's rescored data give 46.2% versus 47.3% for $8.40 versus $12.82, about two-thirds.
 
 Fallbacks are part of the configuration [V]: blocked cybersecurity requests go to Opus 4.8, blocked biology requests to Opus 5, and a few AI research topics to Opus 5. Vals reports a 1.88% fallback rate at `high` [T]. AA's Fable entries include default fallback.
 
@@ -126,7 +144,7 @@ Fallbacks are part of the configuration [V]: blocked cybersecurity requests go t
 | --- | --- | --- |
 | Standard API, dollars/million input/output [V] | $4/$20 versus $8/$40; cache read $0.20 each; Fable fast mode $16/$80. | Fable tokens cost twice as much; cache reads cost the same. |
 | AA Index v5.0.1 [T] | `max` $10.04 versus $26.54; `high` $3.46 versus $9.08 per task. | Fable costs about 2.6 times as much at equal effort. Fable `high` exceeds Opus `max` for 10% less. |
-| FrontierCode 2.0, Claude Code [T] | `medium` $1.70 versus $3.10; `high` $2.42 versus $8.40; `xhigh` $5.18 versus $17.73; `max` $12.82 versus $55.87. | Fable costs 1.8 to 4.4 times as much at equal effort. At an equal score (Opus `max`, Fable `high`), Fable costs about a third less. |
+| FrontierCode 2.0, Claude Code [T] | `medium` $1.70 versus $3.10; `high` $2.42 versus $8.40; `xhigh` $5.18 versus $17.73; `max` $12.82 versus $55.87. | Fable costs 1.8 to 4.4 times as much at equal effort. At a near-equal score (Opus `max` 47.3%, Fable `high` 46.2%, rescored), Fable costs about a third less. |
 | Claude plans, signed in with the subscription [V] | Max, Ultra, and premium seats cap Fable at 50% of the weekly limit and say it draws that limit faster; Pro and standard seats pay usage credits from the start. | No per-task quota ratio is published. Fable's cap can run out well before the weekly limit. |
 
 Costs use the matching source in the task table, [Anthropic pricing][anthropic-price], and the [Fable plan page][fable-plan], read 2026-11-10. These API benchmark costs are not bills under a plan's included limits. A plan's monthly API credits, spent through an API key, are billed at API prices [V, [credits][claude-credits]].
@@ -185,12 +203,8 @@ Sources for the Fable 5.1 history: [AA Opus article, September 22][opus], [AA ef
 [decision]: https://artificialanalysis.ai/articles/artificial-analysis-decision-index
 [claude-credits]: https://support.claude.com/en/articles/17154008-monthly-api-credits-for-max-and-team-plans
 [fable52-vendor]: https://www.anthropic.com/claude-fable-and-mythos-5-2
-[fable52-doc]: https://platform.claude.com/docs/en/models/fable-5-2/overview
 [frontier2]: https://cognition.com/frontiercode
 [frontier2-data]: https://cognition.com/data/frontier-code-2.0/data.json
-[aa-pair52]: https://artificialanalysis.ai/models/comparisons/claude-opus-5-5-vs-claude-fable-5-2
-[aa-v5]: https://artificialanalysis.ai/articles/artificial-analysis-intelligence-index-v5
-[vals-fable]: https://www.vals.ai/models/anthropic_claude-fable-5-2
 [aa-terra]: https://artificialanalysis.ai/articles/gpt-6-1-terra-pushes-the-cost-efficiency-frontier
 [aa-carbon]: https://artificialanalysis.ai/articles/gemini-4-carbon-new-number-1
 [aa-kimi]: https://artificialanalysis.ai/articles/kimi-k3-1-pro-launch-benchmarks
@@ -200,3 +214,11 @@ Sources for the Fable 5.1 history: [AA Opus article, September 22][opus], [AA ef
 [rails-blog]: https://rubyonrails.org/blog
 [notebookcheck]: https://www.notebookcheck.net/Claude-Fable-5-2-fallbacks-make-AI-agents-more-vulnerable.1446771.0.html
 [anthropic-price]: https://platform.claude.com/docs/en/about-claude/pricing
+[openai-62]: https://community.openai.com/t/gpt-6-2-astra-and-sol-are-now-available/1417531
+[openai-launch62]: https://openai.com/index/introducing-gpt-6-2-astra-sol/
+[openai-sol62]: https://developers.openai.com/api/docs/models/gpt-6.2-sol
+[codex-price]: https://learn.chatgpt.com/docs/pricing
+[aa-gpt62]: https://artificialanalysis.ai/articles/openai-has-the-2-model-in-the-intelligence-index-with-the-release-of-gpt-6-2-astra-and-gpt-6-2-sol
+[aa-astra-fable]: https://artificialanalysis.ai/models/comparisons/gpt-6-2-astra-vs-claude-fable-5-2
+[aa-changelog]: https://artificialanalysis.ai/changelog
+[vals-sol62]: https://www.vals.ai/models/openai_gpt-6.2-sol
