@@ -62,8 +62,8 @@ Discovery on 2026-11-18 covered [AA's dated article feed][feed] and [changelog][
 | d1.2, released 2026-11-16 per Vals | Liquid AI, closed weights, a decision model (Vals URL prefix `decision_`). Absent locally. Source: Vals. | Ignored: decision model, best Vals result ClaimBench, 6th of 28. No installed path. |
 | d1.2-ultra, released 2026-11-16 per Vals | Liquid AI, closed weights, a decision model. Absent locally. Source: Vals. | Ignored: decision model, best Vals result ClaimBench, 3rd of 28. No installed path. |
 | Decider V1.3, released 2026-11-12 per Vals | Perplexity, open weights, a decision model. Absent locally. Source: Vals. | Ignored: decision model, best Vals result ClaimBench, 2nd of 28. No installed path. |
-| Decider Flash V1.3, released 2026-11-12 per Vals | Perplexity, open weights, a decision model. Absent locally. Source: Vals. | Ignored: decision model with no ranked Vals result. No installed path. |
-| Gemini Decision 1, released 2026-11-11 per Vals | Google, closed weights, a decision model. Absent locally. Source: Vals. | Ignored: decision model with no ranked Vals result. No installed path. |
+| Decider Flash V1.3, released 2026-11-12 per Vals | Perplexity, open weights, a decision model. Absent locally. Source: Vals. | Ignored: decision model, Vals ClaimBench 97.45% ± 0.36, 16th of 28, read 2026-11-18. No installed path. |
+| Gemini Decision 1, released 2026-11-11 per Vals | Google, closed weights, a decision model. Absent locally. Source: Vals. | Ignored: decision model, Vals ClaimBench 97.50% ± 0.35, 15th of 28, read 2026-11-18. No installed path. |
 | Kimi K3.1 Pro, new DigitalOcean and Databricks endpoints on AA, 2026-11-10 and 2026-11-11 | Absent locally. Source: AA changelog. | Ignored for lack of an installed path, as in the 2026-11-10 row below. |
 | GLM-5.3, new SambaNova endpoint on AA, 2026-11-11 | Absent locally. Source: AA changelog. | Ignored for lack of an installed path, as in the 2026-11-10 row below. |
 | DeepSeek V4.1 Flash 1017, new Fireworks endpoint on AA, 2026-11-13 | Absent locally. Source: AA changelog. | Ignored for lack of an installed path, as in the 2026-11-10 row below. |
